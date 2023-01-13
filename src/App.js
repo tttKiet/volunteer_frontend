@@ -1,7 +1,7 @@
 import "./App.css";
 
 function App() {
-  return <div> Home page</div>;
+  return <div> Home </div>;
 }
 
 export default App;
