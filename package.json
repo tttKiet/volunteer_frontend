@@ -11,6 +11,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "config-overrides-path": "node_modules/some-preconfigured-rewire",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
@@ -36,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-module-resolver": "^5.0.0",
     "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.2.1"
   }
