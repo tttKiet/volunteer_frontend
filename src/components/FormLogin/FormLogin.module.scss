@@ -1,0 +1,37 @@
+.title {
+    padding: 16px 32px;
+    font-size: 20px;
+    color: #495057;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.form {
+    border: 1px solid #ccc;
+    width: 600px;
+    color: #495057;
+    border-radius: 4px;
+}
+
+.wrap-input {
+    padding: 20px;
+}
+
+.btn-submit {
+    margin: 0 20px 20px 20px;
+    padding: 16px;
+}
+
+.form-gr {
+    label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    input {
+        height: 40px;
+
+        &:placeholder-shown {
+            font-size: 14px;
+        }
+    }
+}
