@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import actionTypes from '../actions/actionType';
 
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        isLoggined: 'false',
+        isLogined: false,
     },
     reducers: {
-        [actionTypes.TOGGLE_USER_LOGGIN]: (state) => {
-            return (state.isLoggined = !state.isLoggined);
+        toggleUserLogin: (state) => {
+            state.isLogined = !state.isLogined;
         },
     },
 });

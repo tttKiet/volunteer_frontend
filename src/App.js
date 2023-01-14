@@ -8,7 +8,7 @@ function App() {
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         const Page = route.component;
-                        return <Route key={index + 'route'} path={route.path} element={<Page isLogined={true} />} />;
+                        return <Route key={index + 'route'} path={route.path} element={<Page />} />;
                     })}
                 </Routes>
             </div>
