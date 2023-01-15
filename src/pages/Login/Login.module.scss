@@ -1,5 +1,5 @@
 .wrap {
-    height: 100vh;
+    min-height: 100vh;
     // background: url('../../assets/images/backGround-login.png');
     background-size: cover;
     background-color: #f1f4f6;
@@ -23,4 +23,3 @@
 .wrap__form {
     padding: 40px;
 }
-

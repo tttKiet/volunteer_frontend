@@ -1,17 +1,16 @@
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { userSlice } from '~/redux/reducers';
-
 import { Row, Col } from 'react-bootstrap';
 import Slide from '~/components/Carousel/Carousel';
 import Header from '~/components/Header';
+import Footer from '~/components/Footer';
+
+import FormLogin from '~/components/FormLogin';
+import classNames from 'classnames/bind';
+import styles from './Login.module.scss';
+
 import cr1 from '../../assets/images/cr1.jpg';
 import cr2 from '../../assets/images/cr2.jpg';
 import cr3 from '../../assets/images/cr3.jpg';
 import cr4 from '../../assets/images/cr4.jpg';
-import FormLogin from '~/components/FormLogin';
-import classNames from 'classnames/bind';
-import styles from './Login.module.scss';
 const cx = classNames.bind(styles);
 const imgItems = [
     {
@@ -69,6 +68,7 @@ function Login() {
                     </Row>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

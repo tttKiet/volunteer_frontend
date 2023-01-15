@@ -1,0 +1,15 @@
+.wrap {
+    margin-top: 20px;
+    padding: 12px 0 40px 0;
+
+    .title {
+        font-size: 12px;
+        color: var(--text-color);
+    }
+
+    .card {
+        background-color: inherit;
+        font-size: 14px;
+        color: var(--text-color);
+    }
+}
