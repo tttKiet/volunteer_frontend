@@ -1,31 +1,49 @@
 .wrap {
     height: 80px;
-    position: sticky;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
     top: 20px;
-}
 
-.wrapper {
-    height: 100%;
-    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
-        0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
-    border-width: 0;
-    background-color: #fff;
-    background-clip: border-box;
-    border-radius: 0.25rem;
-    border: 1px solid rgba(26, 54, 126, 0.125);
-}
+    .wrapper {
+        height: 100%;
+        box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
+            0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+        border-width: 0;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 0.25rem;
+        border: 1px solid rgba(26, 54, 126, 0.125);
 
-.logo {
-    width: 68px;
-    margin-left: 20px;
-}
+        .logo {
+            width: 68px;
+            margin-left: 20px;
+        }
 
-.text-content {
-    font-size: 20px;
-    color: #495057;
-    text-align: right;
-    padding: 0 20px 0 0;
-    margin: 0 80px 0;
-    border-left: 1px solid #ccc;
-    letter-spacing: 1px;
+        .text-content {
+            font-size: 20px;
+            color: #495057;
+            text-align: right;
+            padding: 0 20px 0 0;
+            margin: 0 80px 0;
+            border-left: 1px solid #ccc;
+            letter-spacing: 1px;
+
+            .icon-out {
+                font-size: 18px;
+                color: var(--text-color);
+                position: absolute;
+                right: 40px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                padding: 8px 16px;
+                transition: all 0.41s ease-in;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
 }

@@ -31,15 +31,6 @@ function Home() {
 
     return (
         <div className={cx('wrap')}>
-            <button
-                onClick={() => {
-                    setIsLogined((isLogined) => !isLogined);
-                    dispatch(userSlice.actions.toggleUserLogin());
-                }}
-            >
-                Click
-            </button>
-
             <Container>
                 <Row>
                     <Col md={12}>

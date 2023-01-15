@@ -5,10 +5,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { userSlice } from '../reducers';
 
 const userPersistConfig = {
-    key: 'root',
+    key: 'user',
     storage,
 };
-
 
 const persistedReducer = persistReducer(userPersistConfig, userSlice.reducer);
 

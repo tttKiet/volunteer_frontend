@@ -1,3 +1,7 @@
 .wrap {
-    background-color: #ccc;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    padding: 120px 0 0 0;
+
+    
 }
