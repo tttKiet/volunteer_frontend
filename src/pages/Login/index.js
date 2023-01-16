@@ -1,12 +1,16 @@
 import { Row, Col } from 'react-bootstrap';
 import Slide from '~/components/Carousel/Carousel';
+import { useSelector } from 'react-redux';
+import { isLoginSelector } from '~/redux/selector';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-
 import FormLogin from '~/components/FormLogin';
+
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
-
 import cr1 from '../../assets/images/cr1.jpg';
 import cr2 from '../../assets/images/cr2.jpg';
 import cr3 from '../../assets/images/cr3.jpg';
@@ -40,12 +44,14 @@ const imgItems = [
 ];
 
 function Login() {
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    // const handleLogin = () => {
-    //     dispatch(userSlice.actions.toggleUserLogin());
-    //     navigate('/');
-    // };
+    const isLoggined = useSelector(isLoginSelector);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggined) {
+            navigate('/');
+        }
+    });
 
     return (
         <div className={cx('wrap')}>

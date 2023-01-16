@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userSlice } from '~/redux/reducers';
 import { Form, Button } from 'react-bootstrap';
 import Loader from '../Loader';
 import { userServices } from '~/services';
@@ -7,6 +10,9 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function FormLogin() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [isLogined, setIsLogined] = useState(false);
     const [userInput, setUserInput] = useState('');
     const [passInput, setPassInput] = useState('');
     const [errInput, setErrInput] = useState('');
@@ -30,14 +36,33 @@ function FormLogin() {
 
         if (userInput && passInput) {
             setIsloader(true);
-            await setTimeout(async () => {
+            var idLoader = await setTimeout(async () => {
                 const res = await userServices.login(userInput, passInput);
                 setIsloader(false);
-                console.log(res);
                 setErrInput(res.errMessage);
-            }, 1000);
+                clearTimeout(idLoader);
+                if (res.errCode === 0) {
+                    saveUserLogin(res.userData);
+                }
+            }, 500);
         }
     };
+
+    const saveUserLogin = (data) => {
+        dispatch(userSlice.actions.saveUserLogin(data));
+        dispatch(userSlice.actions.toggleUserLogin(true));
+        setIsLogined(true);
+    };
+
+    const handleNavigate = useCallback(() => {
+        if (isLogined) {
+            navigate('/');
+        }
+    }, [isLogined, navigate]);
+
+    useEffect(() => {
+        handleNavigate();
+    }, [handleNavigate, isLogined]);
 
     return (
         <>

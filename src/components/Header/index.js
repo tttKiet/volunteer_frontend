@@ -16,6 +16,7 @@ function Header() {
     const isLogined = useSelector(isLoginSelector);
     const userData = useSelector(userSelector);
 
+    console.log('user', userData);
     const handleCLickLoggout = () => {
         dispatch(userActions.toggleUserLogin());
     };
@@ -37,10 +38,9 @@ function Header() {
                             ) : (
                                 <div>
                                     <span style={{ margin: '0 8px 0 0' }}>
-                                        {' '}
                                         <i>Xin Chào</i>
                                     </span>
-                                    <span>{userData.name}</span>
+                                    <span>{userData.user}</span>
                                     <a href="/login" title="Sign out?" onClick={handleCLickLoggout}>
                                         <FontAwesomeIcon className={cx('icon-out')} icon={faArrowRightFromBracket} />
                                     </a>

@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { isLoginSelector } from '~/redux/selector';
-import { userSlice } from '~/redux/reducers';
 
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
@@ -15,8 +14,7 @@ const cx = classNames.bind(styles);
 
 function Home() {
     const dispatch = useDispatch();
-    const login = useSelector(isLoginSelector);
-    const [isLogined, setIsLogined] = useState(login);
+    const isLogined = useSelector(isLoginSelector);
     const navigate = useNavigate();
 
     const handleNavigate = useCallback(() => {

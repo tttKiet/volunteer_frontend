@@ -4,15 +4,19 @@ const userSlice = createSlice({
     name: 'user',
     initialState: {
         isLogined: true,
-        userData: {
-            ms: 'B2014754',
-            email: 'kietb2014754@gmail.com',
-            name: 'Bui Tuan Kiet',
-        },
+        userData: {},
     },
     reducers: {
-        toggleUserLogin: (state) => {
-            state.isLogined = !state.isLogined;
+        toggleUserLogin(state, actions) {
+            console.log('toggle user login', actions);
+            if (actions.payload === true) {
+                state.isLogined = actions.payload;
+            } else {
+                state.isLogined = !state.isLogined;
+            }
+        },
+        saveUserLogin(state, actions) {
+            state.userData = actions.payload;
         },
     },
 });
