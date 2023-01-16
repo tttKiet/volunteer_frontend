@@ -20,7 +20,7 @@ function FormLogin() {
                     </Form.Group>
 
                     <Form.Group className="mb-1 d-flex align-items-center">
-                        <Form.Check id="check-miss" checked style={{ cursor: 'pointer' }} />
+                        <Form.Check id="check-miss" style={{ cursor: 'pointer' }} />
                         <Form.Label
                             htmlFor="check-miss"
                             className="mx-3"
