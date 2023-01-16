@@ -1,4 +1,3 @@
-import axios from '~/axios';
 import { Row, Col } from 'react-bootstrap';
 import Slide from '~/components/Carousel/Carousel';
 import Header from '~/components/Header';
@@ -47,21 +46,11 @@ function Login() {
     //     dispatch(userSlice.actions.toggleUserLogin());
     //     navigate('/');
     // };
-    const fetchApi = async () => {
-        console.log('------------');
-        const data = await axios.get('/api/v1/accounts');
-        console.log(data);
-    };
 
     return (
         <div className={cx('wrap')}>
             <Header />
             <div className={cx('container')}>
-                {/* test */}
-                <button type="button" onClick={fetchApi} className="btn btn-primary">
-                    fetchApi
-                </button>
-
                 <div className={cx('wrapper', 'py-5')}>
                     <Row>
                         <Col md={5}>
