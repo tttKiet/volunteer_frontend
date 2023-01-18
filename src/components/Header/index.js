@@ -16,7 +16,6 @@ function Header() {
     const isLogined = useSelector(isLoginSelector);
     const userData = useSelector(userSelector);
 
-    console.log('user', userData);
     const handleCLickLoggout = () => {
         dispatch(userActions.toggleUserLogin());
     };

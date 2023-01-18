@@ -1,5 +1,6 @@
 import Home from '~/pages/Home';
 import Login from '~/pages/Login';
+import AdminPost from '~/pages/AdminPost';
 
 const publicRoutes = [
     {
@@ -9,6 +10,10 @@ const publicRoutes = [
     {
         path: '/login',
         component: Login,
+    },
+    {
+        path: '/admin/mypost',
+        component: AdminPost,
     },
 ];
 

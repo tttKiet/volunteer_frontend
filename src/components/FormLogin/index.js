@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userSlice } from '~/redux/reducers';
 import { Form, Button } from 'react-bootstrap';
-import Loader from '../Loader';
 import { userServices } from '~/services';
+
+import Loader from '../Loader';
 import styles from './FormLogin.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -51,6 +52,7 @@ function FormLogin() {
     const saveUserLogin = (data) => {
         dispatch(userSlice.actions.saveUserLogin(data));
         dispatch(userSlice.actions.toggleUserLogin(true));
+        
         setIsLogined(true);
     };
 

@@ -9,6 +9,10 @@
         margin: 0 0 12px 0;
     }
 
+    & + .wrap {
+        margin-top: 20px;
+    }
+
     .header {
         h2 {
             font-size: 12px;

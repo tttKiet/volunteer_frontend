@@ -2,42 +2,5 @@
     background-color: var(--background-color);
     min-height: 100vh;
     padding: 120px 0 0 0;
-
-    .noticatons {
-        font-size: 2rem;
-        padding: 8px 6px;
-        color: var(--text-color);
-    }
-
-    .posts {
-        padding: 0 24px 12px 24px;
-        height: 70vh;
-        overflow: hidden;
-        scroll-behavior: smooth;
-        scrollbar-gutter: stable;
-
-        &:hover {
-            overflow-y: scroll;
-        }
-
-        &::-webkit-scrollbar {
-            border-radius: 0;
-            width: 4px;
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(22, 24, 35, 0.312); /* Hiệu ứng di chuột đổi màu*/
-            cursor: pointer;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 4px;
-            background-color: rgba(22, 24, 35, 0.06);
-        }
-
-        &::-webkit-scrollbar-track {
-            border-radius: 0;
-            background-color: rgba(0, 0, 0, 0);
-        }
-    }
 }
+

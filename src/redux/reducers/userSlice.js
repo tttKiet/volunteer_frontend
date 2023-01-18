@@ -4,6 +4,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState: {
         isLogined: false,
+        isManager: false,
         userData: {},
     },
     reducers: {
@@ -17,6 +18,7 @@ const userSlice = createSlice({
         },
         saveUserLogin(state, actions) {
             state.userData = actions.payload;
+            state.isManager = actions.payload.type === 'admin' ? true : false;
         },
     },
 });
