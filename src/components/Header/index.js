@@ -40,7 +40,7 @@ function Header() {
                                     <span style={{ margin: '0 8px 0 0' }}>
                                         <i>Xin Chào</i>
                                     </span>
-                                    <span>{userData.user}</span>
+                                    <span>{userData.id}</span>
                                     <a href="/login" title="Sign out?" onClick={handleCLickLoggout}>
                                         <FontAwesomeIcon className={cx('icon-out')} icon={faArrowRightFromBracket} />
                                     </a>

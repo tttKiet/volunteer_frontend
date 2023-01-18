@@ -1,0 +1,36 @@
+.wrap {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin: 30px 0;
+    box-shadow: -8px 10px 10px -9px rgba(150, 150, 150, 0.6);
+
+    &:first-child {
+        margin: 0 0 12px 0;
+    }
+
+    .header {
+        h2 {
+            font-size: 12px;
+            color: var(--text-color);
+            opacity: 0.8;
+            padding: 2px 0;
+        }
+    }
+
+    .main {
+        padding: 16px;
+
+        p {
+            font-size: 14px;
+            line-height: 16px;
+        }
+    }
+
+    .footer {
+        .date-status {
+            font-size: 10px;
+            padding: 4px 0;
+        }
+    }
+}
