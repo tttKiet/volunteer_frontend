@@ -1,5 +1,5 @@
 import { Container, Row, Col, Nav } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { postServices } from '~/services';
@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { isLoginSelector, userSelector } from '~/redux/selector';
 import Post from '~/components/Post';
 import Header from '~/components/Header';
+import Footer from '~/components/Footer';
 import classNames from 'classnames/bind';
 import styles from './AdminPost.module.scss';
 
@@ -17,29 +18,28 @@ function AdminPost() {
     const navigate = useNavigate();
     const [post, setPost] = useState([]);
 
-    const getPosts = async () => {
+    const getPosts = useCallback(async () => {
         const res = await postServices.getPosts(curUser.id);
         if (res.errCode === 0) {
             setPost(res.posts);
         }
-    };
-
-    const controlPage = () => {
+    }, [curUser.id]);
+    const controlPage = useCallback(() => {
         if (!isLogined) {
             navigate('/login');
         }
-    };
+    }, [isLogined, navigate]);
 
     useEffect(() => {
         controlPage();
         getPosts();
-    }, []);
+    }, [controlPage, getPosts]);
     return (
         <div className={cx('wrap')}>
             <Container>
                 <div className={cx('container-post')}>
                     <Header />
-                    <Row>
+                    <Row className={cx('content-post')}>
                         <Col sm={9}>
                             <Row>
                                 <Col sm={12}>
@@ -50,8 +50,9 @@ function AdminPost() {
                                         {post.map((post, id) => (
                                             <Post
                                                 author={'Bạn - ' + post.user.id}
+                                                title={post.title}
                                                 key={id + 'post'}
-                                                content={post.descrtiption}
+                                                content={post.description}
                                                 upDate={post.createdAt}
                                             />
                                         ))}
@@ -69,7 +70,7 @@ function AdminPost() {
                                         <Nav.Link href="/admin/mypost">Bài đăng của tôi</Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item className={cx('border-link')}>
-                                        <Nav.Link href="/lists-work"> Đăng bài</Nav.Link>
+                                        <Nav.Link href="/admin/up-post"> Đăng bài</Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item className={cx('border-link')}>
                                         <Nav.Link href="" disabled>
@@ -80,6 +81,7 @@ function AdminPost() {
                             </div>
                         </Col>
                     </Row>
+                    <Footer />
                 </div>
             </Container>
         </div>

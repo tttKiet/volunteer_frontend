@@ -20,7 +20,7 @@ function Footer() {
                         <Row>
                             <Col sm={6} className="offset-3 mt-4">
                                 <div className={cx('card', 'text-center', 'p-2')}>
-                                    <title>Trường Đại học Cần Thơ (Can Tho University)</title>
+                                    <h3 className="mb-3">Trường Đại học Cần Thơ (Can Tho University)</h3>
                                     <p>Khu II, đường 3/2, P. Xuân Khánh, Q. Ninh Kiều, TP. Cần Thơ.</p>
                                     <p>
                                         Điện thoại: (84-292) 3832663 - (84-292) 3838474; Fax: (84-292) 3838474; Email:

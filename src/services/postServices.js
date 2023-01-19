@@ -21,6 +21,21 @@ const postService = {
             console.log('loi');
         }
     },
+
+    // Up load post
+    async upPost(id, title, description) {
+        try {
+            const res = await axios.post('/api/v1/post', {
+                userId: id,
+                title,
+                description,
+            });
+            return res.data;
+        } catch (e) {
+            console.log('loi');
+        }
+        console.log(id, title, description);
+    },
 };
 
 export default postService;

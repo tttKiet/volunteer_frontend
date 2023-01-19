@@ -3,11 +3,13 @@ import classNames from 'classnames/bind';
 import styles from './Post.module.scss';
 
 const cx = classNames.bind(styles);
-function Post({ author, content, upDate }) {
+function Post({ author, title, content, upDate }) {
     return (
         <div className={cx('wrap')}>
             <div className={cx('header')}>
-                <h2>Author: {author}</h2>
+                <p>
+                    Author: {author} : <b className="mx-2">{title}</b>
+                </p>
             </div>
             <hr />
             <div className={cx('main')}>

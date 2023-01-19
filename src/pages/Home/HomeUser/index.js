@@ -18,17 +18,14 @@ function HomeUser() {
             setposts(res.posts);
         }
     };
+
     useEffect(() => {
         getPosts();
     }, []);
     return (
         <Container>
-            <Row>
-                <Col md={12}>
-                    <Header />
-                </Col>
-            </Row>
-            <Row className="mt-4">
+            <Header />
+            <Row className={cx('content')}>
                 <Col md={3}>
                     <Nav className={cx('flex-column', 'nav')} activeKey="/home">
                         <Nav.Item>
@@ -53,8 +50,9 @@ function HomeUser() {
                         {posts.map((post, i) => (
                             <Post
                                 key={i + 'post'}
+                                title={post.title}
                                 author={post.user.name}
-                                content={post.descrtiption}
+                                content={post.description}
                                 upDate={post.createdAt}
                             />
                         ))}

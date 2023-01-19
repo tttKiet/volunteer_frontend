@@ -21,7 +21,7 @@ function Header() {
     };
 
     return (
-        <div className={cx('wrap', 'container')}>
+        <div className={cx('wrap', '')}>
             <div className={cx('wrapper')}>
                 <Row className="h-100 align-items-center px-3">
                     <Col md={3}>
@@ -33,7 +33,7 @@ function Header() {
                     <Col md={5} className="offset-4">
                         <h2 className={cx('text-content')}>
                             {!isLogined ? (
-                                <i>Chúng ta là tình nguyện viên!</i>
+                                <i>Volunteer Work!!!</i>
                             ) : (
                                 <div>
                                     <span style={{ margin: '0 8px 0 0' }}>

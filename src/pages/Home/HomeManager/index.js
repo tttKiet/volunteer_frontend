@@ -9,7 +9,7 @@ function HomeManager() {
     return (
         <Container className={cx('wrap')}>
             <Header />
-            <Row>
+            <Row className={cx('content')}>
                 <Col sm={9}>
                     <Row>
                         <Col sm={12}>

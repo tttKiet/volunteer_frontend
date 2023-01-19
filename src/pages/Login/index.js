@@ -55,8 +55,8 @@ function Login() {
 
     return (
         <div className={cx('wrap')}>
-            <Header />
-            <div className={cx('container')}>
+            <div className={cx('container', '')}>
+                <Header />
                 <div className={cx('wrapper', 'py-5')}>
                     <Row>
                         <Col md={5}>
