@@ -10,7 +10,7 @@ import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Header() {
+function Header({ links }) {
     const dispatch = useDispatch();
     const userActions = userSlice.actions;
     const isLogined = useSelector(isLoginSelector);
@@ -29,8 +29,20 @@ function Header() {
                             <Image rounded roundedCircle thumbnail src={`${logo}`} />
                         </div>
                     </Col>
+                    <Col md={4}>
+                        <ul className="nav nav-pills justify-content-end">
+                            {links &&
+                                links.map((link, i) => (
+                                    <li key={i + 'linksHeader'} className="nav-item mx-2">
+                                        <a className="nav-link " style={{ fontSize: 14 }} href={link.to}>
+                                            {link.name}
+                                        </a>
+                                    </li>
+                                ))}
+                        </ul>
+                    </Col>
 
-                    <Col md={5} className="offset-4">
+                    <Col md={5}>
                         <h2 className={cx('text-content')}>
                             {!isLogined ? (
                                 <i>Volunteer Work!!!</i>
