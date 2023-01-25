@@ -1,11 +1,33 @@
+import { useEffect, useState, useCallback } from 'react';
 import { Container, Row, Table, Col, Button, Nav } from 'react-bootstrap';
 
+import { workServices } from '~/services';
 import Header from '~/components/Header';
 import classNames from 'classnames/bind';
 import styles from './HomeManager.module.scss';
 
 const cx = classNames.bind(styles);
 function HomeManager() {
+    const [works, setWorks] = useState([]);
+    const handleGetWork = useCallback(async () => {
+        const res = await workServices.getWork();
+        if (res.errCode === 0) {
+            setWorks(res.works);
+        }
+    }, []);
+
+    const handleClickBrowse = async (id) => {
+        const res = await workServices.workBrowse(id);
+        if (res.errCode === 0) {
+            console.log('ok');
+            handleGetWork();
+        }
+    };
+
+    useEffect(() => {
+        handleGetWork();
+    }, [handleGetWork]);
+
     return (
         <Container className={cx('wrap')}>
             <Header />
@@ -30,30 +52,38 @@ function HomeManager() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>Otto</td>
-                                            <td>Otto</td>
-                                            <td>Otto</td>
-                                            <td>
-                                                <Button
-                                                    type="button"
-                                                    variant="outline-primary"
-                                                    className={cx('mx-2', 'custom-btn')}
-                                                >
-                                                    Duyệt
-                                                </Button>
-                                                <Button
-                                                    type="button"
-                                                    variant="outline-danger"
-                                                    className={cx(' mx-2', 'custom-btn')}
-                                                >
-                                                    Xóa
-                                                </Button>
-                                            </td>
-                                        </tr>
+                                        {works.map((work, id) => {
+                                            console.log('work', work);
+                                            return (
+                                                <tr key={id + 'work'}>
+                                                    <td>{id + 1}</td>
+                                                    <td>{work.work.name}</td>
+                                                    <td>{work.work.workPlace}</td>
+                                                    <td>{work.userWork.id}</td>
+                                                    <td>{work.work.maxStudent}</td>
+                                                    <td>{work.work.curStudent}</td>
+                                                    <td>{work.status == 0 ? 'Chưa duyệt' : 'Đã duyệt'}</td>
+
+                                                    <td>
+                                                        <Button
+                                                            type="button"
+                                                            variant="outline-primary"
+                                                            className={cx('mx-2', 'custom-btn')}
+                                                            onClick={(e) => handleClickBrowse(work.id, e)}
+                                                        >
+                                                            Duyệt
+                                                        </Button>
+                                                        <Button
+                                                            type="button"
+                                                            variant="outline-danger"
+                                                            className={cx(' mx-2', 'custom-btn')}
+                                                        >
+                                                            Xóa
+                                                        </Button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
                                     </tbody>
                                 </Table>
                             </div>
@@ -70,7 +100,10 @@ function HomeManager() {
                                 <Nav.Link href="/admin/mypost">Bài đăng của tôi</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className={cx('border-link')}>
-                                <Nav.Link href="/lists-work"> Đăng bài</Nav.Link>
+                                <Nav.Link href="/admin/up-post"> Đăng bài</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className={cx('border-link')}>
+                                <Nav.Link href="/admin/work"> Quản lý công việc </Nav.Link>
                             </Nav.Item>
                             <Nav.Item className={cx('border-link')}>
                                 <Nav.Link href="" disabled>

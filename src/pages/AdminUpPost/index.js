@@ -97,7 +97,8 @@ function AdminUpPost() {
                                             <div className="form-floating mb-3">
                                                 <textarea
                                                     type="text"
-                                                    rows={8}
+                                                    rows={9}
+                                                    style={{ minHeight: '200px' }}
                                                     placeholder="content"
                                                     className={cx('form-control', 'textarea')}
                                                     id="Nội dung"
@@ -140,6 +141,9 @@ function AdminUpPost() {
                                     </Nav.Item>
                                     <Nav.Item className={cx('border-link')}>
                                         <Nav.Link href="/admin/up-post"> Đăng bài</Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item className={cx('border-link')}>
+                                        <Nav.Link href="/admin/work"> Quản lý công việc </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item className={cx('border-link')}>
                                         <Nav.Link href="" disabled>
