@@ -22,7 +22,7 @@ const publicRoutes = [
         component: AdminUpPost,
     },
     {
-        path: '/admin/work',
+        path: '/admin/view/list-user-work',
         component: AdminWorkManager,
     },
 ];

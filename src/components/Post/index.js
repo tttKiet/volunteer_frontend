@@ -1,6 +1,7 @@
 import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames/bind';
 import styles from './Post.module.scss';
+import moment from 'moment';
 
 const cx = classNames.bind(styles);
 function Post({ author, title, content, upDate }) {
@@ -20,7 +21,7 @@ function Post({ author, title, content, upDate }) {
             <div className={cx('footer')}>
                 <Row>
                     <Col sm={4} className={cx('offset-8', 'date-status')}>
-                        <i>{upDate}</i>
+                        <i>{moment(upDate).startOf().fromNow()}</i>
                     </Col>
                 </Row>
             </div>

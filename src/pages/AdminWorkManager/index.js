@@ -1,7 +1,13 @@
 import { useEffect, useCallback, useState } from 'react';
+import Moment from 'react-moment';
+import { useNavigate } from 'react-router-dom';
+import { isLoginSelector, userSelector } from '~/redux/selector';
+import { useSelector } from 'react-redux';
+
+import Header from '~/components/Header';
+import Loader from '~/components/Loader';
 import { Container, Row, Col } from 'react-bootstrap';
 import { workServices } from '~/services';
-import Header from '~/components/Header';
 import classNames from 'classnames/bind';
 import styles from './AdminWorkManager.scss';
 
@@ -12,19 +18,30 @@ const links = [
         name: 'Trang chủ',
         to: '/',
     },
-    {
-        name: 'Xem danh sách',
-        to: '/admin/view/work',
-    },
 ];
 
 function AdminWorkManager() {
+    const navigate = useNavigate();
+    const isLogined = useSelector(isLoginSelector);
+    const curUser = useSelector(userSelector);
+
+    const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState([]);
     const [list, setList] = useState([]);
     const [optionValue, setOptionValue] = useState({
         name: 'Tất cả',
         value: 'All',
     });
+
+    const controlPage = useCallback(() => {
+        if (!isLogined) {
+            navigate('/login');
+        }
+
+        if (curUser && curUser.type !== 'admin') {
+            navigate('/');
+        }
+    }, [curUser, isLogined, navigate]);
 
     const handleChangeSeclect = (e) => {
         const index = e.nativeEvent.target.selectedIndex;
@@ -36,15 +53,16 @@ function AdminWorkManager() {
     };
 
     const getListUsers = useCallback(async () => {
+        setIsLoading(true);
         let id;
         if (optionValue.value !== 'All') {
             id = optionValue.value;
         }
         const res = await workServices.getBrowsedUser(id);
-        console.log(res);
         if (res.errCode === 0) {
             setList(res.works);
         }
+        setIsLoading(false);
     }, [optionValue.value]);
 
     const getNameWorks = useCallback(async () => {
@@ -55,12 +73,14 @@ function AdminWorkManager() {
     }, []);
 
     useEffect(() => {
+        controlPage();
         getNameWorks();
         getListUsers();
-    }, [getListUsers, getNameWorks]);
+    }, [controlPage, getListUsers, getNameWorks]);
 
     return (
         <div className={cx('wrap')}>
+            {isLoading && <Loader />}
             <Container>
                 <Header links={links} />
 
@@ -103,7 +123,9 @@ function AdminWorkManager() {
                                             <td>{row.userWork.id}</td>
                                             <td>{row.userWork.name}</td>
                                             <td>{row.userWork.email}</td>
-                                            <td>{row.updatedAt}</td>
+                                            <td>
+                                                <Moment local="vi">{row.updatedAt}</Moment>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>

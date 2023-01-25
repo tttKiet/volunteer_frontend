@@ -73,7 +73,7 @@ function AdminPost() {
                                         <Nav.Link href="/admin/up-post"> Đăng bài</Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item className={cx('border-link')}>
-                                        <Nav.Link href="/admin/work"> Quản lý công việc </Nav.Link>
+                                        <Nav.Link href="/admin/view/list-user-work"> Quản lý công việc </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item className={cx('border-link')}>
                                         <Nav.Link href="" disabled>
