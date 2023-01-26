@@ -52,7 +52,7 @@ function FormLogin() {
     const saveUserLogin = (data) => {
         dispatch(userSlice.actions.saveUserLogin(data));
         dispatch(userSlice.actions.toggleUserLogin(true));
-        
+
         setIsLogined(true);
     };
 
