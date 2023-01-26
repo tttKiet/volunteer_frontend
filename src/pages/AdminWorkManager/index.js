@@ -9,7 +9,7 @@ import Loader from '~/components/Loader';
 import { Container, Row, Col } from 'react-bootstrap';
 import { workServices } from '~/services';
 import classNames from 'classnames/bind';
-import styles from './AdminWorkManager.scss';
+import styles from './AdminWorkManager.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +17,10 @@ const links = [
     {
         name: 'Trang chủ',
         to: '/',
+    },
+    {
+        name: 'Tạo công việc mới',
+        to: '/admin/work/create',
     },
 ];
 

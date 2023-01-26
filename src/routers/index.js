@@ -3,6 +3,7 @@ import Login from '~/pages/Login';
 import AdminPost from '~/pages/AdminPost';
 import AdminUpPost from '~/pages/AdminUpPost';
 import AdminWorkManager from '~/pages/AdminWorkManager';
+import AdminWorkCreate from '~/pages/AdminWorkCreate';
 
 const publicRoutes = [
     {
@@ -24,6 +25,10 @@ const publicRoutes = [
     {
         path: '/admin/view/list-user-work',
         component: AdminWorkManager,
+    },
+    {
+        path: '/admin/work/create',
+        component: AdminWorkCreate,
     },
 ];
 
