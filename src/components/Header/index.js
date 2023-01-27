@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { Row, Col, Image } from 'react-bootstrap';
@@ -12,6 +13,7 @@ const cx = classNames.bind(styles);
 
 function Header({ links }) {
     const dispatch = useDispatch();
+    const ref = useRef();
     const userActions = userSlice.actions;
     const isLogined = useSelector(isLoginSelector);
     const userData = useSelector(userSelector);
@@ -20,8 +22,21 @@ function Header({ links }) {
         dispatch(userActions.toggleUserLogin());
     };
 
+    const handleScrollTop = (e) => {
+        const headerElement = ref.current;
+        const scrollTop = window.scrollY;
+        if (scrollTop > 60) {
+            headerElement.classList.add(cx('re-active'));
+        } else {
+            headerElement.classList.remove(cx('re-active'));
+        }
+    };
+    useEffect(() => {
+        window.addEventListener('scroll', handleScrollTop);
+    }, []);
+
     return (
-        <div className={cx('wrap', '')}>
+        <div ref={ref} className={cx('wrap', '')}>
             <div className={cx('wrapper')}>
                 <Row className="h-100 align-items-center px-3">
                     <Col md={3}>

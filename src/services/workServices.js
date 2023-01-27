@@ -8,8 +8,13 @@ const workServices = {
     },
 
     // get name work
-    async getNameWork() {
-        const res = await axios.get('/api/v1/work/get-name');
+    async getNameWork(type = 'all') {
+        if (type === 'name') {
+            const res = await axios.get('/api/v1/work/get-name');
+            return res.data;
+        }
+
+        const res = await axios.get('/api/v1/work/get-all');
         return res.data;
     },
 
@@ -37,6 +42,15 @@ const workServices = {
             workPlace,
             pointPlus,
             maxStudent,
+        });
+        return res.data;
+    },
+
+    // register work
+    async registerWork(userId, workId) {
+        const res = await axios.post('/api/v1/work/register', {
+            userId,
+            workId,
         });
         return res.data;
     },

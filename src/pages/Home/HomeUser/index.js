@@ -3,6 +3,7 @@ import { Container, Row, Col, Nav } from 'react-bootstrap';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Post from '~/components/Post';
+import ModalRegisterWork from '~/components/ModalRegisterWork';
 import { postServices } from '~/services';
 
 import classNames from 'classnames/bind';
@@ -31,9 +32,10 @@ function HomeUser() {
                         <Nav.Item>
                             <Nav.Link href="/">Frefress Page!</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="/user/add-work">Đăng ký tình nguyện</Nav.Link>
-                        </Nav.Item>
+                        <div className="nav-item">
+                            <span className="nav-link">Đăng ký tình nguyện</span>
+                            <ModalRegisterWork />
+                        </div>
                         <Nav.Item>
                             <Nav.Link href="/lists-work"> Danh mục Work </Nav.Link>
                         </Nav.Item>

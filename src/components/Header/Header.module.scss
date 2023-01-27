@@ -2,8 +2,14 @@
     height: 80px;
     position: sticky;
     z-index: 1000 !important;
-
     top: 20px;
+    transition: all 0.3s linear;
+
+    &.re-active {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
     .wrapper {
         height: 100%;
         box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),

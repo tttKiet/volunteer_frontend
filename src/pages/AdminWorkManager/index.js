@@ -70,7 +70,7 @@ function AdminWorkManager() {
     }, [optionValue.value]);
 
     const getNameWorks = useCallback(async () => {
-        const res = await workServices.getNameWork();
+        const res = await workServices.getNameWork('name');
         if (res.errCode === 0) {
             setOptions(res.workNames);
         }

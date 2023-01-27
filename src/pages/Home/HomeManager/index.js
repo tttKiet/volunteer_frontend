@@ -39,53 +39,57 @@ function HomeManager() {
                         </Col>
                         <Col md={12}>
                             <div className={cx('table')}>
-                                <Table striped bordered hover size="">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Tên</th>
-                                            <th>Nơi thực nghiệm</th>
-                                            <th>Sinh viên đăng ký</th>
-                                            <th>Tối đa</th>
-                                            <th>Số lượng hiện tại</th>
-                                            <th>Trạng thái</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {works.map((work, id) => {
-                                            console.log('work', work);
-                                            return (
-                                                <tr key={id + 'work'}>
-                                                    <td>{id + 1}</td>
-                                                    <td>{work.work.name}</td>
-                                                    <td>{work.work.workPlace}</td>
-                                                    <td>{work.userWork.id}</td>
-                                                    <td>{work.work.maxStudent}</td>
-                                                    <td>{work.work.curStudent}</td>
-                                                    <td>{work.status === 0 ? 'Chưa duyệt' : 'Đã duyệt'}</td>
+                                {works.length > 0 ? (
+                                    <Table striped bordered hover size="">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Tên</th>
+                                                <th>Nơi thực nghiệm</th>
+                                                <th>Sinh viên đăng ký</th>
+                                                <th>Tối đa</th>
+                                                <th>Số lượng hiện tại</th>
+                                                <th>Trạng thái</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {works.map((work, id) => {
+                                                console.log('work', work);
+                                                return (
+                                                    <tr key={id + 'work'}>
+                                                        <td>{id + 1}</td>
+                                                        <td>{work.work.name}</td>
+                                                        <td>{work.work.workPlace}</td>
+                                                        <td>{work.userWork.id}</td>
+                                                        <td>{work.work.maxStudent}</td>
+                                                        <td>{work.work.curStudent}</td>
+                                                        <td>{work.status === 0 ? 'Chưa duyệt' : 'Đã duyệt'}</td>
 
-                                                    <td>
-                                                        <Button
-                                                            type="button"
-                                                            variant="outline-primary"
-                                                            className={cx('mx-2', 'custom-btn')}
-                                                            onClick={(e) => handleClickBrowse(work.id, e)}
-                                                        >
-                                                            Duyệt
-                                                        </Button>
-                                                        <Button
-                                                            type="button"
-                                                            variant="outline-danger"
-                                                            className={cx(' mx-2', 'custom-btn')}
-                                                        >
-                                                            Xóa
-                                                        </Button>
-                                                    </td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </Table>
+                                                        <td>
+                                                            <Button
+                                                                type="button"
+                                                                variant="outline-primary"
+                                                                className={cx('mx-2', 'custom-btn')}
+                                                                onClick={(e) => handleClickBrowse(work.id, e)}
+                                                            >
+                                                                Duyệt
+                                                            </Button>
+                                                            <Button
+                                                                type="button"
+                                                                variant="outline-danger"
+                                                                className={cx(' mx-2', 'custom-btn')}
+                                                            >
+                                                                Xóa
+                                                            </Button>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </Table>
+                                ) : (
+                                    <h2 className={cx('non-res')}>Chưa có sinh viên nào đăng ký </h2>
+                                )}
                             </div>
                         </Col>
                     </Row>
