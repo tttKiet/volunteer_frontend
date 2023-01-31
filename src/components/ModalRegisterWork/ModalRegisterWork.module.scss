@@ -3,10 +3,17 @@
         font-size: 14px;
         margin-right: 12px;
         color: var(--text-color);
+        font-weight: 700;
     }
 
     form {
         font-size: 14px !important;
         color: var(--text-color) !important;
+
+        select {
+            font-size: 14px !important;
+
+            
+        }
     }
 }

@@ -5,12 +5,10 @@ import styles from './ToastMassage.module.scss';
 const cx = classNames.bind(styles);
 
 function ToastMassage({ header, content, handleClose, isShow }) {
-    console.log('header', header);
-    console.log('content', content);
     return (
         <div className={cx('wrap')}>
-            <ToastContainer className={cx('', 'mx-5 my-5')} position="top-end">
-                <Toast onClose={handleClose} show={isShow} delay={4000} animation={true} autohide>
+            <ToastContainer className={cx('right', ' my-5')} position="top-end">
+                <Toast onClose={handleClose} show={isShow} delay={3200} animation={true} autohide>
                     <Toast.Header>
                         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
                         <strong className="me-auto">{header}</strong>

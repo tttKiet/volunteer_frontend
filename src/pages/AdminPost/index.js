@@ -40,26 +40,6 @@ function AdminPost() {
                 <div className={cx('container-post')}>
                     <Header />
                     <Row className={cx('content-post')}>
-                        <Col sm={9}>
-                            <Row>
-                                <Col sm={12}>
-                                    <h2 className={cx('title')}> BÀI ĐĂNG của bạn</h2>
-                                </Col>
-                                <Col md={12}>
-                                    <div className={cx('table', 'posts')}>
-                                        {post.map((post, id) => (
-                                            <Post
-                                                author={'Bạn - ' + post.user.id}
-                                                title={post.title}
-                                                key={id + 'post'}
-                                                content={post.description}
-                                                upDate={post.createdAt}
-                                            />
-                                        ))}
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Col>
                         <Col md={3}>
                             <div className={cx('control-admin')}>
                                 <Nav className={cx('flex-column', 'nav')} activeKey="/home">
@@ -82,6 +62,26 @@ function AdminPost() {
                                     </Nav.Item>
                                 </Nav>
                             </div>
+                        </Col>
+                        <Col sm={9}>
+                            <Row>
+                                <Col sm={12}>
+                                    <h2 className={cx('title')}> BÀI ĐĂNG của bạn</h2>
+                                </Col>
+                                <Col md={12}>
+                                    <div className={cx('table', 'posts')}>
+                                        {post.map((post, id) => (
+                                            <Post
+                                                author={'Bạn - ' + post.user.id}
+                                                title={post.title}
+                                                key={id + 'post'}
+                                                content={post.description}
+                                                upDate={post.createdAt}
+                                            />
+                                        ))}
+                                    </div>
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                     <Footer />
