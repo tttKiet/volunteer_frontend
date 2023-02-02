@@ -1,0 +1,22 @@
+.wrap {
+    min-height: 100vh;
+    background-color: var(--background-color);
+
+    .main {
+        margin-top: 40px;
+
+        .notication {
+            font-size: 14px;
+            color: var(--text-color);
+            padding: 4px 0 18px 0px;
+            text-decoration: wavy;
+            text-align: center;
+        }
+
+        .table {
+            .mr_-20 {
+                margin: 0 -20px;
+            }
+        }
+    }
+}

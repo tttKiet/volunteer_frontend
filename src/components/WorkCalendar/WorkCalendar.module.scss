@@ -1,0 +1,57 @@
+.calendar {
+    margin-top: 14px;
+    height: 70vh;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    transition: all 0.4s ease-in-out;
+
+    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
+        0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid rgba(15, 15, 15, 0.121);
+    padding: 12px 24px;
+
+    .datails {
+        font-size: 14px;
+        display: block;
+        text-align: center;
+        padding: 12px 24px;
+        text-decoration: none;
+        transition: all 0.2s linear;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .group-time {
+        svg {
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .time-text {
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        & + .group-time {
+            margin-top: 8px;
+        }
+    }
+}
+
+.notications {
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 12px 6px;
+    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
+        0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+    background-color: #fff;
+    border: 1px solid rgba(15, 15, 15, 0.121);
+    border-radius: 4px;
+
+    color: var(--text-color);
+}

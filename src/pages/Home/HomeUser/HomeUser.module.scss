@@ -1,9 +1,9 @@
 .nav {
     a {
-        font-size: 16px !important;
+        font-size: 14px !important;
     }
     span {
-        font-size: 16px !important;
+        font-size: 14px !important;
         cursor: pointer;
     }
 }
@@ -11,7 +11,7 @@
 .notications {
     text-align: center;
     font-size: 1.4rem;
-    padding: 8px 6px;
+    padding: 12px 6px;
     box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
         0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
     background-color: #fff;
@@ -57,38 +57,6 @@
                         border-top: 1px solid #ccc !important;
                     }
                 }
-            }
-        }
-    }
-
-    .calendar {
-        margin-top: 14px;
-        height: 70vh;
-        overflow: hidden;
-        scroll-behavior: smooth;
-        scrollbar-gutter: stable;
-        transition: all 0.4s ease-in-out;
-
-        box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
-            0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
-        border-radius: 4px;
-        background-color: #fff;
-        border: 1px solid rgba(15, 15, 15, 0.121);
-        padding: 12px 24px;
-
-        .group-time {
-            svg {
-                font-size: 14px;
-                margin-right: 10px;
-            }
-
-            .time-text {
-                font-size: 14px;
-                color: var(--text-color);
-            }
-
-            & + .group-time {
-                margin-top: 8px;
             }
         }
     }

@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 import { userSelector } from '~/redux/selector';
 import { Container, Row, Col, Nav } from 'react-bootstrap';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { postServices, workServices } from '~/services';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Post from '~/components/Post';
+import WorkCalendar from '~/components/WorkCalendar';
 import Loader from '~/components/Loader';
 import ModalRegisterWork from '~/components/ModalRegisterWork';
 import ToastMassage from '~/components/ToastMassage';
@@ -116,26 +115,7 @@ function HomeUser() {
                     </div>
                 </Col>
                 <Col md={3}>
-                    <h2 className={cx('notications')}>Lịch Tham gia tình nguyện của bạn </h2>
-                    <div className={cx('calendar')}>
-                        <div className={cx('group-time')}>
-                            <FontAwesomeIcon icon={faMinus} />
-                            <span className={cx('time-text')}>Thứ 2, ngày 15 2002 7h30</span>
-                            <span className={cx('time-text')}>, Công trường á tại DHCT</span>
-                        </div>
-
-                        <div className={cx('group-time')}>
-                            <FontAwesomeIcon icon={faMinus} />
-                            <span className={cx('time-text')}>Thứ 2, ngày 15 2002 7h30</span>
-                            <span className={cx('time-text')}> Công trường á tại DHCT</span>
-                        </div>
-
-                        <div className={cx('group-time')}>
-                            <FontAwesomeIcon icon={faMinus} />
-                            <span className={cx('time-text')}>Thứ 2, ngày 15 2002 7h30</span>
-                            <span className={cx('time-text')}> Công trường á tại DHCT</span>
-                        </div>
-                    </div>
+                    <WorkCalendar />
                 </Col>
             </Row>
 

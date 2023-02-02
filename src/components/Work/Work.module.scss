@@ -1,0 +1,47 @@
+.wrap {
+    margin-bottom: 40px;
+    .wrap-item {
+        padding: 0 12px;
+
+        .item {
+            padding: 10px 20px;
+            box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
+                0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+            background-color: #fff;
+            border-radius: 4px;
+            padding-bottom: 40px;
+
+            .title {
+                font-size: 13px;
+                color: rgba(0, 0, 0, 0.5);
+                font-weight: 400;
+                margin: 4px 0 8px 0;
+            }
+
+            .name-main {
+                font-size: 14px;
+                color: #000;
+                margin: 0px 0 8px 0;
+            }
+
+            .more {
+                font-size: 20px;
+                color: rgba(0, 0, 0, 0.88);
+                font-weight: 700;
+                margin: 0px 0 8px 0;
+            }
+
+            .more-content {
+                font-size: 13px;
+                color: rgba(0, 0, 0, 0.5);
+                line-height: 24px;
+            }
+
+            .more-number {
+                font-size: 13px;
+                color: #333;
+                line-height: 24px;
+            }
+        }
+    }
+}

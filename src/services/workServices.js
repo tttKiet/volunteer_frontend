@@ -18,6 +18,13 @@ const workServices = {
         return res.data;
     },
 
+    // get name work of  user
+    async getNameWorkUser(userId, isChecked) {
+        const string = isChecked ? `&&isChecked=1` : '';
+        const res = await axios.get(`/api/v1/work-user?userId=${userId}${string}`);
+        return res.data;
+    },
+
     // get name work
     async getBrowsedUser(id) {
         const res = await axios.get('/api/v1/work/browsed', {
