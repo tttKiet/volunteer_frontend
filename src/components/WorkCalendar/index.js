@@ -15,7 +15,7 @@ function WorkCalendar() {
     const currUser = useSelector(userSelector);
     const [works, setWorks] = useState([]);
     const getWorks = useCallback(async () => {
-        const res = await workServices.getNameWorkUser(currUser.id);
+        const res = await workServices.getNameWorkUser(currUser.id, 1);
         if (res.errCode === 0) {
             setWorks(res.works);
         }
@@ -43,7 +43,13 @@ function WorkCalendar() {
                     );
                 })}
 
-                <a href="/user/details-work" className={cx("datails")}>Xem chi tiết</a>
+                {works.length > 0 ? (
+                    <a href="/user/details-work" className={cx('datails')}>
+                        Xem chi tiết
+                    </a>
+                ) : (
+                    <span className={cx('datails')}>Bạn chưa có lịch </span>
+                )}
             </div>
         </>
     );

@@ -5,9 +5,9 @@ import Footer from '~/components/Footer';
 import Work from '~/components/Work';
 import { workServices } from '~/services';
 
+import { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './UserDetailsWork.module.scss';
-import { useCallback, useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 

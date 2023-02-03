@@ -1,0 +1,18 @@
+.wrap {
+    min-height: 100vh;
+    background-color: var(--background-color);
+    .content {
+        padding-top: 40px;
+
+        .title {
+            text-align: center;
+            color: var(--text-color);
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        .mr_-20 {
+            margin: 0 -20px;
+        }
+    }
+}

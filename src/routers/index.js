@@ -5,6 +5,7 @@ import AdminUpPost from '~/pages/AdminUpPost';
 import AdminWorkManager from '~/pages/AdminWorkManager';
 import AdminWorkCreate from '~/pages/AdminWorkCreate';
 import UserDetailsWork from '~/pages/UserDetailsWork';
+import UserListWork from '~/pages/UserListWork';
 import Invalid_404 from '~/pages/Invalid_404';
 
 const publicRoutes = [
@@ -35,6 +36,10 @@ const publicRoutes = [
     {
         path: '/user/details-work',
         component: UserDetailsWork,
+    },
+    {
+        path: '/lists-work',
+        component: UserListWork,
     },
     {
         path: '/invalid/404',
