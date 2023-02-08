@@ -1,42 +1,95 @@
-.title {
-    padding: 16px 32px;
-    font-size: 20px;
-    color: #495057;
-    border-bottom: 1px solid #ccc;
-    text-align: center;
-}
-
 .form {
     border: 1px solid #ccc;
-    width: 600px;
+    padding: 0 20px;
+    min-width: 520px;
+    border: 2px solid black;
     color: #495057;
-    border-radius: 4px;
-}
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 
-.wrap-input {
-    padding: 20px 20px 0 20px;
-}
+    border-radius: 0.625rem;
+    --tw-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 #0000, 0 0 #0000, var(--tw-shadow);
 
-.btn-submit {
-    margin: 0 20px 20px 20px;
-    padding: 16px;
+    .title {
+        padding: 16px 32px;
+        font-size: 20px;
+        color: #495057;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+    }
+
+    .wrap-input {
+        padding: 20px 20px 0 20px;
+    }
+
+    .submit {
+        padding: 0 20px;
+        margin: 0 0 20px 0;
+        .btn-submit {
+            width: 100% !important;
+            padding: 10px;
+        }
+    }
 }
 
 .form-gr {
-    label {
-        font-size: 18px;
-        margin-bottom: 10px;
+    position: relative;
+
+    + .form-gr {
+        margin-top: 24px;
+    }
+    .title-input {
+        background-color: transparent;
+        position: absolute;
+        user-select: none;
+        cursor: pointer;
+        font-size: 14px;
+        top: 50%;
+        left: 16px;
+        transform: translateY(-50%);
+        transition: all 0.2s ease-in-out;
     }
     input {
-        height: 40px;
+        height: 60px;
+        border-color: transparent transparent #ced4da transparent;
+        border-style: solid;
+        border-width: 2px;
+
+        font-size: 14px !important;
+        padding-left: 16px;
+        padding-top: 12px;
+        transition: all 0.3s linear;
+        
 
         &:placeholder-shown {
             font-size: 14px;
         }
+
+        &:focus {
+            box-shadow: none;
+            border-color: transparent transparent #ced4da transparent;
+            border-radius: 0px 0px 0px 8px;
+            & + .title-input {
+                text-shadow: 0px 0px 1px red;
+                color: rgba(255, 0, 0, 0.34);
+                background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+                font-size: 12px;
+                padding: 0 10px;
+                top: 0;
+                transform: translateY(-50%);
+            }
+        }
     }
 
-    input {
-        font-size: 14px;
+    input[value]:not([value='']) {
+        & + .title-input {
+            background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+            font-size: 12px;
+            padding: 0 10px;
+            top: 0;
+            transform: translateY(-50%);
+        }
     }
 }
 .err {

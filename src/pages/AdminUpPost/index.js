@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { isLoginSelector, userSelector } from '~/redux/selector';
 
 import postService from '~/services/postServices';
-import ModalAuth from '~/components/Modal';
+import ModalAuth from '~/components/ModalAuth';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import Loader from '~/components/Loader';

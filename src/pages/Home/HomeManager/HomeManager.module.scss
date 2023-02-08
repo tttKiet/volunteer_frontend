@@ -12,6 +12,19 @@
             color: var(--text-color);
             opacity: 0.9;
         }
+
+        .header-table {
+            font-size: 14px;
+            max-width: 60px !important;
+            min-width: 50px !important;
+        }
+
+        .wrap-td {
+            min-height: 40px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
     }
 
     .content {
@@ -31,12 +44,13 @@
     }
     td {
         font-size: 14px;
-        padding: 8px !important;
+        min-width: 50px;
+        max-width: 100px;
+        padding: 10px !important;
     }
 
     th {
-        font-size: 14px;
-        padding: 10px !important;
+        padding: 8px !important;
     }
 
     .title {

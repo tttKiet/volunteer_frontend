@@ -1,5 +1,5 @@
 @import 'normalize.css';
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap');
 :root {
     --primary-color: rgb(27, 61, 254);
     --text-color: #495057;
@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif !important;
     font-size: 1.6rem;
     line-height: 1.5;
     margin: 0;

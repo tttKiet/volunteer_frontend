@@ -61,6 +61,15 @@ const workServices = {
         });
         return res.data;
     },
+
+    async handleDeleteWorkRegister(id) {
+        const res = await axios.delete('/api/v1/listUser/delete', {
+            data: {
+                id,
+            },
+        });
+        return res.data;
+    },
 };
 
 export default workServices;

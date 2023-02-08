@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Header from '~/components/Header';
-import ModalAuth from '~/components/Modal';
+import ModalAuth from '~/components/ModalAuth';
 import ToastMassage from '~/components/ToastMassage';
 import { workServices } from '~/services';
 import classNames from 'classnames/bind';

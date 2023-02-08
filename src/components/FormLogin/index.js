@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userSlice } from '~/redux/reducers';
@@ -11,9 +11,11 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function FormLogin() {
+    const btnSubmitRef = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isLogined, setIsLogined] = useState(false);
+    const [isCheckBox, setIsCheckBox] = useState(true);
     const [userInput, setUserInput] = useState('');
     const [passInput, setPassInput] = useState('');
     const [errInput, setErrInput] = useState('');
@@ -24,6 +26,8 @@ function FormLogin() {
             setUserInput(e.target.value);
         } else if (type === 'pass') {
             setPassInput(e.target.value);
+        } else if (type === 'checkbox') {
+            setIsCheckBox((isCheckBox) => !isCheckBox);
         }
     };
 
@@ -62,8 +66,15 @@ function FormLogin() {
         }
     }, [isLogined, navigate]);
 
+    const handleKeyDownSubmit = (e) => {
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') btnSubmitRef.current.click();
+        });
+    };
+
     useEffect(() => {
         handleNavigate();
+        handleKeyDownSubmit();
     }, [handleNavigate, isLogined]);
 
     return (
@@ -74,28 +85,36 @@ function FormLogin() {
                 <fieldset>
                     <div className={cx('wrap-input')}>
                         <Form.Group className={cx('mb-4', 'form-gr')}>
-                            <Form.Label htmlFor="user">User:</Form.Label>
                             <Form.Control
                                 id="user"
                                 onChange={(e) => handleChange(e, 'user')}
+                                autoComplete="off"
                                 value={userInput}
-                                placeholder="Nhập User"
                             />
+                            <Form.Label className={cx('title-input')} htmlFor="user">
+                                Tên đăng nhập
+                            </Form.Label>
                         </Form.Group>
                         <Form.Group className={cx('mb-1', 'form-gr')}>
-                            <Form.Label htmlFor="password">Password:</Form.Label>
                             <Form.Control
                                 type="password"
                                 onChange={(e) => handleChange(e, 'pass')}
                                 value={passInput}
                                 id="password"
-                                placeholder="Nhập Password"
                             />
+                            <Form.Label className={cx('title-input')} htmlFor="password">
+                                Mật khẩu
+                            </Form.Label>
                         </Form.Group>
 
                         <Form.Group className="my-4 d-flex align-items-center justify-content-between">
                             <Form.Group className="d-flex align-items-center">
-                                <Form.Check id="check-miss" style={{ cursor: 'pointer' }} />
+                                <Form.Check
+                                    checked={isCheckBox}
+                                    onChange={(e) => handleChange(e, 'checkbox')}
+                                    id="check-miss"
+                                    style={{ cursor: 'pointer' }}
+                                />
                                 <Form.Label
                                     htmlFor="check-miss"
                                     className="mx-3"
@@ -107,9 +126,11 @@ function FormLogin() {
                             <span className={cx('err')}>{errInput}</span>
                         </Form.Group>
                     </div>
-                    <Button className={cx('btn-submit', 'btn-lg')} onClick={handleClickSubmit}>
-                        Đăng nhập
-                    </Button>
+                    <div className={cx('submit')}>
+                        <Button className={cx('btn-submit', 'btn-lg')} ref={btnSubmitRef} onClick={handleClickSubmit}>
+                            Đăng nhập
+                        </Button>
+                    </div>
                 </fieldset>
             </Form>
         </>
