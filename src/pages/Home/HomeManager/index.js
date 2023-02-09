@@ -1,213 +1,116 @@
-import { useEffect, useState, useCallback } from 'react';
-import { Container, Row, Table, Col, Button, Nav } from 'react-bootstrap';
+import { useCallback, useEffect, useState } from 'react';
 
-import ToastMassage from '~/components/ToastMassage';
-import ModalAuth from '~/components/ModalAuth';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { workServices } from '~/services';
+import { postServices } from '~/services';
+import { Container, Row, Col } from 'react-bootstrap';
+import Post from '~/components/Post';
 import Header from '~/components/Header';
-import Footer from '~/components/Footer';
 import classNames from 'classnames/bind';
+import Footer from '~/components/Footer';
 import styles from './HomeManager.module.scss';
 
 const cx = classNames.bind(styles);
-function HomeManager() {
-    const [isShowToast, setIsShowToast] = useState(false);
-    const [isShowModal, setIsShowModal] = useState(false);
-    const [contentToast, setContentToast] = useState({
-        header: '',
-        content: '',
-    });
-    const [deleteId, setDeleteId] = useState('');
 
-    const [works, setWorks] = useState([]);
-    const handleGetWork = useCallback(async () => {
-        const res = await workServices.getWork();
-        if (res.errCode === 0) {
-            setWorks(res.works);
-        }
+const links = [
+    { name: 'BÀI ĐĂNG CỦA TÔI', to: '/admin/mypost' },
+    { name: 'ĐĂNG BÀI', to: '/admin/up-post' },
+    { name: 'QUẢN LÝ CÔNG VIỆC', to: '/admin/view/list-user-work' },
+];
+function HomeManager() {
+    const [post, setPost] = useState([]);
+
+    const handleGetPosts = useCallback(async () => {
+        const res = await postServices.getPosts({ litmit: 4 });
+        setPost(res.posts);
+        console.log(res);
     }, []);
 
-    const ToggleShowToast = () => {
-        setIsShowToast((cur) => !cur);
-    };
-
-    const ToggleShowModal = () => {
-        setIsShowModal((cur) => !cur);
-    };
-
-    const handleClickBrowse = async (id) => {
-        const res = await workServices.workBrowse(id);
-        if (res.errCode === 0) {
-            handleGetWork();
-        }
-    };
-    const handleCLickX = async (id) => {
-        setDeleteId(id);
-        setIsShowModal(true);
-    };
-
-    const handleDeleteRow = async ({ id }) => {
-        const res = await workServices.handleDeleteWorkRegister(id);
-        if (res.errCode === 0) {
-            setIsShowModal(false);
-            handleGetWork();
-            setContentToast({
-                header: 'Thành công',
-                content: res.errMessage,
-            });
-            ToggleShowToast();
-        }
-    };
-
     useEffect(() => {
-        handleGetWork();
-    }, [handleGetWork]);
+        handleGetPosts();
+    }, [handleGetPosts]);
 
     return (
         <>
-            <Container className={cx('wrap')}>
-                <ToastMassage
-                    isShow={isShowToast}
-                    header={contentToast.header}
-                    content={contentToast.content}
-                    handleClose={ToggleShowToast}
-                />
-                <ModalAuth
-                    isShowModal={isShowModal}
-                    header="Bạn có chắc muốn xóa"
-                    main='Việc nhấn "Đồng ý", bạn sẽ xóa dữ liệu này trong database và không thể khôi phục lại!'
-                    ToggleShowModal={ToggleShowModal}
-                    uploadPost={handleDeleteRow}
-                    deleteId={deleteId}
-                />
-                <Header />
-                <Row className={cx('content')}>
-                    <Col md={3}>
-                        <div className={cx('control-admin')}>
-                            <Nav className={cx('flex-column', 'nav')} activeKey="/home">
-                                <Nav.Item className={cx('border-link')}>
-                                    <Nav.Link href="/">Frefress Page!</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item className={cx('border-link')}>
-                                    <Nav.Link href="/admin/mypost">Bài đăng của tôi</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item className={cx('border-link')}>
-                                    <Nav.Link href="/admin/up-post"> Đăng bài</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item className={cx('border-link')}>
-                                    <Nav.Link href="/admin/view/list-user-work"> Quản lý công việc </Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item className={cx('border-link')}>
-                                    <Nav.Link href="" disabled>
-                                        Updating...
-                                    </Nav.Link>
-                                </Nav.Item>
-                            </Nav>
+            <div className={cx('wrap')}>
+                <div className={cx('header')}>
+                    <Container>
+                        <Header links={links} />
+                        <div className={cx('header-main')}>
+                            <h2>AI SẼ LÀ NHỮNG TÌNH NGUYỆN VIÊN KẾ TIẾP?</h2>
+                            <span>
+                                Đây là trang web quản lý dành cho admin, việc lựa chọn thành viên trong lực lượng tình
+                                nguyện sẽ do bạn quyết định và giải quyết!
+                            </span>
                         </div>
-                    </Col>
-                    <Col sm={9}>
-                        <Row>
-                            <Col sm={12}>
-                                <h2 className={cx('title')}>Danh sách sinh viên đăng ký tình nguyện</h2>
-                            </Col>
-                            <Col md={12}>
-                                <div className={cx('table')}>
-                                    {works.length > 0 ? (
-                                        <Table striped bordered hover size="">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <span className={cx('header-table')}>#STT</span>
-                                                    </th>
-                                                    <th>
-                                                        <span className={cx('header-table')}>Tên</span>
-                                                    </th>
-                                                    <th>
-                                                        <span className={cx('header-table')}>Nơi làm việc</span>
-                                                    </th>
-                                                    <th>
-                                                        <span className={cx('header-table')}>Sinh viên</span>
-                                                    </th>
-                                                    <th>
-                                                        <span className={cx('header-table')}>Tối đa</span>
-                                                    </th>
-                                                    <th>
-                                                        <span className={cx('header-table')}>Hiện tại</span>
-                                                    </th>
-                                                    <th>
-                                                        <span className={cx('header-table')}>Trạng thái</span>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {works.map((work, id) => {
-                                                    return (
-                                                        <tr key={id + 'work'}>
-                                                            <td>
-                                                                <div className={cx('wrap-td')}>{id + 1}</div>
-                                                            </td>
-                                                            <td>
-                                                                <div className={cx('wrap-td')}>{work.work.name}</div>
-                                                            </td>
-                                                            <td>
-                                                                <div className={cx('wrap-td')}>
-                                                                    {work.work.workPlace}
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div className={cx('wrap-td')}>{work.userWork.id}</div>
-                                                            </td>
-                                                            <td>
-                                                                <div className={cx('wrap-td')}>
-                                                                    {work.work.maxStudent}
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div className={cx('wrap-td')}>
-                                                                    {work.work.curStudent}
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div className={cx('wrap-td')}>
-                                                                    {work.status === '0' ? 'Chưa duyệt' : 'Đã duyệt'}
-                                                                </div>
-                                                            </td>
+                    </Container>
+                </div>
+                <Container>
+                    <Row className={cx('main')}>
+                        <Col md={6}>
+                            <div className={cx('wrap-main')}>
+                                <h2 className={cx('title')}>Truyền thông?</h2>
+                                <p className={cx('paragrap')}>
+                                    Để dể dàng hơn trong việc quản bá công việc tình nguyện, các admin có thể đăng bài
+                                    viết.
+                                </p>
+                                <h2 className={cx('title')}>“Tại sao không nhiều người biết?”</h2>
+                                <p className={cx('paragrap')}>
+                                    Đó đã luôn là trăn trở của tất cả thành viên trong nhóm công tác xã hội ở CTU. Một
+                                    phần có thể do hoạt động tình nguyện ở trường không quá sôi nổi và tâm lí sợ sệt của
+                                    các bạn sinh viên. Mặt khác, công tác quảng bá, truyền thông của nhóm cũng còn rất
+                                    yếu về công tác tình nguyện viên cũng như nguồn tài trợ.
+                                </p>
+                                <h2 className={cx('title')}>
+                                    Có nhiều cách để truyền thông công tác tình nguyện, bao gồm:
+                                </h2>
+                                <ul>
+                                    <li className={cx('paragrap-list')}>
+                                        Sử dụng mạng xã hội: Bạn có thể sử dụng các trang mạng xã hội như Facebook,
+                                        Twitter hoặc Instagram để chia sẻ thông tin về công tác tình nguyện của mình và
+                                        mời mọi người tham gia.
+                                    </li>
+                                    <li className={cx('paragrap-list')}>
+                                        Tổ chức sự kiện: Bạn có thể tổ chức sự kiện để giới thiệu về công tác tình
+                                        nguyện của mình và mời mọi người tham gia.
+                                    </li>
+                                    <li className={cx('paragrap-list')}>
+                                        Sử dụng truyền thông địa phương: Bạn có thể sử dụng các báo địa phương hoặc
+                                        truyền hình địa phương để truyền thông về công tác tình nguyện của mình.
+                                    </li>
+                                    <li className={cx('paragrap-list')}> Sử dụng trang web (như trang này)</li>
+                                    <li className={cx('paragrap-list')}>
+                                        Gửi thư quảng cáo: : Bạn có thể gửi thư quảng cáo đến các tổ chức hoặc cá nhân
+                                        mà bạn muốn mời tham gia công tác tình nguyện của mình.
+                                    </li>
+                                    <span className={cx('paragrap-list')}> . . .</span>
+                                </ul>
+                            </div>
+                        </Col>
+                        <Col sm={6}>
+                            <Row>
+                                <Col sm={12}>
+                                    <Row>
+                                        <h2 className={cx('title')}>Bài đăng mới nhất</h2>
 
-                                                            <td>
-                                                                <Button
-                                                                    type="button"
-                                                                    variant="outline-primary"
-                                                                    className={cx('mx-2', 'my-2', 'custom-btn')}
-                                                                    onClick={(e) => handleClickBrowse(work.id, e)}
-                                                                >
-                                                                    <FontAwesomeIcon icon={faCheck} />
-                                                                </Button>
-                                                                <Button
-                                                                    type="button"
-                                                                    variant="outline-danger"
-                                                                    className={cx(' mx-2', 'custom-btn')}
-                                                                    onClick={() => handleCLickX(work.id)}
-                                                                >
-                                                                    <FontAwesomeIcon icon={faXmark} />
-                                                                </Button>
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </tbody>
-                                        </Table>
-                                    ) : (
-                                        <h2 className={cx('non-res')}>Chưa có sinh viên nào đăng ký </h2>
-                                    )}
-                                </div>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
-            <Footer />
+                                        {post.map((post) => {
+                                            return (
+                                                <Col md={6} key={post.id} className="mt-3">
+                                                    <Post
+                                                        author={post.user.id}
+                                                        title={post.title}
+                                                        content={post.description}
+                                                        upDate={post.createdAt}
+                                                    />
+                                                </Col>
+                                            );
+                                        })}
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
+                <Footer />
+            </div>
         </>
     );
 }

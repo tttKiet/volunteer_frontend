@@ -2,7 +2,7 @@ import axios from '~/axios';
 
 const postService = {
     // Get Post
-    async getPosts(id) {
+    async getPosts({ id, litmit }) {
         if (id) {
             try {
                 const res = await axios.get('/api/v1/post', {
@@ -15,7 +15,9 @@ const postService = {
             }
         }
         try {
-            const res = await axios.get('/api/v1/post');
+            const res = await axios.get('/api/v1/get-all-post', {
+                params: { litmit },
+            });
             return res.data;
         } catch (e) {
             console.log('loi');

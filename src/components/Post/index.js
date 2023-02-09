@@ -9,7 +9,7 @@ function Post({ author, title, content, upDate }) {
         <div className={cx('wrap')}>
             <div className={cx('header')}>
                 <p>
-                    * {author} : <b className="mx-2">{title}</b>
+                    {author} : <b className="mx-2">{title}</b>
                 </p>
             </div>
             <hr />

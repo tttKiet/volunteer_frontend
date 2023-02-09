@@ -1,7 +1,8 @@
 .wrap {
     background-color: #fff;
     border-radius: 4px;
-    padding: 8px 16px;
+
+    padding: 20px 26px;
     margin: 30px 0;
     border: 1px solid rgba(204, 204, 204, 0.797);
     box-shadow: -2px 2px 12px -6px rgba(150, 150, 150, 0.6);
@@ -24,11 +25,18 @@
     }
 
     .main {
-        padding: 16px;
+        padding: 16px 0;
 
         p {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 100px;
+            height: 100px;
             font-size: 14px;
-            line-height: 16px;
+            line-height: 20px;
         }
     }
 

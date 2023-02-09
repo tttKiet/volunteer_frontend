@@ -1,8 +1,7 @@
 .wrap {
-    height: 80px;
-    position: sticky;
+    height: 100px;
     z-index: 1000 !important;
-    top: 20px;
+    position: relative;
     transition: all 0.3s linear;
 
     &.re-active {
@@ -12,31 +11,51 @@
 
     .wrapper {
         height: 100%;
-        box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
-            0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
         border-width: 0;
-        background-color: #fff;
         background-clip: border-box;
         border-radius: 0.25rem;
-        border: 1px solid rgba(26, 54, 126, 0.125);
 
         .logo {
             width: 68px;
-            margin-left: 20px;
+            height: 68px;
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            .logo-image {
+                width: 68px;
+                color: #fff;
+            }
+        }
+
+        .nav-item-link {
+            color: #fff !important;
+            font-weight: 600;
+            letter-spacing: 0px;
+
+            &:hover {
+                color: rgba(56, 182, 49, 0.744) !important;
+                text-shadow: 0px 1px 1px rgba(79, 244, 107, 0.853);
+            }
         }
 
         .text-content {
             font-size: 14px;
-            color: #495057;
-            text-align: right;
-            padding: 0 20px 0 0;
-            margin: 0 80px 0;
-            border-left: 1px solid #ccc;
+            color: #fff;
             letter-spacing: 1px;
-
+            margin: 0;
+            text-align: right;
+            padding-right: 100px;
+            color: rgb(0, 255, 4);
+            text-shadow: 0px 1px 1px rgba(79, 244, 107, 0.348);
             .icon-out {
                 font-size: 14px;
-                color: var(--text-color);
+                color: #fff;
                 position: absolute;
                 right: 40px;
                 top: 50%;
@@ -48,8 +67,7 @@
                 &:hover {
                     opacity: 0.7;
                     transform: translate(2px, -50%);
-                    border-radius: 50%;
-                    border: 1px solid rgba(0, 0, 0, 0.9);
+                    border-right: 1px solid #fff;
                 }
             }
         }
