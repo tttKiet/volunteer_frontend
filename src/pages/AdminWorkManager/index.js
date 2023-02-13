@@ -79,6 +79,8 @@ function AdminWorkManager() {
         setIsShowTable(true);
     };
 
+    
+
     useEffect(() => {
         controlPage();
         getNameWorkAndCountRes();
@@ -130,6 +132,7 @@ function AdminWorkManager() {
                 getNameWorkAndCountRes={getNameWorkAndCountRes}
                 getWorkReq={getWorkReq}
                 arrayRow={rowUser.row}
+                name={rowUser.work.name}
                 startDate={rowUser.work.startDate}
                 workPlace={rowUser.work.workPlace}
                 maxStudent={rowUser.work.maxStudent}

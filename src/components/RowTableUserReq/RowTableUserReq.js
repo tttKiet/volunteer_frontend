@@ -17,6 +17,7 @@ function RowTableUserReq({
     handleRender,
     getNameWorkAndCountRes,
     toggleShowToast,
+    toggleShowModal,
 }) {
     const handleClickCheck = async () => {
         const res = await workServices.workBrowse(id);
@@ -27,7 +28,9 @@ function RowTableUserReq({
         }
     };
 
-    const handleClickDelete = () => {};
+    const handleClickDelete = () => {
+        toggleShowModal(id, workId);
+    };
 
     return (
         <>

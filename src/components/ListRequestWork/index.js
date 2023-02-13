@@ -1,5 +1,6 @@
-import ToastMassage from '../ToastMassage';
 import { Row, Col, Button } from 'react-bootstrap';
+import ToastMassage from '../ToastMassage';
+import ModalAuth from '../ModalAuth';
 import { UilCheck } from '@iconscout/react-unicons';
 import { UilTimes } from '@iconscout/react-unicons';
 import classNames from 'classnames/bind';
@@ -9,11 +10,13 @@ import RowTableUserReq from '../RowTableUserReq/RowTableUserReq';
 import { UilAngleDoubleLeft } from '@iconscout/react-unicons';
 import { workServices } from '~/services';
 import { useEffect, useState } from 'react';
+import Moment from 'react-moment';
 const cx = classNames.bind(styles);
 
 function ListRequestWork({
     show,
     toggleShowTable,
+    name,
     startDate,
     workPlace,
     maxStudent,
@@ -23,14 +26,27 @@ function ListRequestWork({
     getNameWorkAndCountRes,
 }) {
     const [row, setRow] = useState([]);
-
+    const [isShowModal, setIsShowModal] = useState(false);
+    const [reqUser, setReqUser] = useState({
+        id: '',
+        workId: '',
+    });
     const [currStudentNumber, setCurrStudentNumber] = useState();
-
     const [toastOb, setToastOb] = useState({
         show: false,
         header: '',
         content: '',
     });
+
+    const toggleShowModal = (id, workId) => {
+        if (id && workId) {
+            setReqUser({
+                id,
+                workId,
+            });
+        }
+        setIsShowModal((view) => !view);
+    };
 
     const toggleShowToast = ({ header, show, content }) => {
         setToastOb((toastOb) => {
@@ -46,6 +62,22 @@ function ListRequestWork({
         const res = await getWorkReq(id);
         getWork(id);
         setRow(res);
+    };
+
+    const handleDeleteRow = async () => {
+        const res = await workServices.handleDeleteWorkRegister(reqUser.id);
+        if (res.errCode === 0) {
+            toggleShowModal();
+            setToastOb((toastOb) => {
+                return {
+                    header: 'Xong',
+                    content: 'Xóa thành công',
+                    show: !toastOb.show,
+                };
+            });
+            handleRender(reqUser.workId);
+            getNameWorkAndCountRes();
+        }
     };
 
     const getWork = async (workId) => {
@@ -68,11 +100,15 @@ function ListRequestWork({
                 <UilAngleDoubleLeft size={28} />
             </div>
             <div className={cx('wrap-table')}>
-                <h2 className={cx('title')}>Hiến máu tình nguyện</h2>
+                <h2 className={cx('title')}>{name}</h2>
                 <div className={cx('control')}>
                     <div className={cx('wrap-more')}>
                         <span className={cx('more-content')}>Ngày bắt đầu:</span>
-                        <span className={cx('more-number')}> {startDate}</span>
+                        <span className={cx('more-number')}>
+                            <Moment local="vi" format="ll">
+                                {startDate}
+                            </Moment>
+                        </span>
                     </div>
                     <div className={cx('wrap-more')}>
                         <span className={cx('more-content')}>Nơi làm việc:</span>
@@ -139,6 +175,7 @@ function ListRequestWork({
                                     {row.map((row, i) => {
                                         return (
                                             <RowTableUserReq
+                                                toggleShowModal={toggleShowModal}
                                                 toggleShowToast={toggleShowToast}
                                                 handleRender={handleRender}
                                                 getNameWorkAndCountRes={getNameWorkAndCountRes}
@@ -164,6 +201,13 @@ function ListRequestWork({
                         header={toastOb.header}
                         content={toastOb.content}
                         handleClose={() => toggleShowToast({})}
+                    />
+                    <ModalAuth
+                        header="Bạn có chắc muốn xóa?"
+                        main="Hành động này sẽ xóa bản ghi trong cơ sở dữ liệu và không thể khôi phục"
+                        isShowModal={isShowModal}
+                        handleOk={handleDeleteRow}
+                        ToggleShowModal={toggleShowModal}
                     />
                 </div>
             </div>

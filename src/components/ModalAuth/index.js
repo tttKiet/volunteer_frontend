@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function ModalAuth({ header, main, isShowModal, uploadPost, ToggleShowModal, deleteId }) {
+function ModalAuth({ header, main, isShowModal, handleOk, ToggleShowModal, deleteId }) {
     return (
         <>
             <Modal show={isShowModal} onHide={ToggleShowModal}>
@@ -13,7 +13,7 @@ function ModalAuth({ header, main, isShowModal, uploadPost, ToggleShowModal, del
                     <Button className="fs-5" variant="secondary" onClick={ToggleShowModal}>
                         Đóng
                     </Button>
-                    <Button className="fs-5" variant="primary" onClick={() => uploadPost({ id: deleteId })}>
+                    <Button className="fs-5" variant="primary" onClick={() => handleOk({ id: deleteId })}>
                         Đồng ý
                     </Button>
                 </Modal.Footer>
