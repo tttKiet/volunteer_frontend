@@ -2,19 +2,42 @@ import axios from '~/axios';
 
 const workServices = {
     // get work
-    async getWork() {
+    async getWork({ workId }) {
+        if (workId) {
+            const res = await axios.get('/api/v1/work', {
+                params: {
+                    workId: workId,
+                },
+            });
+            return res.data;
+        }
         const res = await axios.get('/api/v1/work');
         return res.data;
     },
 
     // get name work
-    async getNameWork(type = 'all') {
+    async getNameWork({ type = 'all', workId }) {
         if (type === 'name') {
             const res = await axios.get('/api/v1/work/get-name');
             return res.data;
         }
 
+        if (workId) {
+            const res = await axios.get('/api/v1/work/get-all', {
+                params: {
+                    workId,
+                },
+            });
+            return res.data;
+        }
+
         const res = await axios.get('/api/v1/work/get-all');
+        return res.data;
+    },
+
+    // get name work count resquest
+    async getNameWorkAndCountRes() {
+        const res = await axios.get('/api/v1/work/get-and-count-resquest');
         return res.data;
     },
 

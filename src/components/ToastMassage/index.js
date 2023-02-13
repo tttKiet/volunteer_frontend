@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 function ToastMassage({ header, content, handleClose, isShow }) {
     return (
         <div className={cx('wrap')}>
-            <ToastContainer className={cx('right', ' my-5')} position="top-end">
+            <ToastContainer className={cx('')}>
                 <Toast onClose={handleClose} show={isShow} delay={3200} animation={true} autohide>
                     <Toast.Header>
                         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />

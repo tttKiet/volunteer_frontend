@@ -1,41 +1,44 @@
 import { useEffect, useCallback, useState } from 'react';
-import Moment from 'react-moment';
 import { useNavigate } from 'react-router-dom';
 import { isLoginSelector, userSelector } from '~/redux/selector';
 import { useSelector } from 'react-redux';
-
-import Header from '~/components/Header';
+import { UilEstate } from '@iconscout/react-unicons';
 import Loader from '~/components/Loader';
+import { UilListUl } from '@iconscout/react-unicons';
 import { Container, Row, Col } from 'react-bootstrap';
+import Work from '~/components/Work';
+import ListRequestWork from '~/components/ListRequestWork';
 import { workServices } from '~/services';
+import NavLeft from '~/components/NavLeft';
 import classNames from 'classnames/bind';
 import styles from './AdminWorkManager.module.scss';
 
 const cx = classNames.bind(styles);
 
-const links = [
-    {
-        name: 'Trang chủ',
-        to: '/',
-    },
-    {
-        name: 'Tạo công việc mới',
-        to: '/admin/work/create',
-    },
-];
+const menu = {
+    title: 'Quản lý công việc',
+    desc: [
+        {
+            title: 'Trang chủ',
+            to: '/',
+            icon: UilEstate,
+        },
+        {
+            title: 'Xem danh sách thực hiện công việc',
+            to: '/',
+            icon: UilListUl,
+        },
+    ],
+};
 
 function AdminWorkManager() {
     const navigate = useNavigate();
     const isLogined = useSelector(isLoginSelector);
     const curUser = useSelector(userSelector);
-
+    const [isShowTable, setIsShowTable] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [options, setOptions] = useState([]);
-    const [list, setList] = useState([]);
-    const [optionValue, setOptionValue] = useState({
-        name: 'Tất cả',
-        value: 'All',
-    });
+    const [work, setWork] = useState([]);
+    const [rowUser, setRowUser] = useState({ work: {}, row: [] });
 
     const controlPage = useCallback(() => {
         if (!isLogined) {
@@ -47,97 +50,93 @@ function AdminWorkManager() {
         }
     }, [curUser, isLogined, navigate]);
 
-    const handleChangeSeclect = (e) => {
-        const index = e.nativeEvent.target.selectedIndex;
-        const text = e.nativeEvent.target[index].text;
-        setOptionValue({
-            name: text,
-            value: e.target.value,
-        });
-    };
-
-    const getListUsers = useCallback(async () => {
-        setIsLoading(true);
-        let id;
-        if (optionValue.value !== 'All') {
-            id = optionValue.value;
-        }
-        const res = await workServices.getBrowsedUser(id);
+    const getNameWorkAndCountRes = useCallback(async () => {
+        const res = await workServices.getNameWorkAndCountRes();
         if (res.errCode === 0) {
-            setList(res.works);
-        }
-        setIsLoading(false);
-    }, [optionValue.value]);
-
-    const getNameWorks = useCallback(async () => {
-        const res = await workServices.getNameWork('name');
-        if (res.errCode === 0) {
-            setOptions(res.workNames);
+            setWork(res.works);
         }
     }, []);
 
+    const toggleShowTable = () => {
+        setIsShowTable((show) => !show);
+    };
+
+    const getWorkReq = async (workId) => {
+        const res = await workServices.getWork({ workId });
+        if (res.errCode === 0) {
+            setRowUser({
+                work: res.works.length > 0 ? { ...res.works[0].work } : {},
+                row: res.works,
+            });
+            return res.works;
+        }
+
+        return [];
+    };
+
+    const handleCLickDetail = async (workId) => {
+        getWorkReq(workId);
+        setIsShowTable(true);
+    };
+
     useEffect(() => {
         controlPage();
-        getNameWorks();
-        getListUsers();
-    }, [controlPage, getListUsers, getNameWorks]);
+        getNameWorkAndCountRes();
+    }, [controlPage, getNameWorkAndCountRes]);
 
     return (
         <div className={cx('wrap')}>
             {isLoading && <Loader />}
+            <NavLeft menu={menu} />
             <Container>
-                <Header links={links} />
-
-                <Row className={cx('content')}>
-                    <Col sm={5}>
-                        <h4 className={cx('title')}> Danh sách sinh viên đăng ký tình nguyện</h4>
-                    </Col>
-                    <Col className={cx('title')} sm={3}>
-                        <select
-                            className={cx('form-select', 'select')}
-                            onChange={handleChangeSeclect}
-                            value={optionValue.value}
-                        >
-                            <option defaultValue={'All'}>All</option>
-                            {options.map((op, i) => (
-                                <option key={i + 'option'} value={op.id}>
-                                    {op.name}
-                                </option>
-                            ))}
-                        </select>
-                    </Col>
-                    <hr />
-                    <Col md={12}>
-                        <div className={cx('table')}>
-                            <h4 className={cx('name-work')}>Danh sách: {optionValue.name}</h4>
-                            <table className={cx('table table-striped table-hover', 'table-form')}>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#STT</th>
-                                        <th scope="col">MSSV</th>
-                                        <th scope="col">Họ và tên</th>
-                                        <th scope="col">Email </th>
-                                        <th scope="col">Đẵ đăng ký ngày </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {list.map((row, i) => (
-                                        <tr key={i + 'row'}>
-                                            <th scope="row">{i + 1}</th>
-                                            <td>{row.userWork.id}</td>
-                                            <td>{row.userWork.name}</td>
-                                            <td>{row.userWork.email}</td>
-                                            <td>
-                                                <Moment local="vi">{row.updatedAt}</Moment>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                <Row>
+                    <Col md={3}></Col>
+                    <Col md={9}>
+                        <h2 className={cx('title')}>Danh sách đăng ký của sinh viên</h2>
+                        <div className={cx('works')}>
+                            {work.length === 0 ? (
+                                <h2 className={cx('no-req')}>Chưa có yêu cầu đăng ký tham gia nào!</h2>
+                            ) : (
+                                <>
+                                    {work.map((work) => {
+                                        return (
+                                            <div key={work.id} className={cx('wrap-work')}>
+                                                <Work
+                                                    key={work.id}
+                                                    countRequest={work.workCount}
+                                                    startDate={work.work.startDate}
+                                                    name={work.work.name}
+                                                    workPlace={work.work.workPlace}
+                                                    curStudent={work.work.curStudent}
+                                                    maxStudent={work.work.maxStudent}
+                                                    pointPlus={work.work.pointPlus}
+                                                />
+                                                <span
+                                                    className={cx('detail-work-req')}
+                                                    onClick={() => handleCLickDetail(work.work.id)}
+                                                >
+                                                    Xem chi tiết
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                </>
+                            )}
                         </div>
                     </Col>
                 </Row>
             </Container>
+            <ListRequestWork
+                getNameWorkAndCountRes={getNameWorkAndCountRes}
+                getWorkReq={getWorkReq}
+                arrayRow={rowUser.row}
+                startDate={rowUser.work.startDate}
+                workPlace={rowUser.work.workPlace}
+                maxStudent={rowUser.work.maxStudent}
+                curStudent={rowUser.work.curStudent}
+                show={isShowTable}
+                toggleShowTable={toggleShowTable}
+            />
         </div>
     );
 }

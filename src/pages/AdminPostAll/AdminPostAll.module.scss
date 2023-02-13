@@ -101,53 +101,11 @@
         z-index: 1;
         width: 340px;
         min-height: 100vh;
-        // background-color: aqua;
 
         .info {
             padding: 40px 30px 0;
-
-            .col-wrap:first-child {
-                padding: 20px 0 20px 0 !important;
-
-                .image {
-                    text-align: center;
-                    .image-user {
-                        text-align: center;
-
-                        width: 100px;
-                        height: 100px;
-                        object-fit: cover;
-                        object-position: center;
-                        border-radius: 50%;
-                    }
-                }
-            }
-
-            .name {
-                text-align: center;
-                margin-top: 14px !important;
-                font-weight: 600 !important;
-                line-height: 16px !important;
-            }
-
-            .col-wrap {
-                text-align: left;
-                padding: 10px 0 20px 8px;
-                .title {
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: rgb(38, 38, 38);
-                }
-
-                .content {
-                    font-size: 14px;
-                    color: rgb(38, 38, 38);
-                    padding-left: 8px;
-                    font-weight: 400;
-                }
-            }
-
             .border {
+                margin-bottom: 10px;
                 text-align: center;
                 width: 100%;
                 border-top: 4px solid #ccc;

@@ -1,17 +1,42 @@
-import { Container, Row, Col, Nav } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { UilPostcard } from '@iconscout/react-unicons';
+import { UilFileUpload } from '@iconscout/react-unicons';
+import { UilEstate } from '@iconscout/react-unicons';
+import Moment from 'react-moment';
+import NavLeft from '~/components/NavLeft';
 import { postServices } from '~/services';
 import { useSelector } from 'react-redux';
 import { isLoginSelector, userSelector } from '~/redux/selector';
 import Post from '~/components/Post';
-import Header from '~/components/Header';
-import Footer from '~/components/Footer';
+import user from '../../assets/images/home-admin-slide3.jpg';
 import classNames from 'classnames/bind';
 import styles from './AdminPost.module.scss';
 
 const cx = classNames.bind(styles);
+
+const menu = {
+    title: 'Volunteer',
+    desc: [
+        {
+            title: 'Trang chủ',
+            to: '/',
+            icon: UilEstate,
+        },
+        {
+            title: 'Đăng bài',
+            to: '/',
+            icon: UilFileUpload,
+        },
+        {
+            title: 'Xem tất cả bài đăng',
+            to: '/admin/allpost',
+            icon: UilPostcard,
+        },
+    ],
+};
+
 function AdminPost() {
     const isLogined = useSelector(isLoginSelector);
     const curUser = useSelector(userSelector);
@@ -19,7 +44,7 @@ function AdminPost() {
     const [post, setPost] = useState([]);
 
     const getPosts = useCallback(async () => {
-        const res = await postServices.getPosts(curUser.id);
+        const res = await postServices.getPosts({ id: curUser.id });
         if (res.errCode === 0) {
             setPost(res.posts);
         }
@@ -34,59 +59,63 @@ function AdminPost() {
         controlPage();
         getPosts();
     }, [controlPage, getPosts]);
+
     return (
         <div className={cx('wrap')}>
-            <Container>
-                <div className={cx('container-post')}>
-                    <Header />
-                    <Row className={cx('content-post')}>
-                        <Col md={3}>
-                            <div className={cx('control-admin')}>
-                                <Nav className={cx('flex-column', 'nav')} activeKey="/home">
-                                    <Nav.Item className={cx('border-link')}>
-                                        <Nav.Link href="/">Frefress Page!</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item className={cx('border-link')}>
-                                        <Nav.Link href="/admin/mypost">Bài đăng của tôi</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item className={cx('border-link')}>
-                                        <Nav.Link href="/admin/up-post"> Đăng bài</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item className={cx('border-link')}>
-                                        <Nav.Link href="/admin/view/list-user-work"> Quản lý công việc </Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item className={cx('border-link')}>
-                                        <Nav.Link href="" disabled>
-                                            Updating...
-                                        </Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
+            <NavLeft menu={menu} />
+            <div className={cx('posts')}>
+                <div className={cx('post-profice')}>
+                    {post.map((post) => {
+                        console.log(post);
+                        return (
+                            <Post
+                                light={true}
+                                key={post.id}
+                                author={post.user.id}
+                                title={post.title}
+                                content={post.description}
+                                upDate={post.createdAt}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
+            <div className={cx('profice')}>
+                <div className={cx('info')}>
+                    <Row>
+                        <Col className={cx('col-wrap')} md={12}>
+                            <div className={cx('image')}>
+                                <img className={cx('image-user')} src={user} alt="User" />
                             </div>
+                            <h3 className={cx('content', 'name')}>{curUser.id}</h3>
+                            <h3 className={cx('content', 'name')}>{curUser.name}</h3>
                         </Col>
-                        <Col sm={9}>
-                            <Row>
-                                <Col sm={12}>
-                                    <h2 className={cx('title')}> BÀI ĐĂNG của bạn</h2>
-                                </Col>
-                                <Col md={12}>
-                                    <div className={cx('table', 'posts')}>
-                                        {post.map((post, id) => (
-                                            <Post
-                                                author={'Bạn - ' + post.user.id}
-                                                title={post.title}
-                                                key={id + 'post'}
-                                                content={post.description}
-                                                upDate={post.createdAt}
-                                            />
-                                        ))}
-                                    </div>
-                                </Col>
-                            </Row>
+                        <Col className={cx('col-wrap')} md={12}>
+                            <span className={cx('title')}>Ngày tham gia:</span>
+                            <span className={cx('content')}>
+                                <Moment local="vi" fromNow format="ll" date={curUser.updatedAt} />
+                            </span>
+                        </Col>
+
+                        <Col className={cx('col-wrap')} md={12}>
+                            <span className={cx('title')}>Email: </span>
+                            <span className={cx('content')}>{curUser.email}</span>
+                        </Col>
+                        <Col className={cx('col-wrap')} md={12}>
+                            <span className={cx('title')}>Mã lớp:</span>
+                            <span className={cx('content')}>{curUser.className}</span>
+                        </Col>
+                        <Col className={cx('col-wrap')} md={12}>
+                            <span className={cx('title')}>Trực thuộc khoa:</span>
+                            <span className={cx('content')}>{curUser.faculty}</span>
                         </Col>
                     </Row>
-                    <Footer />
+                    <div className={cx('border')}></div>
+                    <div className={cx('note')}>
+                        <span>Ghi chú: Bạn đang đăng nhập với tư cách là Admin!</span>
+                    </div>
                 </div>
-            </Container>
+            </div>
         </div>
     );
 }

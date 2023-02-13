@@ -5,9 +5,9 @@ import styles from './Work.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Work({ startDate, name, workPlace, curStudent, maxStudent, pointPlus }) {
+function Work({ startDate, name, workPlace, curStudent, maxStudent, pointPlus, countRequest }) {
     return (
-        <Col md={6} className={cx('wrap')}>
+        <div className={cx('wrap')}>
             <div className={cx('wrap-item')}>
                 <div className={cx('item')}>
                     <div className="row">
@@ -43,9 +43,19 @@ function Work({ startDate, name, workPlace, curStudent, maxStudent, pointPlus })
                         <Col sm={4}>
                             <span className={cx('more-content')}>Số sinh viên đã đăng ký:</span>
                         </Col>
-                        <Col sm={8}>
+                        <Col sm={3}>
                             <span className={cx('more-number')}>{curStudent}</span>
                         </Col>
+                        {countRequest && (
+                            <>
+                                <Col sm={3}>
+                                    <span className={cx('more-content')}>Số yêu cầu: </span>
+                                </Col>
+                                <Col sm={2}>
+                                    <span className={cx('more-number')}>{countRequest}</span>
+                                </Col>
+                            </>
+                        )}
                     </div>
                     <div className="row">
                         <Col sm={4}>
@@ -65,7 +75,7 @@ function Work({ startDate, name, workPlace, curStudent, maxStudent, pointPlus })
                     </div>
                 </div>
             </div>
-        </Col>
+        </div>
     );
 }
 

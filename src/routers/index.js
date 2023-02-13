@@ -1,6 +1,7 @@
 import Home from '~/pages/Home';
 import Login from '~/pages/Login';
 import AdminPost from '~/pages/AdminPost';
+import AdminPostAll from '~/pages/AdminPostAll';
 import AdminUpPost from '~/pages/AdminUpPost';
 import AdminWorkManager from '~/pages/AdminWorkManager';
 import AdminWorkCreate from '~/pages/AdminWorkCreate';
@@ -20,6 +21,10 @@ const publicRoutes = [
     {
         path: '/admin/mypost',
         component: AdminPost,
+    },
+    {
+        path: '/admin/allpost',
+        component: AdminPostAll,
     },
     {
         path: '/admin/up-post',
