@@ -1,0 +1,41 @@
+.wrap {
+    background-color: var(--background-color);
+
+    min-height: 100vh;
+    position: relative;
+
+    .title {
+        font-size: 18px;
+        padding: 48px 20px 20px 20px;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+
+    .no-req {
+        text-align: center;
+        font-size: 14px;
+        color: #383838;
+        margin-top: 60px;
+    }
+
+    .works {
+        margin-top: 40px;
+
+        .wrap-work {
+            position: relative;
+            .detail-work-req {
+                font-size: 13;
+                color: rgba(0, 0, 0, 0.5);
+                cursor: pointer;
+                position: absolute;
+                right: 40px;
+                bottom: 20px;
+                transition: all 0.2s linear;
+
+                &:hover {
+                    color: rgba(0, 0, 0, 0.9);
+                }
+            }
+        }
+    }
+}

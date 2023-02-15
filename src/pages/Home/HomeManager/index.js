@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 
 const links = [
     { name: 'BÀI ĐĂNG CỦA TÔI', to: '/admin/mypost' },
-    { name: 'QUẢN LÝ CÔNG TÁC TÌNH NGUYỆN', to: '/admin/view/list-user-work' },
+    { name: 'QUẢN LÝ CÔNG TÁC TÌNH NGUYỆN', to: '/admin/view/list-user-req' },
 ];
 function HomeManager() {
     const [post, setPost] = useState([]);

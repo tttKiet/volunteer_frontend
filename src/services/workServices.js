@@ -49,9 +49,9 @@ const workServices = {
     },
 
     // get name work
-    async getBrowsedUser(id) {
+    async getBrowsedUser({ workId }) {
         const res = await axios.get('/api/v1/work/browsed', {
-            params: { id: id },
+            params: { id: workId },
         });
         return res.data;
     },

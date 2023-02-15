@@ -7,6 +7,7 @@ import AdminWorkManager from '~/pages/AdminWorkManager';
 import AdminWorkCreate from '~/pages/AdminWorkCreate';
 import UserDetailsWork from '~/pages/UserDetailsWork';
 import UserListWork from '~/pages/UserListWork';
+import AdminWorkList from '~/pages/AdminWorkList';
 import Invalid_404 from '~/pages/Invalid_404';
 
 const publicRoutes = [
@@ -31,8 +32,12 @@ const publicRoutes = [
         component: AdminUpPost,
     },
     {
-        path: '/admin/view/list-user-work',
+        path: '/admin/view/list-user-req',
         component: AdminWorkManager,
+    },
+    {
+        path: '/admin/view/list-user-work',
+        component: AdminWorkList,
     },
     {
         path: '/admin/work/create',

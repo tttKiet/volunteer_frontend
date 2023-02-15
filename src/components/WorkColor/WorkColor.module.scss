@@ -1,0 +1,73 @@
+.wrap {
+    padding: 0 0 40px 0;
+    position: relative;
+    margin-bottom: 20px;
+
+    .name {
+        text-align: center;
+        padding: 8px 12px;
+        background-color: #3ea6ff;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 80%;
+        transform: translate(-50%, -50%);
+        border-radius: 8px;
+        .title {
+            text-align: center;
+            margin: 0;
+            width: 100%;
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: 2px solid #3ea6ff;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* số dòng tối đa trước khi ẩn nội dung */
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    .card {
+        color: var(--text-color);
+        border-radius: 4px;
+        font-size: 14px;
+        padding: 34px 24px 12px 24px;
+        border: 2px solid#3ea6ff;
+
+        .time {
+            text-align: center;
+            font-size: 14px;
+            margin: 8px;
+        }
+
+        .number {
+            text-align: center;
+            display: block;
+            margin: 12px;
+        }
+
+        .view {
+            text-align: center;
+            margin-top: 12px;
+
+            p {
+                border-radius: 4px;
+                padding: 12px 24px;
+                cursor: pointer;
+                border: 1px solid #ccc;
+                transition: all 0.2s linear;
+
+                &:hover {
+                    color: #fff;
+                    background-color: #3ea5ffbb;
+                }
+
+                &:active {
+                    background-color: #1e93fa;
+                }
+            }
+        }
+    }
+}

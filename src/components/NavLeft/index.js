@@ -35,7 +35,9 @@ function NavLeft({ menu }) {
                     return (
                         <li key={id} className={cx('item-link')}>
                             <a href={menu.to}>
-                                <Icon size="30" className={cx('icon')} />
+                                <div>
+                                    <Icon size="30" className={cx('icon')} />
+                                </div>
                                 <h3 className={cx('title')}>{menu.title}</h3>
                             </a>
                         </li>

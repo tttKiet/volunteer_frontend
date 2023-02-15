@@ -16,7 +16,7 @@ import styles from './AdminWorkManager.module.scss';
 const cx = classNames.bind(styles);
 
 const menu = {
-    title: 'Quản lý công việc',
+    title: 'Quản lý công tác tình nguyện',
     desc: [
         {
             title: 'Trang chủ',
@@ -25,7 +25,7 @@ const menu = {
         },
         {
             title: 'Xem danh sách thực hiện công việc',
-            to: '/',
+            to: '/admin/view/list-user-work',
             icon: UilListUl,
         },
     ],
@@ -78,8 +78,6 @@ function AdminWorkManager() {
         getWorkReq(workId);
         setIsShowTable(true);
     };
-
-    
 
     useEffect(() => {
         controlPage();
