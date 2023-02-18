@@ -1,8 +1,6 @@
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import ToastMassage from '../ToastMassage';
-import * as XLSX from 'xlsx/xlsx.mjs';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileExcel } from '@fortawesome/free-regular-svg-icons';
+
 import classNames from 'classnames/bind';
 import styles from './ListUserWork.module.scss';
 import { UilAngleDoubleLeft } from '@iconscout/react-unicons';
@@ -10,33 +8,18 @@ import { workServices } from '~/services';
 import { useCallback, useEffect, useState } from 'react';
 import Moment from 'react-moment';
 import RowTableWork from '../RowTableWork';
+import ExportToEx from '../ExportToEx';
 const cx = classNames.bind(styles);
 
 function ListUserWork({ show, workId, toggleShowTable, name, startDate, workPlace, maxStudent, curStudent }) {
     const [row, setRow] = useState([]);
-    const [data, setData] = useState([]);
 
     const getBrowsedUser = useCallback(async () => {
         const res = await workServices.getBrowsedUser({ workId });
         if (res.errCode === 0) {
             setRow(res.works);
-            setData(res.works);
         }
     }, [workId]);
-
-    const handleClickExportFile = () => {
-        const ws = XLSX.utils.json_to_sheet(data, {
-            header: ['STT', 'Họ và tên', 'MSSV', 'Email', 'Lớp', 'Ngày đăng ký'],
-            skipHeader: false,
-            origin: 'A3',
-        });
-
-        XLSX.utils.sheet_add_aoa(ws, [['Danh sách sinh viên']], { origin: 'B1' });
-
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Danh sách sinh viên tham gia');
-        XLSX.writeFile(wb, 'DanhSachSinhVien.xlsx');
-    };
 
     useEffect(() => {
         getBrowsedUser();
@@ -78,10 +61,7 @@ function ListUserWork({ show, workId, toggleShowTable, name, startDate, workPlac
                     </div>
 
                     <div className={cx('wrap-more')}>
-                        <Button variant="outline-success" className={cx('btn-export')} onClick={handleClickExportFile}>
-                            Xuất ra file
-                            <FontAwesomeIcon icon={faFileExcel} />
-                        </Button>
+                        <ExportToEx data={row} />
                     </div>
                 </div>
                 {/* <div className={cx('note')}>

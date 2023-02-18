@@ -13,14 +13,6 @@
     right: -100vw;
     background-color: #fafafa;
     transition: all 0.3s linear;
-
-    .btn-export {
-        font-size: 14px !important;
-        svg {
-            font-size: 14px !important;
-            margin-left: 10px;
-        }
-    }
     opacity: 0.6;
 
     .icon-back {
@@ -46,6 +38,8 @@
         display: flex;
         justify-content: flex-start;
         margin-left: 60px;
+        align-items: center;
+        margin-bottom: 4px;
 
         .wrap-more {
             + .wrap-more {
