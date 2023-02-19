@@ -26,8 +26,8 @@ const menu = {
         },
         {
             title: 'Đăng bài',
-            to: '/',
             icon: UilFileUpload,
+            type: 'up-post',
         },
         {
             title: 'Xem tất cả bài đăng',
@@ -66,7 +66,6 @@ function AdminPost() {
             <div className={cx('posts')}>
                 <div className={cx('post-profice')}>
                     {post.map((post) => {
-                        console.log(post);
                         return (
                             <Post
                                 light={true}

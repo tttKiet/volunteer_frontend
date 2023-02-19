@@ -64,7 +64,7 @@ function AdminUpPost() {
         } else if (curUser.type !== 'admin') {
             navigate('/invalid/404');
         }
-    }, [isLogined, navigate]);
+    }, [curUser.type, isLogined, navigate]);
 
     useEffect(() => {
         controlPage();
