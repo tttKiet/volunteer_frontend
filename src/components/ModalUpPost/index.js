@@ -1,6 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import classNames from 'classnames/bind';
+
+import { useState } from 'react';
+import { postServices } from '~/services';
+
+import Loader from '../Loader';
+
 import img1 from '../../assets/images/bg-post-1.jpg';
 import img2 from '../../assets/images/bg-post-2.jpg';
 import img3 from '../../assets/images/bg-post-3.jpg';
@@ -9,10 +14,15 @@ import img5 from '../../assets/images/bg-post-5.jpg';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt } from '@fortawesome/free-regular-svg-icons';
+import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import style from './ModalUpPost.module.scss';
+
+import { useSelector } from 'react-redux';
+import { userSelector } from '~/redux/selector';
+
 import ImageSmall from '../ImageSmall';
-import { useState } from 'react';
+import style from './ModalUpPost.module.scss';
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 const smallImage = [
@@ -47,6 +57,10 @@ const obImgS = {
 };
 
 function ModalUpPost({ isShow, toggleShow }) {
+    const currUser = useSelector(userSelector);
+    const [showLoading, setShowLoading] = useState(false);
+    const [title, setTitle] = useState('');
+    const [decsription, setDecsription] = useState('');
     const [img, setImg] = useState(img5);
     const [isShowDecs, setIsShowDecs] = useState(false);
     const [name, setName] = useState('');
@@ -55,6 +69,7 @@ function ModalUpPost({ isShow, toggleShow }) {
     const handleClickImgSmall = (type) => {
         setImg(obImgS[type]);
         setName('');
+        setFile(null);
     };
 
     const handleChangeFile = (e) => {
@@ -67,12 +82,46 @@ function ModalUpPost({ isShow, toggleShow }) {
         }
     };
 
+    const backModal = () => {
+        setIsShowDecs(false);
+    };
+
     const handleClickContinue = () => {
         setIsShowDecs(true);
     };
 
-    const handleClickUpPost = () => {
-        console.log('uo post clicked');
+    const handleClickUpPost = async () => {
+        setShowLoading(true);
+        if (file) {
+            const userId = currUser.id;
+            const res = await postServices.upPost(userId, title, decsription, file);
+            console.log('res', res);
+            if (res.errCode === 0) {
+                toggleShow();
+                setTitle('');
+                setDecsription('');
+                setName('');
+                setFile(null);
+                setIsShowDecs(false);
+            }
+        }
+        setShowLoading(false);
+    };
+
+    const handleClickChangeInput = (e, type) => {
+        switch (type) {
+            case 'title': {
+                setTitle(e.target.value);
+                break;
+            }
+            case 'decsription': {
+                setDecsription(e.target.value);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     };
 
     return (
@@ -83,6 +132,11 @@ function ModalUpPost({ isShow, toggleShow }) {
         >
             <div className={cx('form')}>
                 <h1 className={cx('header')}>
+                    {isShowDecs && (
+                        <div className={cx('back')} onClick={backModal}>
+                            <FontAwesomeIcon icon={faLeftLong} />
+                        </div>
+                    )}
                     Tạo bài viết mới
                     <div className={cx('x')} onClick={toggleShow}>
                         <FontAwesomeIcon icon={faXmark} />
@@ -132,7 +186,18 @@ function ModalUpPost({ isShow, toggleShow }) {
                         </div>
 
                         <div className={cx('content')}>
-                            <textarea name="decsription" placeholder="Nội dung ..."></textarea>
+                            <input
+                                name="title"
+                                value={title}
+                                onChange={(e) => handleClickChangeInput(e, 'title')}
+                                placeholder="Tiêu đề.."
+                            ></input>
+                            <textarea
+                                name="decsription"
+                                onChange={(e) => handleClickChangeInput(e, 'decsription')}
+                                placeholder="Nội dung ..."
+                                defaultValue={decsription}
+                            ></textarea>
                         </div>
                         <hr />
                         <div className={cx('main-footer')}>
@@ -150,9 +215,28 @@ function ModalUpPost({ isShow, toggleShow }) {
                             Tiếp tục
                         </button>
                     ) : (
-                        <button type="button" className={cx('submit')} onClick={handleClickUpPost}>
-                            Đăng
-                        </button>
+                        <>
+                            {showLoading ? (
+                                <button
+                                    type="button"
+                                    className={cx('submit', {
+                                        'btn-load': showLoading,
+                                    })}
+                                >
+                                    <Loader />
+                                </button>
+                            ) : (
+                                <button
+                                    type="button"
+                                    className={cx('submit', {
+                                        'btn-load': showLoading,
+                                    })}
+                                    onClick={handleClickUpPost}
+                                >
+                                    Đăng
+                                </button>
+                            )}
+                        </>
                     )}
                 </div>
             </div>

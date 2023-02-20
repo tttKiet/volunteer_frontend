@@ -25,18 +25,31 @@ const postService = {
     },
 
     // Up load post
-    async upPost(id, title, description) {
+    async upPost(id, title, description, image) {
+        console.log('file', image);
+
+        const formData = new FormData();
         try {
-            const res = await axios.post('/api/v1/post', {
+            const data = {
                 userId: id,
                 title,
                 description,
+                image,
+            };
+
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
+
+            const res = await axios.post('/api/v1/post', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             });
             return res.data;
         } catch (e) {
-            console.log('loi');
+            console.log('e----------------', e);
         }
-        console.log(id, title, description);
     },
 };
 

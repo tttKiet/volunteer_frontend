@@ -1,21 +1,22 @@
 .wrap-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(159, 161, 161, 0.049) !important;
-    z-index: 100000;
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+    // bottom: 0;
+    // right: 0;
+    // background-color: rgba(159, 161, 161, 0.049) !important;
+    // z-index: 100000;
 }
 
 .dot-spinner {
     z-index: 1000001;
-    --uib-size: 2.8rem;
+    --uib-size: 24px;
     --uib-speed: 0.9s;
-    --uib-color: #183153;
+    --uib-color: #fff;
     position: absolute;
-    bottom: 40px;
-    right: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: flex-start;
