@@ -56,7 +56,7 @@ const obImgS = {
     img5,
 };
 
-function ModalUpPost({ isShow, toggleShow }) {
+function ModalUpPost({ isShow, toggleShow, toggleShowToast }) {
     const currUser = useSelector(userSelector);
     const [showLoading, setShowLoading] = useState(false);
     const [title, setTitle] = useState('');
@@ -108,6 +108,7 @@ function ModalUpPost({ isShow, toggleShow }) {
             setName('');
             setFile(null);
             setIsShowDecs(false);
+            toggleShowToast({ header: 'Xong', content: 'Đã tạo bài đăng' });
         }
         setShowLoading(false);
     };

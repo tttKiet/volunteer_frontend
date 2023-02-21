@@ -164,14 +164,35 @@
                 padding: 20px 12px 12px 12px;
                 transition: all 0.4s linear;
                 z-index: 1;
-                display: none;
-                transform: translateX(-324px);
-
+                // display: none;
+                // margin-left: -326px;
+                animation: mrl-re 0.2s linear forwards;
+                overflow: hidden;
                 &.show {
-                    transition: all 0.4s linear;
+                    animation: mrl 0.2s linear forwards;
+                    margin-right: 0;
                     display: flex;
                     flex-direction: column;
-                    transform: translateX(0);
+                    margin-left: 0;
+                }
+
+                @keyframes mrl-re {
+                    0% {
+                        margin-left: 0;
+                    }
+
+                    100% {
+                        margin-left: -326px;
+                    }
+                }
+
+                @keyframes mrl {
+                    0% {
+                        margin-left: -326px;
+                    }
+                    100% {
+                        margin-left: 0;
+                    }
                 }
 
                 .info {

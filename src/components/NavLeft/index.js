@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import classNames from 'classnames/bind';
+import ToastMassage from '../ToastMassage';
 import styles from './NavLeft.module.scss';
 import MenuMoreProfice from '~/components/MenuMoreProfice';
 import { UilEllipsisV } from '@iconscout/react-unicons';
@@ -10,9 +11,23 @@ const cx = classNames.bind(styles);
 function NavLeft({ menu }) {
     const [isShowMenuMore, setIsShowMenuMore] = useState(false);
     const [isShowModalUpPost, setIsShowModalUpPost] = useState(false);
+    const [obToast, setObToast] = useState({
+        isShow: false,
+        header: '',
+        content: '',
+    });
 
     const handleClickMore = () => {
         setIsShowMenuMore((isShowMenuMore) => !isShowMenuMore);
+
+        //
+        setObToast(() => {
+            return {
+                isShow: true,
+                header: 'Xong',
+                content: 'Đã đăng bài',
+            };
+        });
     };
 
     const handleWindowCLick = useCallback(() => {
@@ -28,12 +43,21 @@ function NavLeft({ menu }) {
     const handleCLickMenu = (e, type) => {
         if (type && type === 'up-post') {
             setIsShowModalUpPost(true);
-            console.log('clickup');
         }
     };
 
     const handleClickX = () => {
         setIsShowModalUpPost(false);
+    };
+
+    const toggleShowToast = ({ header, content }) => {
+        setObToast((toast) => {
+            return {
+                isShow: !toast.isShow,
+                header: header ? header : '',
+                content: content ? content : '',
+            };
+        });
     };
 
     useEffect(() => {
@@ -42,7 +66,13 @@ function NavLeft({ menu }) {
 
     return (
         <div className={cx('wrap')}>
-            <ModalUpPost isShow={isShowModalUpPost} toggleShow={handleClickX} />
+            <ToastMassage
+                header={obToast.header}
+                content={obToast.content}
+                handleClose={() => toggleShowToast({})}
+                isShow={obToast.isShow}
+            />
+            <ModalUpPost isShow={isShowModalUpPost} toggleShow={handleClickX} toggleShowToast={toggleShowToast} />
             <span className={cx('title-main')}>{menu.title}</span>
             <ul className={cx('controler')}>
                 {menu.desc.map((menu, id) => {

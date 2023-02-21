@@ -35,6 +35,7 @@ function HomeManager() {
         <>
             <div className={cx('wrap')}>
                 <div className={cx('header')}>
+                    
                     <Container>
                         <Header links={links} />
                         <div className={cx('header-main')}>
