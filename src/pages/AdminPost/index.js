@@ -69,6 +69,7 @@ function AdminPost() {
                         return (
                             <Post
                                 light={true}
+                                image={post.linkImage}
                                 key={post.id}
                                 author={post.user.id}
                                 title={post.title}
@@ -77,6 +78,7 @@ function AdminPost() {
                             />
                         );
                     })}
+                    {post.length == 0 && <div> Chưa có bài post nào!</div>}
                 </div>
             </div>
             <div className={cx('profice')}>

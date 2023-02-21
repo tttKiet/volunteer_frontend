@@ -98,6 +98,7 @@ function HomeManager() {
                                     {post.map((post) => {
                                         return (
                                             <Post
+                                                image={post.linkImage}
                                                 light={light}
                                                 key={post.id}
                                                 author={post.user.id}

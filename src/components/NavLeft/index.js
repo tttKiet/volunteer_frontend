@@ -3,12 +3,13 @@ import classNames from 'classnames/bind';
 import styles from './NavLeft.module.scss';
 import MenuMoreProfice from '~/components/MenuMoreProfice';
 import { UilEllipsisV } from '@iconscout/react-unicons';
+import { Link } from 'react-router-dom';
 import ModalUpPost from '../ModalUpPost';
 const cx = classNames.bind(styles);
 
 function NavLeft({ menu }) {
     const [isShowMenuMore, setIsShowMenuMore] = useState(false);
-    const [isShowModalUpPost, setIsShowModalUpPost] = useState(true);
+    const [isShowModalUpPost, setIsShowModalUpPost] = useState(false);
 
     const handleClickMore = () => {
         setIsShowMenuMore((isShowMenuMore) => !isShowMenuMore);
@@ -48,7 +49,7 @@ function NavLeft({ menu }) {
                     const Icon = menu.icon;
                     let Component;
                     if (menu.to) {
-                        Component = 'a';
+                        Component = Link;
                     } else {
                         Component = 'span';
                     }
@@ -61,7 +62,7 @@ function NavLeft({ menu }) {
                     }
                     return (
                         <li key={id} className={cx('item-link')} {...props}>
-                            <Component href={menu.to}>
+                            <Component to={menu.to}>
                                 <div>
                                     <Icon size="30" className={cx('icon')} />
                                 </div>

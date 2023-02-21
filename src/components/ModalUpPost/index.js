@@ -61,18 +61,19 @@ function ModalUpPost({ isShow, toggleShow }) {
     const [showLoading, setShowLoading] = useState(false);
     const [title, setTitle] = useState('');
     const [decsription, setDecsription] = useState('');
-    const [img, setImg] = useState(img5);
+    const [img, setImg] = useState('img3');
     const [isShowDecs, setIsShowDecs] = useState(false);
     const [name, setName] = useState('');
     const [file, setFile] = useState(null);
 
     const handleClickImgSmall = (type) => {
-        setImg(obImgS[type]);
+        setImg(type);
         setName('');
         setFile(null);
     };
 
     const handleChangeFile = (e) => {
+        console.log('upfile');
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
             const url = URL.createObjectURL(file);
@@ -92,18 +93,21 @@ function ModalUpPost({ isShow, toggleShow }) {
 
     const handleClickUpPost = async () => {
         setShowLoading(true);
+        let userId;
+        let res;
+        userId = currUser.id;
         if (file) {
-            const userId = currUser.id;
-            const res = await postServices.upPost(userId, title, decsription, file);
-            console.log('res', res);
-            if (res.errCode === 0) {
-                toggleShow();
-                setTitle('');
-                setDecsription('');
-                setName('');
-                setFile(null);
-                setIsShowDecs(false);
-            }
+            res = await postServices.upPost(userId, title, decsription, file);
+        } else {
+            res = await postServices.upPost(userId, title, decsription, img);
+        }
+        if (res.errCode === 0) {
+            toggleShow();
+            setTitle('');
+            setDecsription('');
+            setName('');
+            setFile(null);
+            setIsShowDecs(false);
         }
         setShowLoading(false);
     };
@@ -145,7 +149,7 @@ function ModalUpPost({ isShow, toggleShow }) {
                 <hr />
                 <div className={cx('main')}>
                     <div className={cx('main-image')}>
-                        <div className={cx('image')} style={{ backgroundImage: `url(${img})` }}>
+                        <div className={cx('image')} style={{ backgroundImage: `url(${!file ? obImgS[img] : img})` }}>
                             {isShowDecs ? (
                                 <></>
                             ) : (
@@ -181,7 +185,8 @@ function ModalUpPost({ isShow, toggleShow }) {
                         })}
                     >
                         <div className={cx('info')}>
-                            <img src={img5}></img>
+                            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                            <img src={img3}></img>
                             <span>b2014754</span>
                         </div>
 
@@ -226,15 +231,28 @@ function ModalUpPost({ isShow, toggleShow }) {
                                     <Loader />
                                 </button>
                             ) : (
-                                <button
-                                    type="button"
-                                    className={cx('submit', {
-                                        'btn-load': showLoading,
-                                    })}
-                                    onClick={handleClickUpPost}
-                                >
-                                    Đăng
-                                </button>
+                                <>
+                                    {!title || !decsription ? (
+                                        <button
+                                            type="button"
+                                            className={cx('submit', {
+                                                'btn-disable': true,
+                                            })}
+                                        >
+                                            Đăng
+                                        </button>
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            className={cx('submit', {
+                                                'btn-load': showLoading,
+                                            })}
+                                            onClick={handleClickUpPost}
+                                        >
+                                            Đăng
+                                        </button>
+                                    )}
+                                </>
                             )}
                         </>
                     )}

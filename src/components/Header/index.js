@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 // import { UilAirplay } from '@iconscout';
@@ -40,23 +41,23 @@ function Header({ links }) {
             <div className={cx('wrapper')}>
                 <Row className="h-100 align-items-center  px-3">
                     <Col md={3}>
-                        <a href="/" className={cx('logo')}>
+                        <Link to="/" className={cx('logo')}>
                             <UilBorderLeft size="30" className={cx('logo-image')} />
                             {/* <Image className={cx('logo-image')} rounded roundedCircle thumbnail src={`${logo}`} /> */}
-                        </a>
+                        </Link>
                     </Col>
                     <Col md={6}>
                         <ul className="nav justify-content-end nav-pills justify-content-end">
                             {links &&
                                 links.map((link, i) => (
                                     <li key={i + 'linksHeader'} className="nav-item mx-2">
-                                        <a
+                                        <Link
                                             className={cx('nav-link', 'nav-item-link')}
                                             style={{ fontSize: 14 }}
-                                            href={link.to}
+                                            to={link.to}
                                         >
                                             {link.name}
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                         </ul>
@@ -67,9 +68,9 @@ function Header({ links }) {
                             <span>
                                 Hi <b>{userData.id} !</b>
                             </span>
-                            <a href="/login" title="Sign out?" onClick={handleCLickLoggout}>
+                            <Link to="/login" title="Sign out?" onClick={handleCLickLoggout}>
                                 <FontAwesomeIcon className={cx('icon-out')} icon={faArrowRightFromBracket} />
-                            </a>
+                            </Link>
                         </h2>
                     </Col>
                 </Row>

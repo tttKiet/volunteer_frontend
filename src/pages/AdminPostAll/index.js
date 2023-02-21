@@ -56,9 +56,9 @@ function AdminPostAll() {
             <div className={cx('posts')}>
                 <div className={cx('post-profice')}>
                     {post.map((post) => {
-                        console.log(post);
                         return (
                             <Post
+                                image={post.linkImage}
                                 light={true}
                                 key={post.id}
                                 author={post.user.id}
@@ -68,6 +68,7 @@ function AdminPostAll() {
                             />
                         );
                     })}
+                    {post.length === 0 && <div> Chưa có bài post nào!</div>}
                 </div>
             </div>
             <div className={cx('profice')}>

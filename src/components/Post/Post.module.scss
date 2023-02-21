@@ -18,6 +18,14 @@
         align-items: center;
         height: 56px;
 
+        .user {
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgb(75, 75, 255);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
         b {
             font-size: 14px;
             line-height: 18px;
@@ -53,17 +61,45 @@
     .main {
         width: 470px;
         height: 314px;
+        position: relative;
         .image-up {
             box-shadow: 0px 0 2px 1px #ffffff94;
             width: 100%;
             height: 100%;
             border-radius: 8px;
-            object-fit: cover;
+            object-fit: contain;
             object-position: center;
+        }
+
+        &.img-dev {
+            box-shadow: 0px 0 2px 1px #ffffff94;
+            border-radius: 8px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-color: rgba(0, 0, 0, 1);
         }
     }
 
     .footer {
+        &.into-Img {
+            position: absolute !important;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 20px);
+            .title {
+                font-weight: 600;
+                color: #080808 !important;
+            }
+
+            .desc {
+                height: calc(100% - 20px);
+
+                .more {
+                    color: #565656 !important;
+                }
+            }
+        }
         .title {
             margin-top: 24px;
             margin-bottom: 10px;
@@ -75,11 +111,14 @@
         .desc {
             margin: 12px 0;
             font-size: 14px;
-            height: 90px;
+            // height: 90px;
+            font-family: 'inter';
             line-height: 18px;
             color: var(--text-color-post);
 
             .more {
+                font-family: 'inter';
+                font-size: 14px;
                 color: #a8a8a8;
                 cursor: pointer;
                 margin: 0 4px;
