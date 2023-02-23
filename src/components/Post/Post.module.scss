@@ -28,6 +28,7 @@
 
         b {
             font-size: 14px;
+            font-weight: 600;
             line-height: 18px;
             color: var(--text-color-post);
         }
@@ -93,8 +94,10 @@
             }
 
             .desc {
+                width: 80%;
                 height: calc(100% - 20px);
-
+                word-wrap: break-word;
+                white-space: pre-wrap;
                 .more {
                     color: #565656 !important;
                 }
@@ -115,7 +118,8 @@
             font-family: 'inter';
             line-height: 18px;
             color: var(--text-color-post);
-
+            word-wrap: break-word;
+            white-space: pre-wrap;
             .more {
                 font-family: 'inter';
                 font-size: 14px;

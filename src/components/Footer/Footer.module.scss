@@ -1,15 +1,119 @@
 .wrap {
-    margin-top: 20px;
-    padding: 12px 0 40px 0;
+    margin-top: 30px;
+    padding: 12px 0 4px 0;
+    background-color: #222222;
 
-    .title {
-        font-size: 12px;
-        color: var(--text-color);
+    .bor1 {
+        padding-bottom: 40px;
+        border-bottom: 1px solid #fff;
     }
 
-    .card {
-        background-color: inherit;
+    .box2 {
+        h3 {
+            color: #fff;
+            font-size: 14px;
+            padding: 24px 0;
+        }
+    }
+
+    .title {
+        font-size: 18px;
+        color: #fff;
+    }
+
+    .decs {
+        max-width: 400px;
+        font-size: 16px;
+        line-height: 22px;
+        color: #fff;
+        margin-top: 20px;
+    }
+
+    .social {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: #fff;
+        margin-top: 20px;
+
+        div {
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 4px;
+            margin-right: 12px;
+            transition: 0.3s;
+
+            svg {
+                color: #fbad15;
+            }
+
+            &:hover {
+                background-color: #ffffff2b;
+                color: #fff;
+                animation: scaleM 0.3s ease-in-out;
+                cursor: pointer;
+            }
+        }
+
+        @keyframes scaleM {
+            50% {
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    .title2 {
+        font-size: 23px;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .list1 {
         font-size: 14px;
-        color: var(--text-color);
+        color: #fff;
+        margin-top: 20px;
+
+        li {
+            margin-bottom: 8px;
+            cursor: pointer;
+
+            &:hover {
+                color: #fbad15;
+            }
+        }
+    }
+
+    .list2 {
+        li {
+            margin-bottom: 22px;
+            .list2-wrap {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                color: #fff;
+                .title3 {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+                .list2-icon {
+                    padding: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    background-color: #fff;
+                    border-radius: 4px;
+                    margin-right: 14px;
+                    svg {
+                        color: #fbad15;
+                    }
+                }
+
+                span {
+                    font-size: 14px;
+                    line-height: 18px;
+                    font-weight: 400;
+                }
+            }
+        }
     }
 }

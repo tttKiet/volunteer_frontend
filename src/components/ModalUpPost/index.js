@@ -183,6 +183,7 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast }) {
                     <div
                         className={cx('main-decs', {
                             show: isShowDecs,
+                            're-show': !isShowDecs,
                         })}
                     >
                         <div className={cx('info')}>

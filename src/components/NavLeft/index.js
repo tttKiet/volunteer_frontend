@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import ToastMassage from '../ToastMassage';
+import ModalCreateWork from '../ModalCreateWork';
 import styles from './NavLeft.module.scss';
 import MenuMoreProfice from '~/components/MenuMoreProfice';
 import { UilEllipsisV } from '@iconscout/react-unicons';
@@ -10,6 +11,7 @@ const cx = classNames.bind(styles);
 
 function NavLeft({ menu }) {
     const [isShowMenuMore, setIsShowMenuMore] = useState(false);
+    const [showCreateWork, setShowCreateWork] = useState(false);
     const [isShowModalUpPost, setIsShowModalUpPost] = useState(false);
     const [obToast, setObToast] = useState({
         isShow: false,
@@ -19,15 +21,6 @@ function NavLeft({ menu }) {
 
     const handleClickMore = () => {
         setIsShowMenuMore((isShowMenuMore) => !isShowMenuMore);
-
-        //
-        setObToast(() => {
-            return {
-                isShow: true,
-                header: 'Xong',
-                content: 'Đã đăng bài',
-            };
-        });
     };
 
     const handleWindowCLick = useCallback(() => {
@@ -43,6 +36,8 @@ function NavLeft({ menu }) {
     const handleCLickMenu = (e, type) => {
         if (type && type === 'up-post') {
             setIsShowModalUpPost(true);
+        } else if (type && type === 'create-work') {
+            setShowCreateWork(true);
         }
     };
 
@@ -60,6 +55,10 @@ function NavLeft({ menu }) {
         });
     };
 
+    const toggleShowCreateWorkModal = () => {
+        setShowCreateWork((show) => !show);
+    };
+
     useEffect(() => {
         handleWindowCLick();
     }, [handleWindowCLick]);
@@ -72,6 +71,7 @@ function NavLeft({ menu }) {
                 handleClose={() => toggleShowToast({})}
                 isShow={obToast.isShow}
             />
+            <ModalCreateWork isShow={showCreateWork} handleClose={toggleShowCreateWorkModal} />
             <ModalUpPost isShow={isShowModalUpPost} toggleShow={handleClickX} toggleShowToast={toggleShowToast} />
             <span className={cx('title-main')}>{menu.title}</span>
             <ul className={cx('controler')}>

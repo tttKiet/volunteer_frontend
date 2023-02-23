@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { UilEstate } from '@iconscout/react-unicons';
 import Loader from '~/components/Loader';
 import { UilListUl } from '@iconscout/react-unicons';
+import { UilPlus } from '@iconscout/react-unicons';
 import { Container, Row, Col } from 'react-bootstrap';
 import Work from '~/components/Work';
 import ListRequestWork from '~/components/ListRequestWork';
@@ -27,6 +28,11 @@ const menu = {
             title: 'Xem danh sách thực hiện công việc',
             to: '/admin/view/list-user-work',
             icon: UilListUl,
+        },
+        {
+            title: 'Tạo công việc mới',
+            icon: UilPlus,
+            type: 'create-work',
         },
     ],
 };

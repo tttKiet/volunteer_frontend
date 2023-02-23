@@ -65,13 +65,14 @@ const workServices = {
     },
 
     // create work
-    async createWork(name, startDate, workPlace, pointPlus, maxStudent) {
+    async createWork({ name, startDate, workPlace, pointPlus, maxStudent, note }) {
         const res = await axios.post('/api/v1/work/create', {
             name,
             startDate,
             workPlace,
             pointPlus,
             maxStudent,
+            note,
         });
         return res.data;
     },
