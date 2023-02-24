@@ -1,130 +1,83 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { userSelector } from '~/redux/selector';
-import { Container, Row, Col, Nav } from 'react-bootstrap';
-
-import { postServices, workServices } from '~/services';
-import Header from '~/components/Header';
-import Footer from '~/components/Footer';
-import Post from '~/components/Post';
-import WorkCalendar from '~/components/WorkCalendar';
-import Loader from '~/components/Loader';
-import ModalRegisterWork from '~/components/ModalRegisterWork';
-import ToastMassage from '~/components/ToastMassage';
-
+import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightLong, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons';
 import classNames from 'classnames/bind';
 import styles from './HomeUser.module.scss';
+import { Col, Row } from 'react-bootstrap';
 
 const cx = classNames.bind(styles);
 
 function HomeUser() {
-    const currUser = useSelector(userSelector);
-    const [isLoading, setIsLoading] = useState(false);
-    const [obToast, setObToast] = useState({
-        isShow: false,
-        header: '',
-        content: '',
-    });
-    const [isShowModalRegister, setIsShowModalRegister] = useState(false);
-    const [posts, setposts] = useState([]);
-    const getPosts = async () => {
-        const res = await postServices.getPosts();
-        if (res.errCode === 0) {
-            setposts(res.posts);
-        }
-    };
-    const toggleIsShow = () => {
-        setIsShowModalRegister((show) => !show);
-    };
-
-    const toggleIsShowToast = () => {
-        setObToast({
-            isShow: !obToast.isShow,
-            header: '',
-            content: '',
-        });
-    };
-
-    const handleRegisterWork = async (workId) => {
-        setIsLoading(true);
-        const userId = currUser.id;
-        const res = await workServices.registerWork(userId, workId);
-        setObToast({
-            isShow: true,
-            header: res.errCode === 0 ? 'Thành công (Vui lòng đợi admin xét duyệt)' : 'Thất bại',
-            content: res.errMessage,
-        });
-        setIsLoading(false);
-        return res.errCode;
-    };
-
-    useEffect(() => {
-        getPosts();
-    }, []);
+    const elementRef = useRef(null);
+    const [showContent, setShowContent] = useState(false);
     return (
-        <Container>
-            {isLoading && <Loader />}
-            <ToastMassage
-                header={obToast.header}
-                content={obToast.content}
-                isShow={obToast.isShow}
-                handleClose={toggleIsShowToast}
-            />
-
-            <Header />
-            <Row className={cx('content')}>
-                <Col md={3}>
-                    <div className={cx('control')}>
-                        <Nav className={cx('flex-column', 'nav')} activeKey="/home">
-                            <Nav.Item className={cx('border-link')}>
-                                <Nav.Link href="/">Frefress Page!</Nav.Link>
-                            </Nav.Item>
-                            <div className={cx('border-link', 'nav-item')}>
-                                <span className="nav-link" onClick={toggleIsShow}>
-                                    Đăng ký tình nguyện
-                                </span>
-                                <ModalRegisterWork
-                                    isShow={isShowModalRegister}
-                                    toggleIsShow={toggleIsShow}
-                                    handleRegisterWork={handleRegisterWork}
-                                />
-                            </div>
-                            <Nav.Item className={cx('border-link')}>
-                                <Nav.Link href="/lists-work"> Danh mục Work </Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item className={cx('border-link')}>
-                                <Nav.Link href="" disabled>
-                                    Updating...
-                                </Nav.Link>
-                            </Nav.Item>
-                        </Nav>
+        <div className={cx('wrap')}>
+            <div className={cx('nav-color')}>
+                <div className={cx('logo')}>
+                    <FontAwesomeIcon icon={faCircle} />
+                </div>
+                <div className={cx('circle')}>
+                    <FontAwesomeIcon icon={faCircle} />
+                    <FontAwesomeIcon icon={faCircle} />
+                    <FontAwesomeIcon icon={faCircle} />
+                    <FontAwesomeIcon icon={faCircle} />
+                    <FontAwesomeIcon icon={faCircle} />
+                    <FontAwesomeIcon icon={faCircle} />
+                </div>
+                <div className={cx('control')} onClick={() => setShowContent((show) => !show)}>
+                    <FontAwesomeIcon icon={faArrowAltCircleUp} />
+                </div>
+            </div>
+            <div className={cx('header')}>
+                <div className={cx('header-nav')}>
+                    <div className={cx('logo')}>
+                        <h3>
+                            <span>VOLL</span>UNTER
+                        </h3>
                     </div>
-                </Col>
-                <Col md={6}>
-                    <h2 className={cx('notications')}>Thông báo</h2>
-                    <div className={cx('posts')}>
-                        {posts.map((post, i) => (
-                            <Post
-                                key={i + 'post'}
-                                title={post.title}
-                                author={post.user.name}
-                                content={post.description}
-                                upDate={post.createdAt}
-                            />
-                        ))}
-                    </div>
-                </Col>
-                <Col md={3}>
-                    <WorkCalendar />
-                </Col>
-            </Row>
+                    <div className={cx('controls')}>
+                        <ul className={cx('controls-list')}>
+                            <li className={cx('controls-item')}>
+                                <Link to="#">Bắt đầu</Link>
+                            </li>
+                            <li className={cx('controls-item')}>
+                                <Link to="#">Liên hệ</Link>
+                            </li>
+                        </ul>
 
-            <Row>
-                <Col md={12}>
-                    <Footer />
-                </Col>
-            </Row>
-        </Container>
+                        <div className={cx('icon-out')}>
+                            <FontAwesomeIcon icon={faRightLong} />
+                        </div>
+                    </div>
+                </div>
+
+                <div className={cx('header-content')}>
+                    <h3 className={cx('title2')}>Xin Chào Bùi Tuấn Kiệt! </h3>
+                    <h3 className={cx('title1')}>
+                        "Trải nghiệm tình nguyện viên - Cùng chúng tôi lan tỏa yêu thương và sự đồng cảm đến mọi người"
+                    </h3>
+                    <span className={cx('content')}>
+                        Tình nguyện viên là những người có tâm huyết và mong muốn thay đổi thế giới bằng cách đóng góp
+                        cho cộng đồng và xã hội. Tình nguyện viên không chỉ giúp đỡ người khác mà còn tạo nên những trải
+                        nghiệm ý nghĩa và đáng nhớ cho chính bản thân họ.
+                    </span>
+                </div>
+            </div>
+
+            <div
+                className={cx('content', {
+                    show: showContent,
+                })}
+            >
+                <Row>
+                    <Col sm={3}>asds</Col>
+                    <Col sm={5}>asds</Col>
+                    <Col sm={4}>asds</Col>
+                </Row>
+            </div>
+        </div>
     );
 }
 

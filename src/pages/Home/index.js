@@ -25,7 +25,7 @@ function Home() {
         handleNavigate();
     }, [handleNavigate, isLogined]);
 
-    return <div className={cx('wrap')}>{isManager ? <HomeManager /> : <HomeUser />}</div>;
+    return <>{isManager ? <HomeManager /> : <HomeUser />}</>;
 }
 
 export default Home;

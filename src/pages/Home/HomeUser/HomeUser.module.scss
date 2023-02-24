@@ -1,95 +1,149 @@
-.nav {
-    a {
-        font-size: 14px !important;
+.wrap {
+    --pri-color: #f18624;
+    width: 100%;
+    height: 100vh;
+    padding-left: 110px;
+    overflow: hidden;
+    // background: url('../../../assets/images/back-uer-1.jpg') no-repeat center/cover;
+    background: linear-gradient(to right, rgb(14 14 14), rgb(34 3 3 / 74%), rgb(120 92 117 / 99%));
+    position: relative;
+    h1,
+    h2,
+    h3 {
+        margin: 0;
     }
-    span {
-        font-size: 14px !important;
-        cursor: pointer;
-    }
-}
 
-.notications {
-    text-align: center;
-    font-size: 1.4rem;
-    padding: 12px 6px;
-    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
-        0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
-    background-color: #fff;
-    border: 1px solid rgba(15, 15, 15, 0.121);
-    border-radius: 4px;
+    .nav-color {
+        position: fixed;
+        width: 50px;
+        background-color: var(--pri-color);
+        top: 0;
+        left: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 10;
 
-    color: var(--text-color);
-}
+        .logo {
+            font-size: 10px;
+            padding: 12px 0 0 0;
+            color: #fff;
+        }
 
-.content {
-    margin-top: 40px !important;
+        .circle {
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    .control {
-        box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
-            0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
-        border-radius: 4px;
-        background-color: #fff;
-        border: 1px solid rgba(15, 15, 15, 0.121);
+            svg {
+                margin-bottom: 10px;
+                color: #fff;
 
-        .nav {
-            padding: 4px 10px !important;
-            a,
-            span {
-                font-size: 14px !important;
-                padding: 10px 20px !important;
-                text-align: right;
-                transition: all 0.2s ease-in;
-                &:hover {
-                    margin-right: 10px;
+                &:first-child {
+                    color: #ffffff59;
                 }
             }
-            .border-link {
-                position: relative;
-                & + .border-link {
-                    &::after {
-                        display: block;
-                        content: '';
-                        position: absolute;
-                        bottom: 100%;
-                        left: 10%;
-                        width: 80%;
-                        height: 1px;
-                        border-top: 1px solid #ccc !important;
+        }
+
+        .control {
+            margin-bottom: 22px;
+            padding: 12px 12px;
+            cursor: pointer;
+            svg {
+                font-size: 20px;
+                color: #fff;
+            }
+        }
+    }
+
+    .header {
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 30px;
+            .logo {
+                h3 {
+                    font-size: 28px;
+                    color: #fff;
+                    span {
+                        color: var(--pri-color);
                     }
                 }
             }
+
+            .controls {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                .controls-list {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    margin: 0;
+                    margin-right: 40px;
+                    list-style: none;
+
+                    .controls-item {
+                        color: #fff;
+
+                        a {
+                            text-decoration: none;
+                            font-size: 14px;
+                            color: #fff;
+                            padding: 12px 24px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                .icon-out {
+                    font-size: 14px;
+                    margin-right: 100px;
+                    color: #fff;
+                }
+            }
+        }
+        .header-content {
+            margin-top: 120px;
+            padding-left: 30px;
+            .title2 {
+                font-size: 16px;
+                color: #fff;
+            }
+
+            .title1 {
+                font-size: 30px;
+                color: #fff;
+                max-width: 600px;
+                margin: 20px 0;
+            }
+
+            .content {
+                font-size: 14px;
+                display: block;
+                color: #fff;
+                max-width: 600px;
+            }
         }
     }
 
-    .posts {
-        margin-top: 14px;
-        height: 70vh;
-        overflow: hidden;
-        scroll-behavior: smooth;
-        scrollbar-gutter: stable;
-        transition: all 0.4s ease-in-out;
-        &:hover {
-            overflow-y: scroll;
-        }
-
-        &::-webkit-scrollbar {
-            border-radius: 0;
-            width: 4px;
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(22, 24, 35, 0.312); /* Hiệu ứng di chuột đổi màu*/
-            cursor: pointer;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 4px;
-            background-color: rgba(22, 24, 35, 0.06);
-        }
-
-        &::-webkit-scrollbar-track {
-            border-radius: 0;
-            background-color: rgba(0, 0, 0, 0);
+    .content {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        min-height: 100vh;
+        border-top: 2px solid #ccc;
+        padding-left: 50px;
+        background-color: #fff;
+        transition: top 1.2s cubic-bezier(0.23, 1.3, 0.46, 0.22);
+        &.show {
+            top: 0;
         }
     }
 }
