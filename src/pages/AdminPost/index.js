@@ -62,7 +62,7 @@ function AdminPost() {
 
     return (
         <div className={cx('wrap')}>
-            <NavLeft menu={menu} />
+            <NavLeft menu={menu} handleOkUpPost={getPosts} />
             <div className={cx('posts')}>
                 <div className={cx('post-profice')}>
                     {post.map((post) => {
@@ -78,7 +78,7 @@ function AdminPost() {
                             />
                         );
                     })}
-                    {post.length == 0 && <div> Chưa có bài post nào!</div>}
+                    {post.length === 0 && <div> Chưa có bài post nào!</div>}
                 </div>
             </div>
             <div className={cx('profice')}>

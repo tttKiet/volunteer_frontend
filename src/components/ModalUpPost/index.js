@@ -56,7 +56,7 @@ const obImgS = {
     img5,
 };
 
-function ModalUpPost({ isShow, toggleShow, toggleShowToast }) {
+function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
     const currUser = useSelector(userSelector);
     const [showLoading, setShowLoading] = useState(false);
     const [title, setTitle] = useState('');
@@ -109,6 +109,7 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast }) {
             setFile(null);
             setIsShowDecs(false);
             toggleShowToast({ header: 'Xong', content: 'Đã tạo bài đăng' });
+            handleOk();
         }
         setShowLoading(false);
     };
@@ -198,11 +199,13 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast }) {
                                 value={title}
                                 onChange={(e) => handleClickChangeInput(e, 'title')}
                                 placeholder="Tiêu đề.."
+                                spellCheck="false"
                             ></input>
                             <textarea
                                 name="decsription"
                                 onChange={(e) => handleClickChangeInput(e, 'decsription')}
                                 placeholder="Nội dung ..."
+                                spellCheck="false"
                                 defaultValue={decsription}
                             ></textarea>
                         </div>

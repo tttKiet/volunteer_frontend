@@ -87,7 +87,29 @@
             position: absolute !important;
             top: 20px;
             left: 20px;
-            width: calc(100% - 20px);
+            right: 10px;
+            overflow-y: auto;
+            bottom: 10px;
+
+            &::-webkit-scrollbar {
+                width: 2px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: #dbd8d8;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: #26262679;
+            }
+
+            /* Handle on hover */
+            &::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
             .title {
                 font-weight: 600;
                 color: #080808 !important;
@@ -95,7 +117,7 @@
 
             .desc {
                 width: 80%;
-                height: calc(100% - 20px);
+                height: 100%;
                 word-wrap: break-word;
                 white-space: pre-wrap;
                 .more {

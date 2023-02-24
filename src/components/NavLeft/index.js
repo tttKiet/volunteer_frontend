@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import ModalUpPost from '../ModalUpPost';
 const cx = classNames.bind(styles);
 
-function NavLeft({ menu }) {
+function NavLeft({ menu, handleOkUpPost }) {
     const [isShowMenuMore, setIsShowMenuMore] = useState(false);
     const [showCreateWork, setShowCreateWork] = useState(false);
     const [isShowModalUpPost, setIsShowModalUpPost] = useState(false);
@@ -72,7 +72,12 @@ function NavLeft({ menu }) {
                 isShow={obToast.isShow}
             />
             <ModalCreateWork isShow={showCreateWork} handleClose={toggleShowCreateWorkModal} />
-            <ModalUpPost isShow={isShowModalUpPost} toggleShow={handleClickX} toggleShowToast={toggleShowToast} />
+            <ModalUpPost
+                isShow={isShowModalUpPost}
+                handleOk={handleOkUpPost}
+                toggleShow={handleClickX}
+                toggleShowToast={toggleShowToast}
+            />
             <span className={cx('title-main')}>{menu.title}</span>
             <ul className={cx('controler')}>
                 {menu.desc.map((menu, id) => {
