@@ -1,0 +1,40 @@
+.header-content {
+    padding-left: 110px;
+    padding-top: 120px;
+    background: linear-gradient(to right, rgb(14 14 14), rgb(34 3 3 / 74%), rgb(120 92 117 / 99%));
+    display: inline-block;
+    height: 100vh;
+    min-width: 100%;
+    display: flex;
+    .header-img {
+        display: inline-block;
+        width: 700px;
+        margin-left: 100px;
+        margin-top: 40px;
+
+        img {
+            width: 100%;
+            display: inline-block;
+            background-color: transparent;
+        }
+    }
+
+    .title2 {
+        font-size: 16px;
+        color: #fff;
+    }
+
+    .title1 {
+        font-size: 30px;
+        color: #fff;
+        max-width: 600px;
+        margin: 20px 0;
+    }
+
+    .content {
+        font-size: 14px;
+        display: block;
+        color: #fff;
+        max-width: 600px;
+    }
+}

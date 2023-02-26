@@ -1,29 +1,23 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-
-import { useSpring, animated } from '@react-spring/web';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightLong, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons';
-import classNames from 'classnames/bind';
 import gifPost from '../../../assets/gif/Mail.gif';
 import gifUser from '../../../assets/gif/user-home-2.gif';
-import styles from './LayoutUser.module.scss';
 import HomeUser from '~/components/HomeUser';
+import styles from './LayoutUser.module.scss';
+import classNames from 'classnames/bind';
+import HomeUserSLide from '~/components/HomeUserSLide';
+import StatedUserSLide from '~/components/StatedUserSLide';
+import ContactUserSLide from '~/components/ContactUserSLide';
 
 const cx = classNames.bind(styles);
 
 function LayoutUser() {
     const elementRef = useRef(null);
-
-    const [props, api] = useSpring(
-        () => ({
-            from: { opacity: 0 },
-            to: { opacity: 1 },
-        }),
-        [],
-    );
+    const eRef = useRef();
 
     const [showContent, setShowContent] = useState(false);
     return (
@@ -53,7 +47,7 @@ function LayoutUser() {
                             <span>VOLL</span>UNTER
                         </a>
                     </div>
-                    <animated.div style={props} className={cx('controls')}>
+                    <div className={cx('controls')}>
                         <ul className={cx('controls-list')}>
                             <li className={cx('controls-item')}>
                                 <a href="#stated">Bắt đầu</a>
@@ -66,63 +60,13 @@ function LayoutUser() {
                         <div className={cx('icon-out')}>
                             <FontAwesomeIcon icon={faRightLong} />
                         </div>
-                    </animated.div>
+                    </div>
                 </div>
 
                 <div className={cx('slides')}>
-                    <div className={cx('header-content', 'slide')} id="home">
-                        <div>
-                            <h3 className={cx('title2')}>Xin Chào Bùi Tuấn Kiệt! </h3>
-                            <h3 className={cx('title1')}>
-                                "Trải nghiệm tình nguyện viên - Cùng chúng tôi lan tỏa yêu thương và sự đồng cảm đến mọi
-                                người"
-                            </h3>
-                            <span className={cx('content')}>
-                                Tình nguyện viên là những người có tâm huyết và mong muốn thay đổi thế giới bằng cách
-                                đóng góp cho cộng đồng và xã hội. Tình nguyện viên không chỉ giúp đỡ người khác mà còn
-                                tạo nên những trải nghiệm ý nghĩa và đáng nhớ cho chính bản thân họ.
-                            </span>
-                        </div>
-                        <div className={cx('header-img')}>
-                            <img src={gifUser}></img>
-                        </div>
-                    </div>
-
-                    <div className={cx('header-stated', 'slide')} id="stated">
-                        <div>
-                            <h3 className={cx('title2')}>Xin Chào Bùi Tuấn Kiệt! </h3>
-                            <h3 className={cx('title1')}>
-                                "Trải nghiệm tình nguyện viên - Cùng chúng tôi lan tỏa yêu thương và sự đồng cảm đến mọi
-                                người"
-                            </h3>
-                            <span className={cx('content')}>
-                                Tình nguyện viên là những người có tâm huyết và mong muốn thay đổi thế giới bằng cách
-                                đóng góp cho cộng đồng và xã hội. Tình nguyện viên không chỉ giúp đỡ người khác mà còn
-                                tạo nên những trải nghiệm ý nghĩa và đáng nhớ cho chính bản thân họ.
-                            </span>
-                        </div>
-                        <div className={cx('header-img')}>
-                            <img src={gifUser}></img>
-                        </div>
-                    </div>
-
-                    <div className={cx('header-contact', 'slide')} id="contact">
-                        <div>
-                            <h3 className={cx('title2')}>Lien he </h3>
-                            <h3 className={cx('title1')}>
-                                "Trải nghiệm tình nguyện viên - Cùng chúng tôi lan tỏa yêu thương và sự đồng cảm đến mọi
-                                người"
-                            </h3>
-                            <span className={cx('content')}>
-                                Tình nguyện viên là những người có tâm huyết và mong muốn thay đổi thế giới bằng cách
-                                đóng góp cho cộng đồng và xã hội. Tình nguyện viên không chỉ giúp đỡ người khác mà còn
-                                tạo nên những trải nghiệm ý nghĩa và đáng nhớ cho chính bản thân họ.
-                            </span>
-                        </div>
-                        <div className={cx('header-img')}>
-                            <img src={gifUser}></img>
-                        </div>
-                    </div>
+                    <HomeUserSLide className={cx('slide')} />
+                    <StatedUserSLide className={cx('slide')} />
+                    <ContactUserSLide className={cx('slide')} />
                 </div>
             </div>
             <div

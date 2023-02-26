@@ -4,6 +4,7 @@
     --primary-color: rgb(27, 61, 254);
     --text-color: #495057;
     --background-color: #f1f4f6;
+    --text-color-user: #f18624;
 }
 
 html {
@@ -17,4 +18,35 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.fadeIn {
+    animation-name: fade;
+    animation-duration: 1s;
+
+    @keyframes fade {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+// run dong
+.pulse {
+    animation-name: pulse;
+    animation-duration: 1s;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
