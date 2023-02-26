@@ -9,6 +9,8 @@ import UserDetailsWork from '~/pages/UserDetailsWork';
 import UserListWork from '~/pages/UserListWork';
 import AdminWorkList from '~/pages/AdminWorkList';
 import Invalid_404 from '~/pages/Invalid_404';
+import HomeUser from '~/components/HomeUser';
+import LayoutUser from '~/pages/layout/LayoutUser';
 
 const publicRoutes = [
     {
@@ -47,14 +49,32 @@ const publicRoutes = [
         path: '/user/details-work',
         component: UserDetailsWork,
     },
-    {
-        path: '/lists-work',
-        component: UserListWork,
-    },
-    {
-        path: '/invalid/404',
-        component: Invalid_404,
-    },
+
+    // // EDIT
+    // {
+    //     path: '/work/:userId/create',
+    //     component: HomeUser,
+    //     layout: LayoutUser,
+    // },
+    // {
+    //     path: '/work/view/list-work',
+    //     component: HomeUser,
+    //     layout: LayoutUser,
+    // },
+    // {
+    //     path: '/work/view/calader',
+    //     component: HomeUser,
+    //     layout: LayoutUser,
+    // },
+    //
+    // {
+    //     path: '/lists-work',
+    //     component: UserListWork,
+    // },
+    // {
+    //     path: '/invalid/404',
+    //     component: Invalid_404,
+    // },
 ];
 
 const privateRoutes = [];

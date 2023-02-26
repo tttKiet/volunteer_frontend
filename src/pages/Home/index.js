@@ -3,8 +3,9 @@ import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { isLoginSelector, isManagerSelector } from '~/redux/selector';
 
+import LayoutUser from '../layout/LayoutUser';
 import HomeManager from './HomeManager';
-import HomeUser from './HomeUser';
+import HomeUser from '../../components/HomeUser';
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 
@@ -25,7 +26,7 @@ function Home() {
         handleNavigate();
     }, [handleNavigate, isLogined]);
 
-    return <>{isManager ? <HomeManager /> : <HomeUser />}</>;
+    return <>{isManager ? <HomeManager /> : <LayoutUser />}</>;
 }
 
 export default Home;
