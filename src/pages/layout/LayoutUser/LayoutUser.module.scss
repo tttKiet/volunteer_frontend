@@ -230,14 +230,30 @@
                 }
 
                 .control-box {
+                    position: relative;
                     display: flex;
                     align-items: center;
                     cursor: pointer;
                     transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+                    margin-top: 10px;
+                    .icon {
+                        font-size: 14px;
+                        color: #e17613;
+                        position: absolute;
+                        top: 50%;
+                        left: -10px;
+                        transform: translateY(-50%);
+                        display: none;
+
+                        &.show {
+                            display: block;
+                        }
+                    }
+
                     .title {
                         font-size: 14px;
+                        padding: 10px 0;
                         color: #b76e2a;
-                        margin-top: 20px;
                         margin-left: 20px;
                     }
 
@@ -253,7 +269,7 @@
                 left: 300px;
                 position: absolute;
                 top: 20px;
-                right: 0;
+                right: 40px;
             }
         }
     }
