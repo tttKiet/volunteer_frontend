@@ -1,57 +1,93 @@
-.calendar {
-    margin-top: 14px;
-    height: 70vh;
-    overflow: hidden;
-    scroll-behavior: smooth;
-    scrollbar-gutter: stable;
-    transition: all 0.4s ease-in-out;
+.wrap {
+    padding: 0 50px;
+    .calendar {
+        margin-top: 14px;
+        height: calc(100vh - 98px);
+        scroll-behavior: smooth;
+        scrollbar-gutter: stable;
+        transition: all 0.4s ease-in-out;
 
-    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
-        0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
-    border-radius: 4px;
-    background-color: #fff;
-    border: 1px solid rgba(15, 15, 15, 0.121);
-    padding: 12px 24px;
-
-    .datails {
-        font-size: 14px;
-        display: block;
-        text-align: center;
+        box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
+            0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+        border-radius: 4px;
+        border: 1px solid #0d6efd;
+        background-color: #fff;
+        // border: 1px solid rgba(15, 15, 15, 0.121);
         padding: 12px 24px;
-        text-decoration: none;
-        transition: all 0.2s linear;
 
-        &:hover {
-            text-decoration: underline;
+        .datails {
+            font-size: 14px;
+            display: block;
+            color: #0d6efd;
+            cursor: pointer;
+            text-align: center;
+            padding: 18px 24px;
+            text-decoration: none;
+            transition: all 0.2s linear;
+
+            &:hover {
+                color: #3b83f0;
+                text-decoration: underline;
+            }
+        }
+
+        .group-time {
+            padding-top: 20px;
+            font-weight: 500;
+            letter-spacing: 0.6px;
+            svg {
+                font-size: 14px;
+                margin-right: 10px;
+            }
+
+            .time-text {
+                font-size: 14px;
+                color: var(--text-color);
+            }
+
+            & + .group-time {
+                margin-top: 8px;
+            }
         }
     }
 
-    .group-time {
-        svg {
-            font-size: 14px;
-            margin-right: 10px;
+    .notications {
+        text-align: center;
+        margin: 0 auto;
+        font-size: 1.4rem;
+        padding: 12px 6px;
+        box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
+            0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+        background-color: #0d6efd;
+        font-weight: 600;
+        border: 1px solid rgba(15, 15, 15, 0.121);
+        border-radius: 4px;
+        transition: all 1s ease;
+        color: #fff;
+        position: relative;
+        .icon-back {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 4px 8px;
+            cursor: pointer;
+            opacity: 0.76;
+            transition: all 0.3s ease;
+
+            svg {
+                font-size: 14px;
+                color: #fff;
+                margin-right: 12px;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
         }
 
-        .time-text {
-            font-size: 14px;
-            color: var(--text-color);
-        }
-
-        & + .group-time {
-            margin-top: 8px;
+        &.details {
+            text-align: center;
         }
     }
-}
-
-.notications {
-    text-align: center;
-    font-size: 1.4rem;
-    padding: 12px 6px;
-    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
-        0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
-    background-color: #fff;
-    border: 1px solid rgba(15, 15, 15, 0.121);
-    border-radius: 4px;
-
-    color: var(--text-color);
 }

@@ -21,8 +21,7 @@ body {
 }
 
 .fadeIn {
-    animation-name: fade;
-    animation-duration: 1s;
+    animation: fade 1s ease-in forwards;
 
     @keyframes fade {
         from {
@@ -36,8 +35,7 @@ body {
 
 // run dong
 .pulse {
-    animation-name: pulse;
-    animation-duration: 1s;
+    animation: pulse 1s ease-in forwards;
 }
 
 @keyframes pulse {

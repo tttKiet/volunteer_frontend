@@ -39,7 +39,7 @@ function StatedUserSLide() {
         <div className={cx('header-stated', 'slide')} ref={elementRef} id="stated">
             <h3 className={cx('title')}>Tham gia đội ngủ tình nguyện viên đầu tiên </h3>
             <div className={cx('row', 'g-5')}>
-                <Col md={5}>
+                <Col Col md={6}>
                     <div
                         className={cx('gr-step', {
                             animate: isVisible,
@@ -50,11 +50,16 @@ function StatedUserSLide() {
                             <h2>Mở giao diện người dùng</h2>
                             <span>
                                 - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào
-                                biểu tượng dưới cùng bển trái
+                                biểu tượng dưới cùng bển trái - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu
+                                tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái - Nhấp vào biểu tượng
+                                dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng
+                                bển trái - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái
+                                Nhấp vào biểu tượng dưới cùng bển trái
                             </span>
                         </div>
                     </div>
-
+                </Col>
+                <Col md={6}>
                     <div
                         className={cx('gr-step', {
                             animate: isVisible,
@@ -69,7 +74,8 @@ function StatedUserSLide() {
                             </span>
                         </div>
                     </div>
-
+                </Col>
+                <Col md={6}>
                     <div
                         className={cx('gr-step', {
                             animate: isVisible,
@@ -86,7 +92,7 @@ function StatedUserSLide() {
                     </div>
                 </Col>
 
-                <Col md={5}>
+                <Col md={6}>
                     <div
                         className={cx('gr-step', {
                             animate: isVisible,
@@ -101,7 +107,9 @@ function StatedUserSLide() {
                             </span>
                         </div>
                     </div>
+                </Col>
 
+                <Col md={6}>
                     <div
                         className={cx('gr-step', {
                             animate: isVisible,
@@ -116,7 +124,9 @@ function StatedUserSLide() {
                             </span>
                         </div>
                     </div>
+                </Col>
 
+                <Col md={6}>
                     <div
                         className={cx('gr-step', {
                             animate: isVisible,

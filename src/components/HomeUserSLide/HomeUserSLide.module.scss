@@ -16,12 +16,17 @@
             width: 100%;
             display: inline-block;
             background-color: transparent;
+            opacity: 0;
+            transform: scale(1.2);
+            animation-delay: 0.4s;
         }
     }
 
     .title2 {
         font-size: 16px;
         color: #fff;
+        opacity: 0;
+        transform: scale(1.2);
     }
 
     .title1 {
@@ -29,6 +34,8 @@
         color: #fff;
         max-width: 600px;
         margin: 20px 0;
+        opacity: 0;
+        transform: scale(1.2);
     }
 
     .content {
@@ -36,5 +43,7 @@
         display: block;
         color: #fff;
         max-width: 600px;
+        opacity: 0;
+        transform: scale(1.2);
     }
 }

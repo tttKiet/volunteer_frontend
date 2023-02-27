@@ -2,12 +2,14 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightLong, faCircle, faFish } from '@fortawesome/free-solid-svg-icons';
+import { faRightLong, faCircle, faFish, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons';
 import gifPost from '../../../assets/gif/Mail.gif';
 import gifUser from '../../../assets/gif/user-home-2.gif';
 import HomeUser from '~/components/HomeUser';
 import styles from './LayoutUser.module.scss';
+import { userSlice } from '~/redux/reducers';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
 import HomeUserSLide from '~/components/HomeUserSLide';
 import StatedUserSLide from '~/components/StatedUserSLide';
@@ -20,9 +22,10 @@ import UserRegister from '~/components/UserRegister';
 const cx = classNames.bind(styles);
 
 function LayoutUser() {
-    const elementRef = useRef(null);
+    const dispatch = useDispatch();
     const eRef = useRef();
     const [currComponent, setCurrComponent] = useState('view-post');
+    const [currPage, setCurrPage] = useState('home');
 
     const [showContent, setShowContent] = useState(false);
 
@@ -50,6 +53,15 @@ function LayoutUser() {
         }
     };
 
+    const handleClickLogout = () => {
+        dispatch(userSlice.actions.toggleUserLogin());
+    };
+
+    const handleClickShowContent = () => {
+        setShowContent((show) => !show);
+        setCurrPage('home');
+    };
+
     return (
         <div className={cx('wrap')}>
             <div
@@ -61,12 +73,34 @@ function LayoutUser() {
                     <FontAwesomeIcon icon={faCircle} />
                 </div>
                 <div className={cx('circle')}>
-                    <FontAwesomeIcon icon={faCircle} />
-                    <FontAwesomeIcon icon={faCircle} />
-                    <FontAwesomeIcon icon={faCircle} />
-                    <FontAwesomeIcon icon={faCircle} />
+                    <div
+                        className={cx({
+                            'cic-active': currPage === 'home',
+                        })}
+                    >
+                        <FontAwesomeIcon icon={faCircle} />
+                    </div>
+                    <div
+                        className={cx({
+                            'cic-active': currPage === 'stated',
+                        })}
+                    >
+                        <FontAwesomeIcon icon={faCircle} />
+                    </div>
+                    <div
+                        className={cx({
+                            'cic-active': currPage === 'contact',
+                        })}
+                    >
+                        <FontAwesomeIcon icon={faCircle} />
+                    </div>
                 </div>
-                <div className={cx('control')} onClick={() => setShowContent((show) => !show)}>
+                <div
+                    className={cx('control', {
+                        show: showContent,
+                    })}
+                    onClick={() => handleClickShowContent()}
+                >
                     <FontAwesomeIcon icon={faArrowAltCircleUp} />
                 </div>
             </div>
@@ -79,16 +113,46 @@ function LayoutUser() {
                     </div>
                     <div className={cx('controls')}>
                         <ul className={cx('controls-list')}>
-                            <li className={cx('controls-item')}>
-                                <a href="#stated">Bắt đầu</a>
+                            <li
+                                onClick={() => setCurrPage('home')}
+                                className={cx('controls-item', {
+                                    active: currPage === 'home',
+                                })}
+                            >
+                                <a href="#home">NHÀ</a>
                             </li>
-                            <li className={cx('controls-item')}>
-                                <a href="#contact">Liên hệ</a>
+                            <li
+                                onClick={() => setCurrPage('stated')}
+                                className={cx('controls-item', {
+                                    active: currPage === 'stated',
+                                })}
+                            >
+                                <a href="#stated">BẮT ĐẦU</a>
+                            </li>
+                            <li
+                                onClick={() => setCurrPage('contact')}
+                                className={cx('controls-item', {
+                                    active: currPage === 'contact',
+                                })}
+                            >
+                                <a href="#contact">LIÊN HỆ</a>
                             </li>
                         </ul>
 
                         <div className={cx('icon-out')}>
-                            <FontAwesomeIcon icon={faRightLong} />
+                            <div className={cx('logout')}>
+                                <h2>kietb2014754@student.ctu.edu.vn</h2>
+                                <div className={cx('icon')}>
+                                    <FontAwesomeIcon icon={faCaretDown} />
+
+                                    <div className={cx('menu')}>
+                                        <h2>B2014754</h2>
+                                        <ul>
+                                            <li onClick={handleClickLogout}>Đăng xuất</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
