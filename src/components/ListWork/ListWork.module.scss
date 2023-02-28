@@ -1,0 +1,28 @@
+.wrap {
+    --backGround-color: #0d6efd;
+    --pri-text-color: #fff;
+    padding: 0 50px;
+    padding-bottom: 24px;
+    .title {
+        padding: 12px 6px;
+        border-radius: 4px;
+        font-size: 1.4rem;
+        text-align: center;
+        background-color: var(--backGround-color);
+        color: var(--pri-text-color);
+        font-weight: 600;
+        box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
+            0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+        background-color: #0d6efd;
+        border: 1px solid rgba(15, 15, 15, 0.121);
+    }
+
+    .main {
+        margin-top: 14px;
+        .work-lists {
+            // padding: 0 calc(1.5rem * 0.5) !important;
+
+           
+        }
+    }
+}

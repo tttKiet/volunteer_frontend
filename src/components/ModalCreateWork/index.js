@@ -389,6 +389,7 @@ function ModalCreateWork({ isShow, handleClose, handleOk }) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
+                        className={cx('btn')}
                         variant="secondary"
                         onClick={() => {
                             setDefaultValue('er');
@@ -397,7 +398,7 @@ function ModalCreateWork({ isShow, handleClose, handleOk }) {
                     >
                         Đóng
                     </Button>
-                    <Button variant="primary" onClick={handleCLickSuccess}>
+                    <Button className={cx('btn')} variant="primary" onClick={handleCLickSuccess}>
                         Tạo
                     </Button>
                 </Modal.Footer>

@@ -6,7 +6,7 @@ import AdminUpPost from '~/pages/AdminUpPost';
 import AdminWorkManager from '~/pages/AdminWorkManager';
 import AdminWorkCreate from '~/pages/AdminWorkCreate';
 import UserDetailsWork from '~/pages/UserDetailsWork';
-import UserListWork from '~/pages/UserListWork';
+import UserListWork from '~/components/ListWork';
 import AdminWorkList from '~/pages/AdminWorkList';
 import Invalid_404 from '~/pages/Invalid_404';
 import HomeUser from '~/components/HomeUser';

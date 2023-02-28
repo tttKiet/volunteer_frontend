@@ -1,11 +1,9 @@
-import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightLong, faCircle, faFish, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faFish, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons';
 import gifPost from '../../../assets/gif/Mail.gif';
-import gifUser from '../../../assets/gif/user-home-2.gif';
 import HomeUser from '~/components/HomeUser';
 import styles from './LayoutUser.module.scss';
 import { userSlice } from '~/redux/reducers';
@@ -14,8 +12,7 @@ import classNames from 'classnames/bind';
 import HomeUserSLide from '~/components/HomeUserSLide';
 import StatedUserSLide from '~/components/StatedUserSLide';
 import ContactUserSLide from '~/components/ContactUserSLide';
-import UserListWork from '~/pages/UserListWork';
-import UserDetailsWork from '~/pages/UserDetailsWork';
+import ListWork from '~/components/ListWork';
 import WorkCalendar from '~/components/WorkCalendar';
 import UserRegister from '~/components/UserRegister';
 
@@ -23,7 +20,6 @@ const cx = classNames.bind(styles);
 
 function LayoutUser() {
     const dispatch = useDispatch();
-    const eRef = useRef();
     const [currComponent, setCurrComponent] = useState('view-post');
     const [currPage, setCurrPage] = useState('home');
 
@@ -172,6 +168,7 @@ function LayoutUser() {
                     <div className={cx('control-user', 'ani-bg')}>
                         <div className={cx('title-img')}>
                             <h2 className={cx('title')}>HELLO !!!</h2>
+                            {/* eslint-disable-next-line jsx-a11y/alt-text */}
                             <img src={gifPost}></img>
                         </div>
 
@@ -218,7 +215,7 @@ function LayoutUser() {
                     </div>
                     <div className={cx('main')}>
                         {(currComponent === 'home' && <HomeUser />) ||
-                            (currComponent === 'list' && <UserListWork />) ||
+                            (currComponent === 'list' && <ListWork />) ||
                             (currComponent === 'register' && <UserRegister />) ||
                             (currComponent === 'calendar' && <WorkCalendar />) ||
                             (currComponent === 'view-post' && <HomeUser />)}

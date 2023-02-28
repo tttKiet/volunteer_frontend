@@ -39,12 +39,13 @@ function StatedUserSLide() {
         <div className={cx('header-stated', 'slide')} ref={elementRef} id="stated">
             <h3 className={cx('title')}>Tham gia đội ngủ tình nguyện viên đầu tiên </h3>
             <div className={cx('row', 'g-5')}>
-                <Col Col md={6}>
-                    <div
-                        className={cx('gr-step', {
-                            animate: isVisible,
-                        })}
-                    >
+                <Col
+                    md={6}
+                    className={cx('item', {
+                        animate: isVisible,
+                    })}
+                >
+                    <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 1</h3>
                         <div className={cx('content')}>
                             <h2>Mở giao diện người dùng</h2>
@@ -59,12 +60,13 @@ function StatedUserSLide() {
                         </div>
                     </div>
                 </Col>
-                <Col md={6}>
-                    <div
-                        className={cx('gr-step', {
-                            animate: isVisible,
-                        })}
-                    >
+                <Col
+                    md={6}
+                    className={cx('item', {
+                        animate: isVisible,
+                    })}
+                >
+                    <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 2</h3>
                         <div className={cx('content')}>
                             <h2>Mở giao diện người dùng</h2>
@@ -75,12 +77,13 @@ function StatedUserSLide() {
                         </div>
                     </div>
                 </Col>
-                <Col md={6}>
-                    <div
-                        className={cx('gr-step', {
-                            animate: isVisible,
-                        })}
-                    >
+                <Col
+                    md={6}
+                    className={cx('item', {
+                        animate: isVisible,
+                    })}
+                >
+                    <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 3</h3>
                         <div className={cx('content')}>
                             <h2>Mở giao diện người dùng</h2>
@@ -92,12 +95,13 @@ function StatedUserSLide() {
                     </div>
                 </Col>
 
-                <Col md={6}>
-                    <div
-                        className={cx('gr-step', {
-                            animate: isVisible,
-                        })}
-                    >
+                <Col
+                    md={6}
+                    className={cx('item', {
+                        animate: isVisible,
+                    })}
+                >
+                    <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 4</h3>
                         <div className={cx('content')}>
                             <h2>Mở giao diện người dùng</h2>
@@ -109,12 +113,13 @@ function StatedUserSLide() {
                     </div>
                 </Col>
 
-                <Col md={6}>
-                    <div
-                        className={cx('gr-step', {
-                            animate: isVisible,
-                        })}
-                    >
+                <Col
+                    md={6}
+                    className={cx('item', {
+                        animate: isVisible,
+                    })}
+                >
+                    <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 5</h3>
                         <div className={cx('content')}>
                             <h2>Mở giao diện người dùng</h2>
@@ -126,12 +131,13 @@ function StatedUserSLide() {
                     </div>
                 </Col>
 
-                <Col md={6}>
-                    <div
-                        className={cx('gr-step', {
-                            animate: isVisible,
-                        })}
-                    >
+                <Col
+                    md={6}
+                    className={cx('item', {
+                        animate: isVisible,
+                    })}
+                >
+                    <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 6</h3>
                         <div className={cx('content')}>
                             <h2>Mở giao diện người dùng</h2>
