@@ -4,12 +4,23 @@ import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
+import ToastMassage from '../ToastMassage';
+import { workServices } from '~/services';
+import { userSelector } from '~/redux/selector';
+import { useSelector } from 'react-redux';
+
 import styles from './WorkInList.module.scss';
 const cx = classNames.bind(styles);
 
-function WorkInList({ stt, name, place, maxStudent, curStudent, pointPlus, startDate }) {
+function WorkInList({ workId, disable, stt, name, place, maxStudent, curStudent, pointPlus, startDate, registerWork }) {
+    const currUser = useSelector(userSelector);
     const elementRef = useRef();
     const [isVisible, setIsVisible] = useState(false);
+
+    const handleClickRegister = async (workId) => {
+        const res = await workServices.registerWork(currUser.id, workId);
+        registerWork(res);
+    };
 
     useEffect(() => {
         const options = {
@@ -38,63 +49,85 @@ function WorkInList({ stt, name, place, maxStudent, curStudent, pointPlus, start
         };
     }, []);
     return (
-        <Col
-            md={6}
-            ref={elementRef}
-            className={cx('item', {
-                show: isVisible,
-            })}
-        >
-            <div className={cx('wrap')}>
-                <h3 className={cx('time')}>
-                    <span className={cx('stt')}>{stt}</span>
-                    <span className={cx('date')}>
-                        Ngày
-                        <Moment local="vi" format="ll" date={startDate} />
-                    </span>
-                </h3>
-                <div className={cx('card')}>
-                    <div className="row">
-                        <Col sm={12}>
-                            <div className={cx('work')}>
-                                <span className={cx('name')}>{name}</span>
-                                <div className={cx('place')}>
-                                    <span className={cx('icon')}>
-                                        <FontAwesomeIcon icon={faLocationDot} />
-                                    </span>
-                                    ({place})
-                                </div>
-                            </div>
-                        </Col>
-                        <Col sm={8} className={cx('main')}>
-                            <div className={cx('border')}>
-                                <div className={cx('students')}>
-                                    <div className={cx('number')}>
-                                        Số lượng: <b>{maxStudent}</b> sinh viên
-                                    </div>
-                                    <div className={cx('number')}>
-                                        Đã duyệt: <b>{curStudent}</b> sinh viên
+        <>
+            <Col
+                md={6}
+                ref={elementRef}
+                className={cx('item', {
+                    show: isVisible,
+                })}
+            >
+                <div className={cx('wrap')}>
+                    <h3 className={cx('time')}>
+                        <span className={cx('stt')}>{stt}</span>
+                        <span className={cx('date')}>
+                            Ngày
+                            <Moment local="vi" format="ll" date={startDate} />
+                        </span>
+                    </h3>
+                    <div className={cx('card')}>
+                        <div className="row">
+                            <Col sm={12}>
+                                <div className={cx('work')}>
+                                    <span className={cx('name')}>{name}</span>
+                                    <div className={cx('place')}>
+                                        <span className={cx('icon')}>
+                                            <FontAwesomeIcon icon={faLocationDot} />
+                                        </span>
+                                        {place}
                                     </div>
                                 </div>
-                                <div className={cx('profits')}>
-                                    <ul className={cx('point')}>
-                                        <b> Quyền lợi</b>
-                                        <li>
-                                            +<b>{pointPlus}</b> điểm rèn luyện
-                                        </li>
-                                    </ul>
+                            </Col>
+                            <Col sm={8} className={cx('main')}>
+                                <div className={cx('border')}>
+                                    <div className={cx('students')}>
+                                        <div className={cx('number')}>
+                                            Số lượng: <b>{maxStudent}</b> sinh viên
+                                        </div>
+                                        <div className={cx('number')}>
+                                            Đã duyệt: <b>{curStudent}</b> sinh viên
+                                        </div>
+                                    </div>
+                                    <div className={cx('profits')}>
+                                        <ul className={cx('point')}>
+                                            <b> Quyền lợi</b>
+                                            <li>
+                                                +<b>{pointPlus}</b> điểm rèn luyện
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </Col>
-                        <Col sm={4}>
-                            <div className={cx('right')}>
-                                <button type="button">Đăng ký ngay</button>
-                            </div>
-                        </Col>
+                            </Col>
+                            <Col sm={4}>
+                                <div className={cx('right')}>
+                                    {disable ? (
+                                        <button type="button" className={cx('disable')}>
+                                            Đã đăng ký
+                                        </button>
+                                    ) : (
+                                        <>
+                                            {curStudent === maxStudent ? (
+                                                <>
+                                                    <button type="button" className={cx('disable')}>
+                                                        Đã đủ số lượng
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <button type="button" onClick={(e) => handleClickRegister(workId)}>
+                                                        Đăng ký ngay
+                                                    </button>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            </Col>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Col>
+            </Col>
+        </>
     );
 }
 

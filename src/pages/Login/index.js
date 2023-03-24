@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { isLoginSelector } from '~/redux/selector';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import volunteerImg from '../../assets/images/volunteer.webp';
 
 import FormLogin from '~/components/FormLogin';
 
@@ -31,20 +32,11 @@ function Login() {
                 </Col>
                 <Col md={4}>
                     <div className={cx('description')}>
-                        <div className={cx('youtobe')}>
-                            <iframe
-                                className={cx('video')}
-                                // width="560"
-                                // height="315"
-                                src="https://www.youtube.com/embed/vjhFsPNk6Po?autoplay=1&mute=0"
-                                title="YouTube video player"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            ></iframe>
+                        <div className={cx('volunteerImg')}>
+                            <img src={volunteerImg}></img>
                         </div>
                         <div className={cx('content')}>
-                            <h2>Truyền Cảm Hứng </h2>
+                            <h2>Chào mừng bạn đến với VOLUNTEER</h2>
                             <p>
                                 GenZ được coi như một thế hệ cô đơn nhất lịch sử. Thay vì cứ chìm trong sự cô độc, và
                                 nỗi u uất. Đắm mình vào thói quen lướt mạng vô thức. Và thấy thiếu kết nối với những

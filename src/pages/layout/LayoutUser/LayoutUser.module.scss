@@ -85,7 +85,11 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 30px;
+            transition: all 0.3s linear;
 
+            &.re-active {
+                transform: translateY(-100%);
+            }
             .logo {
                 a {
                     font-size: 28px;
@@ -180,12 +184,12 @@
                             top: 100%;
                             right: 10px;
                             min-width: 200px;
-                            background-color: #ff7b00;
+                            background-color: #fff;
                             border-radius: 4px;
                             display: none;
                             transition: all 0.3s ease;
                             animation: show 0.3s ease;
-                            border: 1px solid #fff;
+                            border: 1px solid #ccc;
 
                             @keyframes show {
                                 0% {
@@ -198,19 +202,36 @@
 
                             h2 {
                                 padding: 10px 30px 10px 16px;
+                                font-size: 12px;
+                                color: #383838;
+                                font-weight: 600;
+
+                                span {
+                                    display: inline-block;
+                                    margin: 0 12px 0 0;
+
+                                    svg {
+                                        padding: 0;
+                                        color: #383838;
+                                        cursor: auto;
+                                    }
+                                }
                             }
 
                             ul {
                                 list-style: none;
                                 margin: 0;
                                 padding: 0;
+                                font-size: 12px;
                                 li {
                                     cursor: pointer;
-                                    border-top: 1px solid #fff;
+                                    border-top: 1px solid #383838;
                                     padding: 10px 30px 10px 16px;
-
+                                    color: #383838;
+                                    font-weight: 500;
+                                    transition: all 0.2s linear;
                                     &:hover {
-                                        background-color: #d76902;
+                                        background-color: #383838;
                                         color: #fcfcfc;
                                     }
 

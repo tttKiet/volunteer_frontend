@@ -147,12 +147,34 @@
                 font-size: 14px;
                 color: #0067ff;
                 box-shadow: 0 5px 0 0 #0d6dfd39;
+                outline: none;
                 transition: all 0.1s linear;
+
+                &:hover {
+                    background-color: #0067ff;
+                    color: #fff;
+                }
 
                 &:active {
                     transform: translateY(5px);
                     box-shadow: none;
                     opacity: 0.7;
+                }
+                &.disable {
+                    border-radius: 8px;
+                    border: 1px solid #b3b1b1;
+                    padding: 6px 26px;
+                    margin-right: 0;
+                    background-color: #ccc;
+                    box-shadow: none;
+                    color: #000;
+                    opacity: 0.8;
+                    cursor: auto;
+                    &:active {
+                        transform: translateY(0);
+                        opacity: 0.8;
+                        box-shadow: none;
+                    }
                 }
             }
         }

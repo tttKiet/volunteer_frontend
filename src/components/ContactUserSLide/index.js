@@ -63,41 +63,22 @@ function ContactUserSLide() {
                             <li>
                                 <FontAwesomeIcon icon={faEnvelope} />
                                 <span>
-                                    Bùi Tuấn Kiệt
-                                    <span className={cx('hight-light')}>(kietb2014754@student.ctu.edu.vn)</span>, Khoa
-                                    CNTT
+                                    Admin 1<span className={cx('hight-light')}>(cb224@student.ctu.edu.vn)</span>, Khoa
+                                    Thủy sản
                                 </span>
                             </li>
                             <li>
                                 <FontAwesomeIcon icon={faEnvelope} />
                                 <span>
-                                    Bùi Tuấn Kiệt
-                                    <span className={cx('hight-light')}>(kietb2014754@student.ctu.edu.vn)</span>, Khoa
-                                    CNTT
+                                    Admin 2<span className={cx('hight-light')}>(cb226@student.ctu.edu.vn)</span>, Khoa
+                                    Nông nghiệp
                                 </span>
                             </li>
                             <li>
                                 <FontAwesomeIcon icon={faEnvelope} />
                                 <span>
-                                    Bùi Tuấn Kiệt
-                                    <span className={cx('hight-light')}>(kietb2014754@student.ctu.edu.vn)</span>, Khoa
-                                    CNTT
-                                </span>
-                            </li>
-                            <li>
-                                <FontAwesomeIcon icon={faEnvelope} />
-                                <span>
-                                    Bùi Tuấn Kiệt
-                                    <span className={cx('hight-light')}>(kietb2014754@student.ctu.edu.vn)</span>, Khoa
-                                    CNTT
-                                </span>
-                            </li>
-                            <li>
-                                <FontAwesomeIcon icon={faEnvelope} />
-                                <span>
-                                    Bùi Tuấn Kiệt
-                                    <span className={cx('hight-light')}>(kietb2014754@student.ctu.edu.vn)</span>, Khoa
-                                    CNTT
+                                    Admin 2<span className={cx('hight-light')}>(kietb2014754@student.ctu.edu.vn)</span>,
+                                    Khoa CNTT
                                 </span>
                             </li>
                         </ul>

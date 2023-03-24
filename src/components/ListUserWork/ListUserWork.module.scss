@@ -38,10 +38,13 @@
         display: flex;
         justify-content: flex-start;
         margin-left: 60px;
-        align-items: center;
         margin-bottom: 4px;
 
         .wrap-more {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+
             + .wrap-more {
                 margin-left: 40px;
             }
@@ -58,6 +61,8 @@
             color: #333;
             font-weight: 500;
             line-height: 24px;
+            display: inline-block;
+            max-width: 270px;
         }
     }
 

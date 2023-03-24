@@ -2,13 +2,12 @@
     border: 1px solid #ccc;
     padding: 0 20px;
     min-width: 520px;
-    border: 2px solid black;
     color: #495057;
     --tw-bg-opacity: 1;
     background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 
     border-radius: 0.625rem;
-    --tw-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+    --tw-shadow: -9px 14px 3px -3px rgba(0, 0, 0, 0.08);
     box-shadow: 0 0 #0000, 0 0 #0000, var(--tw-shadow);
 
     .title {
@@ -49,6 +48,10 @@
         left: 16px;
         transform: translateY(-50%);
         transition: all 0.2s ease-in-out;
+
+        svg {
+            margin-right: 12px;
+        }
     }
     input {
         height: 60px;
@@ -60,7 +63,6 @@
         padding-left: 16px;
         padding-top: 12px;
         transition: all 0.3s linear;
-        
 
         &:placeholder-shown {
             font-size: 14px;

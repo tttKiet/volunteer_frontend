@@ -1,7 +1,8 @@
 .wrap {
     min-height: 100vh;
-    background: url('../../assets/images/br_login.jpg') center no-repeat;
+    background: linear-gradient(45deg, rgba(42, 42, 251, 0.222), rgba(5, 5, 252, 0.479));
     background-size: cover;
+    filter: blur(0.2);
     .wrapper {
         display: flex;
         flex-wrap: wrap;
@@ -21,14 +22,15 @@
             align-items: center;
             flex-direction: column;
 
-            .youtobe {
+            .volunteerImg {
                 margin-top: 40px;
                 display: flex;
                 justify-content: center;
                 width: 100%;
-                .video {
+                img {
                     border-radius: 4px;
                     width: 460px;
+                    object-fit: cover;
                     height: 258px;
                 }
             }
@@ -41,7 +43,7 @@
                     width: 300px;
                     font-weight: 500;
                     margin: 20px auto;
-                    font-size: 42px;
+                    font-size: 22px;
                     line-height: 1.2;
                 }
 

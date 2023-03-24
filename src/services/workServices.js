@@ -16,7 +16,7 @@ const workServices = {
     },
 
     // get name work
-    async getNameWork({ type = 'all', workId }) {
+    async getNameWork({ type = 'all', workId, userId }) {
         if (type === 'name') {
             const res = await axios.get('/api/v1/work/get-name');
             return res.data;
@@ -31,7 +31,11 @@ const workServices = {
             return res.data;
         }
 
-        const res = await axios.get('/api/v1/work/get-all');
+        const res = await axios.get('/api/v1/work/get-all', {
+            params: {
+                userId,
+            },
+        });
         return res.data;
     },
 
@@ -90,6 +94,15 @@ const workServices = {
         const res = await axios.delete('/api/v1/listUser/delete', {
             data: {
                 id,
+            },
+        });
+        return res.data;
+    },
+
+    async getWorkUserReg({ userId }) {
+        const res = await axios.get('/api/v1/work-user-register', {
+            params: {
+                userId,
             },
         });
         return res.data;

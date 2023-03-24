@@ -6,7 +6,7 @@ import dog from '../../assets/images/home-user-and-dog.png';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-function HomeUserSLide() {
+function HomeUserSLide({ name }) {
     const elementRef = useRef(null);
     const title1 = useRef(null);
     const content = useRef(null);
@@ -63,7 +63,7 @@ function HomeUserSLide() {
         >
             <div>
                 <h3 className={cx('title2')} ref={elementRef}>
-                    Xin Chào Bùi Tuấn Kiệt!
+                    Xin Chào {name}!
                 </h3>
                 <h3 className={cx('title1')} ref={title1}>
                     "Trải nghiệm tình nguyện viên - Cùng chúng tôi lan tỏa yêu thương và sự đồng cảm đến mọi người"

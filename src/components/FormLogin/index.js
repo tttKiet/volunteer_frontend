@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userSlice } from '~/redux/reducers';
 import { Form, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+
 import { userServices } from '~/services';
 
 import Loader from '../Loader';
@@ -92,6 +96,7 @@ function FormLogin() {
                                 value={userInput}
                             />
                             <Form.Label className={cx('title-input')} htmlFor="user">
+                                <FontAwesomeIcon icon={faUser} bounce />
                                 Tên đăng nhập
                             </Form.Label>
                         </Form.Group>
@@ -103,6 +108,7 @@ function FormLogin() {
                                 id="password"
                             />
                             <Form.Label className={cx('title-input')} htmlFor="password">
+                                <FontAwesomeIcon icon={faLock} bounce />
                                 Mật khẩu
                             </Form.Label>
                         </Form.Group>

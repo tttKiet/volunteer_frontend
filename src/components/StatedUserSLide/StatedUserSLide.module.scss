@@ -106,6 +106,12 @@
                 color: #000;
                 background-color: rgb(255 244 234);
                 box-shadow: 0px 0px 1px 1px #ccc;
+                p {
+                    display: inline-block;
+                    margin-left: 10px;
+                    color: #6d1cd4;
+                    font-weight: 700;
+                }
             }
         }
     }

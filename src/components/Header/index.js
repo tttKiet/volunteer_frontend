@@ -23,16 +23,16 @@ function Header({ links }) {
         dispatch(userActions.toggleUserLogin());
     };
 
-    const handleScrollTop = (e) => {
-        const headerElement = ref.current;
-        const scrollTop = window.scrollY;
-        if (scrollTop > 60) {
-            headerElement.classList.add(cx('re-active'));
-        } else {
-            headerElement.classList.remove(cx('re-active'));
-        }
-    };
     useEffect(() => {
+        const handleScrollTop = (e) => {
+            const headerElement = ref.current;
+            const scrollTop = window.scrollY;
+            if (scrollTop > 60) {
+                headerElement.classList.add(cx('re-active'));
+            } else {
+                headerElement.classList.remove(cx('re-active'));
+            }
+        };
         window.addEventListener('scroll', handleScrollTop);
     }, []);
 

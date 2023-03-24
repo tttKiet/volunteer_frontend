@@ -40,7 +40,6 @@ function ListUserWork({ show, workId, toggleShowTable, name, startDate, workPlac
                     <div className={cx('wrap-more')}>
                         <span className={cx('more-content')}>Ngày bắt đầu:</span>
                         <span className={cx('more-number')}>
-                            {console.log('row...', row)}
                             <Moment local="vi" format="ll">
                                 {row[0]?.work.startDate}
                             </Moment>
@@ -64,27 +63,6 @@ function ListUserWork({ show, workId, toggleShowTable, name, startDate, workPlac
                         <ExportToEx data={row} />
                     </div>
                 </div>
-                {/* <div className={cx('note')}>
-                    Ghi chú:
-                    <ul className={cx('note-list')}>
-                        <li className={cx('note-item')}>
-                            <UilLabelAlt size={12} className={cx('list-tyle')} />
-                            Nhấn vào
-                            <Button size="sm" className={cx('btn')} variant="outline-primary">
-                                <UilCheck size={18} />
-                            </Button>
-                            để duyệt sinh viên vào danh sách tham gia.
-                        </li>
-                        <li className={cx('note-item')}>
-                            <UilLabelAlt size={12} className={cx('list-tyle')} />
-                            Nhấn vào
-                            <Button size="sm" className={cx('btn')} variant="outline-danger">
-                                <UilTimes size={18} />
-                            </Button>
-                            để xóa sinh viên ra khỏi danh sách đăng ký tham gia.
-                        </li>
-                    </ul>
-                </div> */}
 
                 <div className={cx('table')}>
                     <Row>

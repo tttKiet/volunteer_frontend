@@ -1,3 +1,4 @@
+import arrowImg from '../../assets/images/arrow.jpg';
 import styles from './StatedUserSLide.module.scss';
 import classNames from 'classnames/bind';
 import { Col } from 'react-bootstrap';
@@ -48,14 +49,10 @@ function StatedUserSLide() {
                     <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 1</h3>
                         <div className={cx('content')}>
-                            <h2>Mở giao diện người dùng</h2>
+                            <h2>Đăng nhập vào hệ thống</h2>
                             <span>
-                                - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào
-                                biểu tượng dưới cùng bển trái - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu
-                                tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái - Nhấp vào biểu tượng
-                                dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng
-                                bển trái - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái
-                                Nhấp vào biểu tượng dưới cùng bển trái
+                                Tiến hành đăng nhập vào hệ thống
+                                <p>Đã xong</p>
                             </span>
                         </div>
                     </div>
@@ -69,11 +66,8 @@ function StatedUserSLide() {
                     <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 2</h3>
                         <div className={cx('content')}>
-                            <h2>Mở giao diện người dùng</h2>
-                            <span>
-                                - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào
-                                biểu tượng dưới cùng bển trái
-                            </span>
+                            <h2>Mở giao diện</h2>
+                            <span>Nhấp nút mũi tên để mở cửa sổ làm việc (nằm ở gốc trái bên dưới)</span>
                         </div>
                     </div>
                 </Col>
@@ -86,10 +80,9 @@ function StatedUserSLide() {
                     <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 3</h3>
                         <div className={cx('content')}>
-                            <h2>Mở giao diện người dùng</h2>
+                            <h2>Tìm kiếm thông tin phù hợp</h2>
                             <span>
-                                - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào
-                                biểu tượng dưới cùng bển trái
+                                Tiếp đó, bạn có thể xem các bài đăng của các Admin để xem công việc tình nguyện phù hợp
                             </span>
                         </div>
                     </div>
@@ -104,10 +97,10 @@ function StatedUserSLide() {
                     <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 4</h3>
                         <div className={cx('content')}>
-                            <h2>Mở giao diện người dùng</h2>
+                            <h2>Đăng ký tham gia</h2>
                             <span>
-                                - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào
-                                biểu tượng dưới cùng bển trái
+                                Sau khi đọc được thông tin cần thiết ở bước trên (có thể bỏ qua bước này), ấn "Xem danh
+                                mục công việc" và sau đó đăng ký công việc phù hợp.
                             </span>
                         </div>
                     </div>
@@ -122,11 +115,8 @@ function StatedUserSLide() {
                     <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 5</h3>
                         <div className={cx('content')}>
-                            <h2>Mở giao diện người dùng</h2>
-                            <span>
-                                - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào
-                                biểu tượng dưới cùng bển trái
-                            </span>
+                            <h2>Kiểm tra thông tin</h2>
+                            <span>Bạn có thể kiểm tra thông tin đăng ký của bạn trong phần "Xem lịch tham gia"</span>
                         </div>
                     </div>
                 </Col>
@@ -140,10 +130,10 @@ function StatedUserSLide() {
                     <div className={cx('gr-step')}>
                         <h3 className={cx('title1')}> 6</h3>
                         <div className={cx('content')}>
-                            <h2>Mở giao diện người dùng</h2>
+                            <h2>Thực hiện công việc</h2>
                             <span>
-                                - Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào biểu tượng dưới cùng bển trái Nhấp vào
-                                biểu tượng dưới cùng bển trái
+                                Đến ngày được công bố, bạn cần đến đúng nơi và làm đúng quy định của công việc bạn đăng
+                                ký để được quyền lợi về điểm rèn luyện... Chúc bạn thành công!
                             </span>
                         </div>
                     </div>

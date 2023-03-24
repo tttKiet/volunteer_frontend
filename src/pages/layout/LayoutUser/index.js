@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faFish, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faFish, faCaretDown, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons';
 import gifPost from '../../../assets/gif/Mail.gif';
 import HomeUser from '~/components/HomeUser';
 import styles from './LayoutUser.module.scss';
+import { useSelector } from 'react-redux';
+import { userSelector } from '~/redux/selector';
+
 import { userSlice } from '~/redux/reducers';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
@@ -20,6 +23,8 @@ const cx = classNames.bind(styles);
 
 function LayoutUser() {
     const dispatch = useDispatch();
+    const headerNavRef = useRef();
+    const currUser = useSelector(userSelector);
     const [currComponent, setCurrComponent] = useState('view-post');
     const [currPage, setCurrPage] = useState('home');
 
@@ -33,10 +38,6 @@ function LayoutUser() {
             }
             case 'list': {
                 setCurrComponent('list');
-                break;
-            }
-            case 'register': {
-                setCurrComponent('register');
                 break;
             }
             case 'view-post': {
@@ -55,8 +56,21 @@ function LayoutUser() {
 
     const handleClickShowContent = () => {
         setShowContent((show) => !show);
-        setCurrPage('home');
     };
+
+    useEffect(() => {
+        const handleScrollTop = (e) => {
+            const headerElement = headerNavRef.current;
+            const scrollTop = window.scrollY;
+            console.log('--------', scrollTop);
+            if (scrollTop > 60) {
+                headerElement.classList.add(cx('re-active'));
+            } else {
+                headerElement.classList.remove(cx('re-active'));
+            }
+        };
+        window.addEventListener('scroll', handleScrollTop);
+    }, []);
 
     return (
         <div className={cx('wrap')}>
@@ -101,7 +115,7 @@ function LayoutUser() {
                 </div>
             </div>
             <div className={cx('header')}>
-                <div className={cx('header-nav')}>
+                <div className={cx('header-nav')} ref={headerNavRef}>
                     <div className={cx('logo')}>
                         <a href="#home">
                             <span>VOLL</span>UNTER
@@ -137,12 +151,17 @@ function LayoutUser() {
 
                         <div className={cx('icon-out')}>
                             <div className={cx('logout')}>
-                                <h2>kietb2014754@student.ctu.edu.vn</h2>
+                                <h2>{currUser.email}</h2>
                                 <div className={cx('icon')}>
                                     <FontAwesomeIcon icon={faCaretDown} />
 
                                     <div className={cx('menu')}>
-                                        <h2>B2014754</h2>
+                                        <h2>
+                                            <span>
+                                                <FontAwesomeIcon icon={faUser} />
+                                            </span>
+                                            {currUser.id}
+                                        </h2>
                                         <ul>
                                             <li onClick={handleClickLogout}>Đăng xuất</li>
                                         </ul>
@@ -154,7 +173,7 @@ function LayoutUser() {
                 </div>
 
                 <div className={cx('slides')}>
-                    <HomeUserSLide className={cx('slide')} />
+                    <HomeUserSLide name={currUser.name} className={cx('slide')} />
                     <StatedUserSLide className={cx('slide')} />
                     <ContactUserSLide className={cx('slide')} />
                 </div>
@@ -202,21 +221,10 @@ function LayoutUser() {
                             </div>
                             <h2 className={cx('title')}>Xem Lịch Tham Gia</h2>
                         </div>
-                        <div className={cx('control-box')} onClick={(e) => handleClickControl('register')}>
-                            <div
-                                className={cx('icon', {
-                                    show: currComponent === 'register',
-                                })}
-                            >
-                                <FontAwesomeIcon icon={faFish} />
-                            </div>
-                            <h2 className={cx('title')}>Đăng Ký Tham Gia </h2>
-                        </div>
                     </div>
                     <div className={cx('main')}>
                         {(currComponent === 'home' && <HomeUser />) ||
                             (currComponent === 'list' && <ListWork />) ||
-                            (currComponent === 'register' && <UserRegister />) ||
                             (currComponent === 'calendar' && <WorkCalendar />) ||
                             (currComponent === 'view-post' && <HomeUser />)}
                     </div>
