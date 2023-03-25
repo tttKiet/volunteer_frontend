@@ -113,7 +113,6 @@ function ModalCreateWork({ isShow, handleClose, handleOk }) {
     const checkErr = (type) => {
         switch (type) {
             case 'name': {
-                console.log('---------checkerr', nameErr);
                 return nameErr.length > 0;
             }
             case 'place': {

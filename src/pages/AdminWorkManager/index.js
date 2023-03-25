@@ -44,7 +44,7 @@ function AdminWorkManager() {
     const [isShowTable, setIsShowTable] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [work, setWork] = useState([]);
-    const [rowUser, setRowUser] = useState({ work: {}, row: [] });
+    const [currWorkId, setCurrWorkId] = useState('');
 
     const controlPage = useCallback(() => {
         if (!isLogined) {
@@ -67,21 +67,8 @@ function AdminWorkManager() {
         setIsShowTable((show) => !show);
     };
 
-    const getWorkReq = async (workId) => {
-        const res = await workServices.getWork({ workId });
-        if (res.errCode === 0) {
-            setRowUser({
-                work: res.works.length > 0 ? { ...res.works[0].work } : {},
-                row: res.works,
-            });
-            return res.works;
-        }
-
-        return [];
-    };
-
-    const handleCLickDetail = async (workId) => {
-        getWorkReq(workId);
+    const handleCLickDetail = (workId) => {
+        setCurrWorkId(workId);
         setIsShowTable(true);
     };
 
@@ -132,18 +119,14 @@ function AdminWorkManager() {
                     </Col>
                 </Row>
             </Container>
-            <ListRequestWork
-                getNameWorkAndCountRes={getNameWorkAndCountRes}
-                getWorkReq={getWorkReq}
-                arrayRow={rowUser.row}
-                name={rowUser.work.name}
-                startDate={rowUser.work.startDate}
-                workPlace={rowUser.work.workPlace}
-                maxStudent={rowUser.work.maxStudent}
-                curStudent={rowUser.work.curStudent}
-                show={isShowTable}
-                toggleShowTable={toggleShowTable}
-            />
+            {isShowTable && (
+                <ListRequestWork
+                    getNameWorkAndCountRes={getNameWorkAndCountRes}
+                    workId={currWorkId}
+                    show={isShowTable}
+                    toggleShowTable={toggleShowTable}
+                />
+            )}
         </div>
     );
 }

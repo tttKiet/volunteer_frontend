@@ -9,41 +9,38 @@ import styles from './ListRequestWork.module.scss';
 import RowTableUserReq from '../RowTableUserReq/RowTableUserReq';
 import { UilAngleDoubleLeft } from '@iconscout/react-unicons';
 import { workServices } from '~/services';
-import { useEffect, useState } from 'react';
+import TableWork from '../TableWork';
+
+// import 'react-table/react-table.css';
+
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import Moment from 'react-moment';
 const cx = classNames.bind(styles);
 
-function ListRequestWork({
-    show,
-    toggleShowTable,
-    name,
-    startDate,
-    workPlace,
-    maxStudent,
-    curStudent,
-    arrayRow,
-    getWorkReq,
-    getNameWorkAndCountRes,
-}) {
-    const [row, setRow] = useState([]);
+function ListRequestWork({ show, toggleShowTable, workId, getNameWorkAndCountRes }) {
     const [isShowModal, setIsShowModal] = useState(false);
-    const [reqUser, setReqUser] = useState({
-        id: '',
-        workId: '',
-    });
-    const [currStudentNumber, setCurrStudentNumber] = useState();
+
+    const [currWorkId, setCurrWorkId] = useState(workId);
+
+    const [data, setData] = useState([]);
+    const [reqUser, setReqUser] = useState('');
     const [toastOb, setToastOb] = useState({
         show: false,
         header: '',
         content: '',
     });
 
-    const toggleShowModal = (id, workId) => {
-        if (id && workId) {
-            setReqUser({
-                id,
-                workId,
-            });
+    const [workInfo, setWorkInfo] = useState({
+        name: '',
+        startDate: '',
+        workPlace: '',
+        maxStudent: '',
+        curStudent: '',
+    });
+
+    const toggleShowModal = (id) => {
+        if (id) {
+            setReqUser(id);
         }
         setIsShowModal((view) => !view);
     };
@@ -58,16 +55,51 @@ function ListRequestWork({
         });
     };
 
-    const handleRender = async (id) => {
-        const res = await getWorkReq(id);
-        getWork(id);
-        setRow(res);
-    };
+    // Tao table
+    const columns = [
+        { Header: 'STT', accessor: 'col1', filter: 'fuzzyText' },
+        { Header: 'MSSV', accessor: 'col2', filter: 'fuzzyText' },
+        { Header: 'Tên', accessor: 'col3', filter: 'fuzzyText' },
+        { Header: 'Email', accessor: 'col4', filter: 'fuzzyText' },
+        { Header: 'Lớp', accessor: 'col5', filter: 'fuzzyText' },
+        { Header: 'Hành động', accessor: 'col6', disableSortBy: true },
+    ];
 
-    const handleDeleteRow = async () => {
-        const res = await workServices.handleDeleteWorkRegister(reqUser.id);
+    const getInfoWork = useCallback(async () => {
+        const dataInfo = await getWorkReq();
+        if (dataInfo) {
+            setWorkInfo(() => {
+                return {
+                    name: dataInfo.work.name,
+                    startDate: dataInfo.work.startDate,
+                    workPlace: dataInfo.work.workPlace,
+                    maxStudent: dataInfo.work.maxStudent,
+                    curStudent: dataInfo.work.curStudent,
+                };
+            });
+        }
+    }, []);
+
+    const getWorkReq = async () => {
+        const res = await workServices.getWork({ workId: currWorkId });
+
         if (res.errCode === 0) {
+            if (res.works.length > 0) {
+                const dataRow = convertToDataRow(res.works);
+                setData(dataRow);
+                return res.works[0];
+            }
+        } else {
+            setData([]);
+        }
+        return {};
+    };
+    const handleDeleteRow = async ({ id }) => {
+        const res = await workServices.handleDeleteWorkRegister(id);
+        if (res.errCode === 0) {
+            getWorkReq();
             toggleShowModal();
+            getNameWorkAndCountRes();
             setToastOb((toastOb) => {
                 return {
                     header: 'Xong',
@@ -75,143 +107,142 @@ function ListRequestWork({
                     show: !toastOb.show,
                 };
             });
-            handleRender(reqUser.workId);
-            getNameWorkAndCountRes();
         }
     };
+    const handleClickDelete = useCallback((id) => {
+        toggleShowModal(id);
+    }, []);
 
-    const getWork = async (workId) => {
-        const res = await workServices.getNameWork({ workId });
-        setCurrStudentNumber(res.workNames[0].curStudent);
+    const handleClickCheck = useCallback(async (id) => {
+        const res = await workServices.workBrowse(id);
+        if (res.errCode === 0) {
+            getWorkReq();
+            getInfoWork();
+            getNameWorkAndCountRes();
+            toggleShowToast({ show: true, header: 'Xong', content: 'Duyệt thành công' });
+        }
+    }, []);
+
+    const convertToDataRow = (rows) => {
+        const dataRow = rows.map((row, index) => {
+            return {
+                col1: index + 1,
+                col2: row.userWork.id,
+                col3: row.userWork.name,
+                col4: row.userWork.email,
+                col5: row.userWork.className,
+                col6: (
+                    <>
+                        <Button
+                            size="sm"
+                            className={cx('btn')}
+                            onClick={() => handleClickCheck(row.id)}
+                            variant="outline-primary"
+                        >
+                            <UilCheck size={18} />
+                        </Button>
+                        <Button
+                            size="sm"
+                            className={cx('btn')}
+                            onClick={() => handleClickDelete(row.id)}
+                            variant="outline-danger"
+                        >
+                            <UilTimes size={18} />
+                        </Button>
+                    </>
+                ),
+            };
+        });
+        return dataRow;
     };
 
     useEffect(() => {
-        setRow(arrayRow);
-        setCurrStudentNumber(curStudent);
-    }, [arrayRow, curStudent]);
+        getWorkReq();
+        getInfoWork();
+    }, []);
 
     return (
-        <div
-            className={cx('wrap', {
-                show: show,
-            })}
-        >
-            <div title="Quay lại" className={cx('icon-back')} onClick={toggleShowTable}>
-                <UilAngleDoubleLeft size={28} />
-            </div>
-            <div className={cx('wrap-table')}>
-                <h2 className={cx('title')}>{name}</h2>
-                <div className={cx('control')}>
-                    <div className={cx('wrap-more')}>
-                        <span className={cx('more-content')}>Ngày bắt đầu:</span>
-                        <span className={cx('more-number')}>
-                            <Moment local="vi" format="ll">
-                                {startDate}
-                            </Moment>
-                        </span>
-                    </div>
-                    <div className={cx('wrap-more')}>
-                        <span className={cx('more-content')}>Nơi làm việc:</span>
-                        <span className={cx('more-number')}> {workPlace}</span>
-                    </div>
-                    <div className={cx('wrap-more')}>
-                        <span className={cx('more-content')}>Tối đa: </span>
-                        <span className={cx('more-number')}> {maxStudent}</span>
-                    </div>
-
-                    <div className={cx('wrap-more')}>
-                        <span className={cx('more-content')}>Hiện tại: </span>
-                        <span className={cx('more-number')}> {currStudentNumber}</span>
-                    </div>
+        <>
+            <div
+                className={cx('wrap', {
+                    show: show,
+                })}
+            >
+                <div title="Quay lại" className={cx('icon-back')} onClick={toggleShowTable}>
+                    <UilAngleDoubleLeft size={28} />
                 </div>
-                <div className={cx('note')}>
-                    Ghi chú:
-                    <ul className={cx('note-list')}>
-                        <li className={cx('note-item')}>
-                            <UilLabelAlt size={12} className={cx('list-tyle')} />
-                            Nhấn vào
-                            <Button size="sm" className={cx('btn')} variant="outline-primary">
-                                <UilCheck size={18} />
-                            </Button>
-                            để duyệt sinh viên vào danh sách tham gia.
-                        </li>
-                        <li className={cx('note-item')}>
-                            <UilLabelAlt size={12} className={cx('list-tyle')} />
-                            Nhấn vào
-                            <Button size="sm" className={cx('btn')} variant="outline-danger">
-                                <UilTimes size={18} />
-                            </Button>
-                            để xóa sinh viên ra khỏi danh sách đăng ký tham gia.
-                        </li>
-                    </ul>
-                </div>
+                <div className={cx('wrap-table')}>
+                    <h2 className={cx('title')}>{workInfo.name}</h2>
+                    <div className={cx('control')}>
+                        <div className={cx('wrap-more')}>
+                            <span className={cx('more-content')}>Ngày bắt đầu:</span>
+                            <span className={cx('more-number')}>
+                                <Moment local="vi" format="ll">
+                                    {workInfo.startDate}
+                                </Moment>
+                            </span>
+                        </div>
+                        <div className={cx('wrap-more')}>
+                            <span className={cx('more-content')}>Nơi làm việc:</span>
+                            <span className={cx('more-number')}> {workInfo.workPlace}</span>
+                        </div>
+                        <div className={cx('wrap-more')}>
+                            <span className={cx('more-content')}>Tối đa: </span>
+                            <span className={cx('more-number')}> {workInfo.maxStudent}</span>
+                        </div>
 
-                <div className={cx('table')}>
-                    <Row>
-                        <Col md={12}>
-                            {row.length > 0 ? (
-                                <>
-                                    <Row>
-                                        <Col md={1} className={cx('header')}>
-                                            STT
-                                        </Col>
-                                        <Col md={2} className={cx('header')}>
-                                            Mã số sinh viên
-                                        </Col>
-                                        <Col md={2} className={cx('header')}>
-                                            Tên
-                                        </Col>
-                                        <Col md={3} className={cx('header')}>
-                                            Email
-                                        </Col>
-                                        <Col md={1} className={cx('header')}>
-                                            Lớp
-                                        </Col>
-                                        <Col md={2} className={cx('header')}>
-                                            Hành động
-                                        </Col>
-                                    </Row>
+                        <div className={cx('wrap-more')}>
+                            <span className={cx('more-content')}>Hiện tại: </span>
+                            <span className={cx('more-number')}> {workInfo.curStudent}</span>
+                        </div>
+                    </div>
+                    <div className={cx('note')}>
+                        Ghi chú:
+                        <ul className={cx('note-list')}>
+                            <li className={cx('note-item')}>
+                                <UilLabelAlt size={12} className={cx('list-tyle')} />
+                                Nhấn vào
+                                <Button size="sm" className={cx('btn')} variant="outline-primary">
+                                    <UilCheck size={18} />
+                                </Button>
+                                để duyệt sinh viên vào danh sách tham gia.
+                            </li>
+                            <li className={cx('note-item')}>
+                                <UilLabelAlt size={12} className={cx('list-tyle')} />
+                                Nhấn vào
+                                <Button size="sm" className={cx('btn')} variant="outline-danger">
+                                    <UilTimes size={18} />
+                                </Button>
+                                để xóa sinh viên ra khỏi danh sách đăng ký tham gia.
+                            </li>
+                        </ul>
+                    </div>
 
-                                    {row.map((row, i) => {
-                                        return (
-                                            <RowTableUserReq
-                                                toggleShowModal={toggleShowModal}
-                                                toggleShowToast={toggleShowToast}
-                                                handleRender={handleRender}
-                                                getNameWorkAndCountRes={getNameWorkAndCountRes}
-                                                id={row.id}
-                                                workId={row.work.id}
-                                                stt={i + 1}
-                                                mssv={row.userWork.id}
-                                                name={row.userWork.name}
-                                                email={row.userWork.email}
-                                                className={row.userWork.className}
-                                                key={i}
-                                            />
-                                        );
-                                    })}
-                                </>
-                            ) : (
-                                <div className={cx('done')}>Các yêu cầu đã được xử lý! </div>
-                            )}
-                        </Col>
-                    </Row>
-                    <ToastMassage
-                        isShow={toastOb.show}
-                        header={toastOb.header}
-                        content={toastOb.content}
-                        handleClose={() => toggleShowToast({})}
-                    />
-                    <ModalAuth
-                        header="Bạn có chắc muốn xóa?"
-                        main="Hành động này sẽ xóa bản ghi trong cơ sở dữ liệu và không thể khôi phục"
-                        isShowModal={isShowModal}
-                        handleOk={handleDeleteRow}
-                        ToggleShowModal={toggleShowModal}
-                    />
+                    <div className={cx('table')}>
+                        {data.length > 0 ? (
+                            <TableWork columns={columns} data={data} />
+                        ) : (
+                            <div className={cx('done')}>Các yêu cầu đã được xử lý! </div>
+                        )}
+
+                        <ToastMassage
+                            isShow={toastOb.show}
+                            header={toastOb.header}
+                            content={toastOb.content}
+                            handleClose={() => toggleShowToast({})}
+                        />
+                        <ModalAuth
+                            header="Bạn có chắc muốn xóa?"
+                            main="Hành động này sẽ xóa bản ghi trong cơ sở dữ liệu và không thể khôi phục"
+                            isShowModal={isShowModal}
+                            handleOk={handleDeleteRow}
+                            ToggleShowModal={toggleShowModal}
+                            deleteId={reqUser}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

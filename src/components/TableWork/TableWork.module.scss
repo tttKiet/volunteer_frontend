@@ -1,0 +1,45 @@
+.wrap {
+    .header__table {
+        margin: 6px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .header__table--entries {
+            font-size: 14px;
+        }
+
+        .header__table--search {
+        }
+    }
+
+    table {
+        width: 100%;
+        thead {
+            th {
+                font-size: 14px;
+                border-bottom: solid 3px red;
+                background: aliceblue;
+                color: #000;
+                font-weight: bold;
+                padding-left: 12px;
+                min-width: 66px;
+            }
+        }
+
+        tbody {
+            td {
+                font-size: 14px;
+                padding: 10px 20px;
+                border: solid 1px gray;
+                background: papayawhip;
+            }
+        }
+
+        .icon-sort {
+            font-size: 12px;
+            padding: 0 8px;
+            color: #00000070;
+        }
+    }
+}

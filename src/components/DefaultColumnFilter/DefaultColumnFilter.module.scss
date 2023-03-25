@@ -1,0 +1,30 @@
+.wrap {
+    width: 100%;
+
+    thead {
+        th {
+            font-size: 14px;
+            border-bottom: solid 3px red;
+            background: aliceblue;
+            color: #000;
+            font-weight: bold;
+            padding-left: 12px;
+            min-width: 66px;
+        }
+    }
+
+    tbody {
+        td {
+            font-size: 14px;
+            padding: 10px 20px;
+            border: solid 1px gray;
+            background: papayawhip;
+        }
+    }
+
+    .icon-sort {
+        font-size: 12px;
+        padding: 0 8px;
+        color: #00000070;
+    }
+}
