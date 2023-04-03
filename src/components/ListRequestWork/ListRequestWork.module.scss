@@ -8,12 +8,43 @@
     z-index: 2;
     position: fixed;
     top: 0;
-    min-height: 100vh;
     left: 100%;
     right: -100vw;
     background-color: #fafafa;
     transition: all 0.3s linear;
     opacity: 0.6;
+    height: 100vh;
+    overflow-y: auto;
+
+    scrollbar-gutter: both-edges;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        position: absolute;
+        border-radius: 0;
+        width: 8px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(22, 24, 35, 0.693); /* Hiệu ứng di chuột đổi màu */
+        cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(22, 24, 35, 0.43);
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .container-content {
+    }
 
     .icon-back {
         font-size: #383838;

@@ -1,29 +1,56 @@
-import { Row, Col } from 'react-bootstrap';
-import ToastMassage from '../ToastMassage';
+import { useEffect, useState } from 'react';
 
+import TableWork from '../TableWork';
 import classNames from 'classnames/bind';
 import styles from './ListUserWork.module.scss';
 import { UilAngleDoubleLeft } from '@iconscout/react-unicons';
 import { workServices } from '~/services';
-import { useCallback, useEffect, useState } from 'react';
 import Moment from 'react-moment';
-import RowTableWork from '../RowTableWork';
 import ExportToEx from '../ExportToEx';
+import moment from 'moment';
 const cx = classNames.bind(styles);
 
-function ListUserWork({ show, workId, toggleShowTable, name, startDate, workPlace, maxStudent, curStudent }) {
+function ListUserWork({ show, workId, toggleShowTable }) {
     const [row, setRow] = useState([]);
+    const [exData, setExData] = useState([]);
 
-    const getBrowsedUser = useCallback(async () => {
-        const res = await workServices.getBrowsedUser({ workId });
-        if (res.errCode === 0) {
-            setRow(res.works);
-        }
-    }, [workId]);
+    // Tao table
+
+    let columns = [
+        { Header: 'STT', accessor: 'col1', filter: 'fuzzyText' },
+        { Header: 'MSSV', accessor: 'col2', filter: 'fuzzyText' },
+        { Header: 'Tên', accessor: 'col3', filter: 'fuzzyText' },
+        { Header: 'Email', accessor: 'col4', filter: 'fuzzyText' },
+        { Header: 'Lớp', accessor: 'col5', filter: 'fuzzyText' },
+        { Header: 'Ngày đăng ký', accessor: 'col6', filter: 'fuzzyText' },
+    ];
+
+    const convertToDataRow = (rows) => {
+        const dataRow = rows.map((row, index) => {
+            return {
+                col1: index + 1,
+                col2: row.userWork.id,
+                col3: row.userWork.name,
+                col4: row.userWork.email,
+                col5: row.userWork.className,
+                col6: moment(row.createdAt).format('LL'),
+            };
+        });
+        return dataRow;
+    };
 
     useEffect(() => {
+        const getBrowsedUser = async () => {
+            const res = await workServices.getBrowsedUser({ workId });
+
+            if (res.errCode === 0) {
+                const data = convertToDataRow(res.works);
+                setRow(data);
+                setExData(res.works);
+            }
+        };
         getBrowsedUser();
-    }, [getBrowsedUser]);
+    }, [workId]);
 
     return (
         <div
@@ -35,77 +62,37 @@ function ListUserWork({ show, workId, toggleShowTable, name, startDate, workPlac
                 <UilAngleDoubleLeft size={28} />
             </div>
             <div className={cx('wrap-table')}>
-                <h2 className={cx('title')}>{row[0]?.work.name}</h2>
+                <h2 className={cx('title')}>{exData[0]?.work.name}</h2>
                 <div className={cx('control')}>
                     <div className={cx('wrap-more')}>
                         <span className={cx('more-content')}>Ngày bắt đầu:</span>
                         <span className={cx('more-number')}>
                             <Moment local="vi" format="ll">
-                                {row[0]?.work.startDate}
+                                {exData[0]?.work.startDate}
                             </Moment>
                         </span>
                     </div>
                     <div className={cx('wrap-more')}>
                         <span className={cx('more-content')}>Nơi làm việc:</span>
-                        <span className={cx('more-number')}>{row[0]?.work.workPlace}</span>
+                        <span className={cx('more-number')}>{exData[0]?.work?.workPlace}</span>
                     </div>
                     <div className={cx('wrap-more')}>
                         <span className={cx('more-content')}>Tối đa: </span>
-                        <span className={cx('more-number')}>{row[0]?.work.maxStudent}</span>
+                        <span className={cx('more-number')}>{exData[0]?.work.maxStudent}</span>
                     </div>
 
                     <div className={cx('wrap-more')}>
                         <span className={cx('more-content')}>Đã duyệt: </span>
-                        <span className={cx('more-number')}>{row[0]?.work.curStudent}</span>
+                        <span className={cx('more-number')}>{exData[0]?.work.curStudent}</span>
                     </div>
 
                     <div className={cx('wrap-more')}>
-                        <ExportToEx data={row} />
+                        <ExportToEx data={exData} />
                     </div>
                 </div>
 
                 <div className={cx('table')}>
-                    <Row>
-                        <Col md={12}>
-                            {row.length > 0 ? (
-                                <>
-                                    <Row>
-                                        <Col md={1} className={cx('header')}>
-                                            STT
-                                        </Col>
-                                        <Col md={2} className={cx('header')}>
-                                            Mã số sinh viên
-                                        </Col>
-                                        <Col md={2} className={cx('header')}>
-                                            Tên
-                                        </Col>
-                                        <Col md={3} className={cx('header')}>
-                                            Email
-                                        </Col>
-                                        <Col md={1} className={cx('header')}>
-                                            Lớp
-                                        </Col>
-                                        <Col md={2} className={cx('header')}>
-                                            Ngày đăng ký
-                                        </Col>
-                                    </Row>
-
-                                    {row.map((row, i) => (
-                                        <RowTableWork
-                                            key={i}
-                                            stt={i + 1}
-                                            mssv={row.userWork.id}
-                                            name={row.userWork.name}
-                                            email={row.userWork.email}
-                                            className={row.userWork.className}
-                                        />
-                                    ))}
-                                </>
-                            ) : (
-                                <div className={cx('done')}>Các yêu cầu đã được xử lý! </div>
-                            )}
-                        </Col>
-                    </Row>
+                    <TableWork columns={columns} data={row} />
                 </div>
             </div>
         </div>

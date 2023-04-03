@@ -59,7 +59,10 @@ function AdminWorkList() {
     }, []);
 
     const toggleShowTable = () => {
-        setIsShowTable((show) => !show);
+        setIsShowTable((show) => {
+            show ? (document.body.style.overflow = 'auto') : (document.body.style.overflow = 'hidden');
+            return !show;
+        });
     };
 
     const handleClickView = async (workId) => {
@@ -74,39 +77,52 @@ function AdminWorkList() {
 
     return (
         <div className={cx('wrap')}>
-            {isLoading && <Loader />}
-            <NavLeft menu={menu} />
-            <Container>
-                <Row>
-                    <Col md={3}></Col>
-                    <Col md={9}>
-                        <h2 className={cx('title')}>Vui lòng chọn công việc để xem danh sách tình nguyện viên!</h2>
-                        <div className={cx('works', 'row')}>
-                            {workName.length === 0 ? (
-                                <h2 className={cx('no-req')}>Chưa có công việc nào!</h2>
-                            ) : (
-                                <>
-                                    {workName
-                                        .filter((name) => name.curStudent > 0)
-                                        .map((name) => {
-                                            return (
-                                                <WorkColor
-                                                    handleClickView={handleClickView}
-                                                    key={name.id}
-                                                    id={name.id}
-                                                    title={name.name}
-                                                    time={name.startDate}
-                                                    number={name.curStudent}
-                                                />
-                                            );
-                                        })}
-                                </>
-                            )}
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-            <ListUserWork show={isShowTable} workId={workId} toggleShowTable={toggleShowTable} table={workName} />
+            <div>
+                {isLoading && <Loader />}
+                <NavLeft menu={menu} />
+                <Container>
+                    <Row>
+                        <Col md={3}></Col>
+                        <Col md={9}>
+                            <div className={cx('menu-control')}>
+                                <a href="/">Trang chủ</a>/
+                                <span href="/admin/view/list-user-req"> Danh sách người tham gia</span>
+                            </div>
+                            <h2 className={cx('title')}>Vui lòng chọn công việc để xem danh sách tình nguyện viên!</h2>
+                            <div className={cx('works', 'row')}>
+                                {workName.length === 0 ? (
+                                    <h2 className={cx('no-req')}>Chưa có công việc nào!</h2>
+                                ) : (
+                                    <>
+                                        {workName
+                                            .filter((name) => name.curStudent > 0)
+                                            .map((name) => {
+                                                return (
+                                                    <WorkColor
+                                                        handleClickView={handleClickView}
+                                                        key={name.id}
+                                                        id={name.id}
+                                                        title={name.name}
+                                                        time={name.startDate}
+                                                        number={name.curStudent}
+                                                    />
+                                                );
+                                            })}
+                                    </>
+                                )}
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+                {isShowTable && (
+                    <ListUserWork
+                        show={isShowTable}
+                        workId={workId}
+                        toggleShowTable={toggleShowTable}
+                        table={workName}
+                    />
+                )}
+            </div>
         </div>
     );
 }

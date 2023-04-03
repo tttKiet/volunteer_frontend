@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { matchSorter } from 'match-sorter';
 import GlobalFilter from '../GlobalFilter';
 import DefaultColumnFilter from '../DefaultColumnFilter';
-import { useTable, useSortBy, useGlobalFilter } from 'react-table';
+import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort } from '@fortawesome/free-solid-svg-icons';
 
@@ -24,7 +24,6 @@ function TableWork({ columns, data }) {
             // Add a new fuzzyTextFilterFn filter type.
             fuzzyText: fuzzyTextFilterFn,
             // Or, override the default text filter to use
-            // "startWith"
             text: (rows, id, filterValue) => {
                 return rows.filter((row) => {
                     const rowValue = row.values[id];
@@ -50,7 +49,16 @@ function TableWork({ columns, data }) {
         getTableBodyProps,
         headerGroups,
         rows,
-        state,
+        // state,
+        pageOptions,
+        page,
+        state: { pageIndex, pageSize, globalFilter },
+        gotoPage,
+        previousPage,
+        nextPage,
+        setPageSize,
+        canPreviousPage,
+        canNextPage,
         prepareRow,
         preGlobalFilteredRows,
         setGlobalFilter,
@@ -63,16 +71,30 @@ function TableWork({ columns, data }) {
         },
         useGlobalFilter,
         useSortBy,
+        usePagination,
     );
-    const firstPageRows = rows.slice(0, 10);
     return (
         <div className={cx('wrap')}>
             <div className={cx('header__table')}>
-                <div className={cx('header__table--entries')}>Showing the first 20 results of {rows.length} rows</div>
+                <div className={cx('header__table--entries')}>
+                    <select
+                        value={pageSize}
+                        onChange={(e) => {
+                            setPageSize(Number(e.target.value));
+                        }}
+                    >
+                        {[5, 10, 20, 30, 40, 50].map((pageSize) => (
+                            <option key={pageSize} value={pageSize}>
+                                Hiển thị {pageSize}
+                            </option>
+                        ))}
+                    </select>
+                    Hiển thị {pageSize} / {rows.length} kết quả
+                </div>
                 <div className={cx('header__table--search')}>
                     <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
-                        globalFilter={state.globalFilter}
+                        globalFilter={globalFilter}
                         setGlobalFilter={setGlobalFilter}
                     />
                 </div>
@@ -84,9 +106,7 @@ function TableWork({ columns, data }) {
                             {headerGroup.headers.map((column) => (
                                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                     {column.render('Header')}
-                                    {/* <div>{column.canFilter ? column.render('Filter') : null}</div> */}
                                     <span>
-                                        {console.log('column: ', column)}
                                         {column.isSorted ? (
                                             column.isSortedDesc ? (
                                                 '  🔽'
@@ -105,7 +125,7 @@ function TableWork({ columns, data }) {
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {firstPageRows.map((row, i) => {
+                    {page.map((row, i) => {
                         prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
@@ -118,7 +138,28 @@ function TableWork({ columns, data }) {
                 </tbody>
             </table>
             <br />
-            <div></div>
+            <div className={cx('table-footer')}>
+                <div className={cx('table-page-number')}>
+                    Trang
+                    <em>
+                        {pageIndex + 1} / {pageOptions.length}
+                    </em>
+                </div>
+                <div className={cx('table-control')}>
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                        Trang trước
+                    </button>
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>
+                        Trang tiếp theo
+                    </button>
+                </div>
+            </div>
+
+            {/* footer */}
+            <div className={cx('footer__end')}>
+                <hr />
+                ---Hết---
+            </div>
         </div>
     );
 }

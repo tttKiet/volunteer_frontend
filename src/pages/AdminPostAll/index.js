@@ -53,22 +53,27 @@ function AdminPostAll() {
     return (
         <div className={cx('wrap')}>
             <NavLeft menu={menu} />
-            <div className={cx('posts')}>
-                <div className={cx('post-profice')}>
-                    {post.map((post) => {
-                        return (
-                            <Post
-                                image={post.linkImage}
-                                light={true}
-                                key={post.id}
-                                author={post.user.id}
-                                title={post.title}
-                                content={post.description}
-                                upDate={post.createdAt}
-                            />
-                        );
-                    })}
-                    {post.length === 0 && <div> Chưa có bài post nào!</div>}
+            <div className={cx('wrap-post')}>
+                <div className={cx('menu-control')}>
+                    <a href="/">Trang chủ</a>/<span> Tất cả bài đăng </span>
+                </div>
+                <div className={cx('posts')}>
+                    <div className={cx('post-profice')}>
+                        {post.map((post) => {
+                            return (
+                                <Post
+                                    image={post.linkImage}
+                                    light={true}
+                                    key={post.id}
+                                    author={post.user.id}
+                                    title={post.title}
+                                    content={post.description}
+                                    upDate={post.createdAt}
+                                />
+                            );
+                        })}
+                        {post.length === 0 && <div> Chưa có bài post nào!</div>}
+                    </div>
                 </div>
             </div>
             <div className={cx('profice')}>

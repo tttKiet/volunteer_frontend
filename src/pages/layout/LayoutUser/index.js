@@ -58,20 +58,6 @@ function LayoutUser() {
         setShowContent((show) => !show);
     };
 
-    useEffect(() => {
-        const handleScrollTop = (e) => {
-            const headerElement = headerNavRef.current;
-            const scrollTop = window.scrollY;
-            console.log('--------', scrollTop);
-            if (scrollTop > 60) {
-                headerElement.classList.add(cx('re-active'));
-            } else {
-                headerElement.classList.remove(cx('re-active'));
-            }
-        };
-        window.addEventListener('scroll', handleScrollTop);
-    }, []);
-
     return (
         <div className={cx('wrap')}>
             <div

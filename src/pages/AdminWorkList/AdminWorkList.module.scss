@@ -1,14 +1,29 @@
 .wrap {
     background-color: var(--background-color);
 
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
+
+    .menu-control {
+        padding: 48px 20px 20px 20px;
+        font-size: 12px;
+        a {
+            padding: 0 4px;
+            cursor: pointer;
+            color: #383838;
+            transition: all 0.2s linear;
+
+            &:hover {
+                color: rgb(73 94 255 / 77%);
+            }
+        }
+    }
 
     .title {
         font-size: 18px;
-        padding: 48px 20px 20px 20px;
+        padding: 0 20px 20px 20px;
         font-weight: 600;
-        text-decoration: underline;
+        text-align: center;
     }
 
     .no-req {

@@ -6,7 +6,22 @@
         justify-content: space-between;
 
         .header__table--entries {
+            color: #555;
             font-size: 14px;
+
+            select {
+                margin-right: 12px;
+                padding: 4px 10px;
+                border-radius: 4px;
+                outline: none;
+                border: 1px solid #ccc;
+                transition: all 0.2s linear;
+                color: #555;
+
+                &:focus {
+                    border: 1px solid #38383897;
+                }
+            }
         }
 
         .header__table--search {
@@ -41,5 +56,46 @@
             padding: 0 8px;
             color: #00000070;
         }
+    }
+
+    .table-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .table-page-number {
+            font-size: 12px;
+            font-weight: 500;
+            color: #555;
+
+            em {
+                margin-left: 4px;
+                font-weight: 700;
+            }
+        }
+
+        .table-control {
+            button {
+                padding: 4px 12px;
+                border-radius: 4px;
+                color: #555;
+                margin-left: 12px;
+                border: 1px solid #ccc;
+
+                &:not([disabled]) {
+                    border: 1px solid #000000bd;
+                    background-color: #efefef;
+                    color: #383838;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    .footer__end {
+        font-size: 12px;
+        margin: 20px 0 30px 0;
+        text-align: center;
+        letter-spacing: 2px;
     }
 }

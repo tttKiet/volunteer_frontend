@@ -34,18 +34,32 @@
         width: 100%;
         padding: 0;
 
-        .item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 12px 12px 24px;
+        li {
+            border-bottom: 1px solid #ccc;
 
-            .icon {
-                color: rgb(38, 38, 38);
+            .item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 12px 12px 24px;
+                a {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                }
+                .icon {
+                    color: rgb(38, 38, 38);
+                }
+
+                h3 {
+                    margin: 0;
+                    font-size: 14px;
+                    color: rgb(38, 38, 38);
+                }
             }
 
-            & + .item {
-                border-top: 1px solid #ccc;
+            & + li {
+                border-bottom: 1px solid transparent;
             }
 
             &:hover {
@@ -57,11 +71,6 @@
                 position: absolute;
                 bottom: 0;
                 width: 100%;
-            }
-            h3 {
-                margin: 0;
-                font-size: 14px;
-                color: rgb(38, 38, 38);
             }
         }
     }

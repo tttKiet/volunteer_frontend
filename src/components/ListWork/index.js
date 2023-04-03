@@ -46,9 +46,19 @@ function ListWork() {
         }
     };
 
+    const renderWork = async () => {
+        console.log('renderWor; currUser.id: ', currUser.id);
+        const res = await workServices.getNameWork({ userId: currUser.id });
+
+        if (res.errCode === 0) {
+            setWork(res.workNames);
+        }
+    };
+
     useEffect(() => {
         const getWorks = async () => {
             const res = await workServices.getNameWork({ userId: currUser.id });
+
             if (res.errCode === 0) {
                 setWork(res.workNames);
             }
@@ -59,7 +69,7 @@ function ListWork() {
         };
         getWorks();
         getWorkUserReg();
-    }, [currUser.id, obToast]);
+    }, [currUser.id]);
     return (
         <div className={cx('wrap')}>
             <ToastMassage
@@ -87,6 +97,7 @@ function ListWork() {
                             maxStudent={work.maxStudent}
                             curStudent={work.curStudent}
                             pointPlus={work.pointPlus}
+                            renderWork={renderWork}
                         />
                     ))}
                 </Row>

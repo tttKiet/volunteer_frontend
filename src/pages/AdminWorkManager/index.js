@@ -57,14 +57,18 @@ function AdminWorkManager() {
     }, [curUser, isLogined, navigate]);
 
     const getNameWorkAndCountRes = useCallback(async () => {
+        setIsLoading(true);
         const res = await workServices.getNameWorkAndCountRes();
         if (res.errCode === 0) {
             setWork(res.works);
         }
+        setIsLoading(false);
     }, []);
 
     const toggleShowTable = () => {
-        setIsShowTable((show) => !show);
+        setIsShowTable((show) => {
+            return !show;
+        });
     };
 
     const handleCLickDetail = (workId) => {
@@ -84,7 +88,10 @@ function AdminWorkManager() {
             <Container>
                 <Row>
                     <Col md={3}></Col>
-                    <Col md={9}>
+                    <Col md={9} className={cx('wrap-req')}>
+                        <div className={cx('menu-control')}>
+                            <a href="/">Trang chủ</a>/<span> Danh sách đăng ký</span>
+                        </div>
                         <h2 className={cx('title')}>Danh sách đăng ký của sinh viên</h2>
                         <div className={cx('works')}>
                             {work.length === 0 ? (

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import ModalUpPost from '../ModalUpPost';
 const cx = classNames.bind(styles);
 
-function NavLeft({ menu, handleOkUpPost }) {
+function NavLeft({ menu, handleOkUpPost, post = true }) {
     const [isShowMenuMore, setIsShowMenuMore] = useState(false);
     const [showCreateWork, setShowCreateWork] = useState(false);
     const [isShowModalUpPost, setIsShowModalUpPost] = useState(false);
@@ -112,7 +112,7 @@ function NavLeft({ menu, handleOkUpPost }) {
                         <UilEllipsisV size="30" className={cx('icon')} />
                         <h3 className={cx('title')}>Xem thêm</h3>
                     </span>
-                    <MenuMoreProfice handleClickMore={handleClickMore} show={isShowMenuMore} />
+                    <MenuMoreProfice post={post} handleClickMore={handleClickMore} show={isShowMenuMore} />
                 </li>
             </ul>
         </div>

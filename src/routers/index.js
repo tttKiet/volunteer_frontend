@@ -2,7 +2,6 @@ import Home from '~/pages/Home';
 import Login from '~/pages/Login';
 import AdminPost from '~/pages/AdminPost';
 import AdminPostAll from '~/pages/AdminPostAll';
-import AdminUpPost from '~/pages/AdminUpPost';
 import AdminWorkManager from '~/pages/AdminWorkManager';
 import AdminWorkCreate from '~/pages/AdminWorkCreate';
 import UserDetailsWork from '~/pages/UserDetailsWork';
@@ -29,10 +28,7 @@ const publicRoutes = [
         path: '/admin/allpost',
         component: AdminPostAll,
     },
-    {
-        path: '/admin/up-post',
-        component: AdminUpPost,
-    },
+
     {
         path: '/admin/view/list-user-req',
         component: AdminWorkManager,

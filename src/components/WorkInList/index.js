@@ -12,7 +12,19 @@ import { useSelector } from 'react-redux';
 import styles from './WorkInList.module.scss';
 const cx = classNames.bind(styles);
 
-function WorkInList({ workId, disable, stt, name, place, maxStudent, curStudent, pointPlus, startDate, registerWork }) {
+function WorkInList({
+    workId,
+    disable,
+    stt,
+    name,
+    place,
+    maxStudent,
+    curStudent,
+    pointPlus,
+    startDate,
+    registerWork,
+    renderWork,
+}) {
     const currUser = useSelector(userSelector);
     const elementRef = useRef();
     const [isVisible, setIsVisible] = useState(false);
@@ -20,6 +32,9 @@ function WorkInList({ workId, disable, stt, name, place, maxStudent, curStudent,
     const handleClickRegister = async (workId) => {
         const res = await workServices.registerWork(currUser.id, workId);
         registerWork(res);
+        if (res.errCode === 0) {
+            renderWork();
+        }
     };
 
     useEffect(() => {

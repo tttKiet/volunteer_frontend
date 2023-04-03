@@ -15,6 +15,20 @@ const workServices = {
         return res.data;
     },
 
+    // get information one work
+    async getInfoWork({ workId }) {
+        if (workId) {
+            const res = await axios.get('/api/v1/work/get-one', {
+                params: {
+                    workId: workId,
+                },
+            });
+            return res.data;
+        }
+
+        return 'Thiếu tham số truyền vào';
+    },
+
     // get name work
     async getNameWork({ type = 'all', workId, userId }) {
         if (type === 'name') {

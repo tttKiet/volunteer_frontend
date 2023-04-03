@@ -81,14 +81,38 @@
         }
     }
 
-    .posts {
-        width: 100%;
+    .wrap-post {
         display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        .post-profice {
-            margin-top: 40px;
-            min-height: 100vh;
+        width: 100%;
+        flex-direction: column;
+        .menu-control {
+            padding: 48px 20px 20px 392px;
+            font-size: 12px;
+            a {
+                padding: 0 4px;
+                cursor: pointer;
+                color: #383838;
+                transition: all 0.2s linear;
+
+                &:hover {
+                    color: rgb(73 94 255 / 77%);
+                }
+            }
+            span {
+                padding: 0 4px;
+            }
+        }
+
+        .posts {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+
+            .post-profice {
+                margin-top: 40px;
+                min-height: 100vh;
+            }
         }
     }
 
@@ -99,7 +123,7 @@
         position: fixed;
         top: 0;
         right: 0;
-        // z-index: 1; 
+        // z-index: 1;
         width: 340px;
         min-height: 100vh;
         // background-color: aqua;

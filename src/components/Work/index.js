@@ -75,7 +75,7 @@ function Work({ startDate, name, workPlace, curStudent, maxStudent, pointPlus, c
                     </div>
 
                     <div className="row">
-                        <Col sm={7}>
+                        <Col sm={10}>
                             <span className={cx('more-content')}>
                                 <b>Ghi chú:</b>
                             </span>
