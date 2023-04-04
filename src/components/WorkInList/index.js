@@ -22,20 +22,11 @@ function WorkInList({
     curStudent,
     pointPlus,
     startDate,
-    registerWork,
-    renderWork,
+    handleClickRegister,
 }) {
     const currUser = useSelector(userSelector);
     const elementRef = useRef();
     const [isVisible, setIsVisible] = useState(false);
-
-    const handleClickRegister = async (workId) => {
-        const res = await workServices.registerWork(currUser.id, workId);
-        registerWork(res);
-        if (res.errCode === 0) {
-            renderWork();
-        }
-    };
 
     useEffect(() => {
         const options = {

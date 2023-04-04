@@ -84,61 +84,72 @@ function FormLogin() {
     return (
         <>
             {isLoader && <Loader />}
-            <Form className={cx('form')}>
-                <h2 className={cx('title')}>Đăng Nhập</h2>
-                <fieldset>
-                    <div className={cx('wrap-input')}>
-                        <Form.Group className={cx('mb-4', 'form-gr')}>
-                            <Form.Control
-                                id="user"
-                                onChange={(e) => handleChange(e, 'user')}
-                                autoComplete="off"
-                                value={userInput}
-                            />
-                            <Form.Label className={cx('title-input')} htmlFor="user">
-                                <FontAwesomeIcon icon={faUser} bounce />
-                                Tên đăng nhập
-                            </Form.Label>
-                        </Form.Group>
-                        <Form.Group className={cx('mb-1', 'form-gr')}>
-                            <Form.Control
-                                type="password"
-                                onChange={(e) => handleChange(e, 'pass')}
-                                value={passInput}
-                                id="password"
-                            />
-                            <Form.Label className={cx('title-input')} htmlFor="password">
-                                <FontAwesomeIcon icon={faLock} bounce />
-                                Mật khẩu
-                            </Form.Label>
-                        </Form.Group>
 
-                        <Form.Group className="my-4 d-flex align-items-center justify-content-between">
-                            <Form.Group className="d-flex align-items-center">
-                                <Form.Check
-                                    checked={isCheckBox}
-                                    onChange={(e) => handleChange(e, 'checkbox')}
-                                    id="check-miss"
-                                    style={{ cursor: 'pointer' }}
-                                />
-                                <Form.Label
-                                    htmlFor="check-miss"
-                                    className="mx-3"
-                                    style={{ fontSize: '14px', margin: 0, cursor: 'pointer' }}
+            <div className={cx('card')}>
+                <div className={cx('circle')}></div>
+                <div className={cx('circle')}></div>
+                <div className={cx('card-inner')}>
+                    <Form className={cx('form')}>
+                        <h2 className={cx('title')}>Đăng Nhập</h2>
+                        <fieldset>
+                            <div className={cx('wrap-input')}>
+                                <Form.Group className={cx('mb-4', 'form-gr')}>
+                                    <Form.Control
+                                        id="user"
+                                        onChange={(e) => handleChange(e, 'user')}
+                                        autoComplete="off"
+                                        value={userInput}
+                                    />
+                                    <Form.Label className={cx('title-input')} htmlFor="user">
+                                        <FontAwesomeIcon icon={faUser} bounce />
+                                        Tên đăng nhập
+                                    </Form.Label>
+                                </Form.Group>
+                                <Form.Group className={cx('mb-1', 'form-gr')}>
+                                    <Form.Control
+                                        type="password"
+                                        onChange={(e) => handleChange(e, 'pass')}
+                                        value={passInput}
+                                        id="password"
+                                    />
+                                    <Form.Label className={cx('title-input')} htmlFor="password">
+                                        <FontAwesomeIcon icon={faLock} bounce />
+                                        Mật khẩu
+                                    </Form.Label>
+                                </Form.Group>
+
+                                <Form.Group className="my-4 d-flex align-items-center justify-content-between">
+                                    <Form.Group className="d-flex align-items-center">
+                                        <Form.Check
+                                            checked={isCheckBox}
+                                            onChange={(e) => handleChange(e, 'checkbox')}
+                                            id="check-miss"
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                        <Form.Label
+                                            htmlFor="check-miss"
+                                            className="mx-3"
+                                            style={{ fontSize: '14px', margin: 0, cursor: 'pointer' }}
+                                        >
+                                            Nhớ tôi
+                                        </Form.Label>
+                                    </Form.Group>
+                                    <span className={cx('err')}>{errInput}</span>
+                                </Form.Group>
+                            </div>
+                            <div className={cx('submit')}>
+                                <Button
+                                    className={cx('btn-submit', 'btn-lg')}
+                                    ref={btnSubmitRef}
+                                    onClick={handleClickSubmit}
                                 >
-                                    Nhớ tôi
-                                </Form.Label>
-                            </Form.Group>
-                            <span className={cx('err')}>{errInput}</span>
-                        </Form.Group>
-                    </div>
-                    <div className={cx('submit')}>
-                        <Button className={cx('btn-submit', 'btn-lg')} ref={btnSubmitRef} onClick={handleClickSubmit}>
-                            Đăng nhập
-                        </Button>
-                    </div>
-                </fieldset>
-            </Form>
+                                    Đăng nhập
+                                </Button>
+                            </div>
+                        </fieldset>
+                    </Form>
+                </div>
+            </div>
         </>
     );
 }

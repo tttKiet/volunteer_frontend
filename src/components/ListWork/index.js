@@ -36,6 +36,7 @@ function ListWork() {
 
     const registerWork = (res) => {
         if (res.errCode === 0) {
+            renderWork();
             setObToast(() => {
                 return {
                     isShow: true,
@@ -43,7 +44,14 @@ function ListWork() {
                     content: res.errMessage,
                 };
             });
+            getWorkUserReg();
+            renderWork();
         }
+    };
+
+    const handleClickRegister = async (workId) => {
+        const res = await workServices.registerWork(currUser.id, workId);
+        registerWork(res);
     };
 
     const renderWork = async () => {
@@ -52,22 +60,17 @@ function ListWork() {
 
         if (res.errCode === 0) {
             setWork(res.workNames);
+            console.log('renderWor; currUser.id: ', res);
         }
     };
 
-    useEffect(() => {
-        const getWorks = async () => {
-            const res = await workServices.getNameWork({ userId: currUser.id });
+    const getWorkUserReg = async () => {
+        const res = await workServices.getWorkUserReg({ userId: currUser.id });
+        setWorkReg(res.data);
+    };
 
-            if (res.errCode === 0) {
-                setWork(res.workNames);
-            }
-        };
-        const getWorkUserReg = async () => {
-            const res = await workServices.getWorkUserReg({ userId: currUser.id });
-            setWorkReg(res.data);
-        };
-        getWorks();
+    useEffect(() => {
+        renderWork();
         getWorkUserReg();
     }, [currUser.id]);
     return (
@@ -87,7 +90,7 @@ function ListWork() {
                     {work.map((work, index) => (
                         <WorkInList
                             disable={workReg.includes(work.id)}
-                            registerWork={registerWork}
+                            handleClickRegister={handleClickRegister}
                             key={work.id}
                             workId={work.id}
                             stt={index + 1}
@@ -97,7 +100,6 @@ function ListWork() {
                             maxStudent={work.maxStudent}
                             curStudent={work.curStudent}
                             pointPlus={work.pointPlus}
-                            renderWork={renderWork}
                         />
                     ))}
                 </Row>
