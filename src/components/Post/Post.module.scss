@@ -12,6 +12,19 @@
     padding-bottom: 20px;
     margin-bottom: 12px;
     border-bottom: 1px solid rgb(var(--ig-separator));
+    opacity: 0;
+    transition: all 0.2s ease-out;
+
+    &.isVisible {
+        opacity: 1;
+    }
+
+    &:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+    &:nth-child(3) {
+        transition-delay: 0.3s;
+    }
 
     .header {
         display: flex;

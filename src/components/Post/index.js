@@ -2,8 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Post.module.scss';
 import moment from 'moment';
 
-import imageTest from '../../assets/images/home-admin-slide4.jpg';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import img1 from '../../assets/images/bg-post-1.jpg';
 import img2 from '../../assets/images/bg-post-2.jpg';
 import img3 from '../../assets/images/bg-post-3.jpg';
@@ -19,6 +18,8 @@ const obImgS = {
 
 const cx = classNames.bind(styles);
 function Post({ author, title, content, upDate, light = true, image }) {
+    const postRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
     const isDevImg = image?.startsWith('img');
     const [viewMore, setViewMore] = useState(false);
     const [desc, setDesc] = useState(() => {
@@ -39,8 +40,41 @@ function Post({ author, title, content, upDate, light = true, image }) {
         setViewMore((viewMore) => !viewMore);
     };
 
+    useEffect(() => {
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        if (postRef.current) {
+            observer.observe(postRef.current);
+        }
+
+        return () => {
+            if (postRef.current) {
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+                observer.unobserve(postRef.current);
+            }
+        };
+    });
+
     return (
-        <div className={cx('wrap')}>
+        <div
+            className={cx('wrap', {
+                isVisible: isVisible,
+            })}
+            ref={postRef}
+        >
             <div
                 className={cx('header', {
                     'header-light': light,

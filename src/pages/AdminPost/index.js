@@ -72,6 +72,7 @@ function AdminPost() {
                         {post.map((post) => {
                             return (
                                 <Post
+                                    postId={post.id}
                                     light={true}
                                     image={post.linkImage}
                                     key={post.id}

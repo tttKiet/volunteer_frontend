@@ -9,6 +9,8 @@ import styles from './ListRequestWork.module.scss';
 import { UilAngleDoubleLeft } from '@iconscout/react-unicons';
 import { workServices } from '~/services';
 import TableWork from '../TableWork';
+import { useSelector } from 'react-redux';
+import { userSelector } from '~/redux/selector';
 
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import Moment from 'react-moment';
@@ -16,8 +18,8 @@ const cx = classNames.bind(styles);
 
 function ListRequestWork({ show, toggleShowTable, workId, getNameWorkAndCountRes }) {
     const [isShowModal, setIsShowModal] = useState(false);
-
     const [currWorkId, setCurrWorkId] = useState(workId);
+    const currUser = useSelector(userSelector);
 
     const [data, setData] = useState([]);
     const [reqUser, setReqUser] = useState('');
@@ -87,7 +89,9 @@ function ListRequestWork({ show, toggleShowTable, workId, getNameWorkAndCountRes
         return {};
     };
     const handleDeleteRow = async ({ id }) => {
-        const res = await workServices.handleDeleteWorkRegister(id);
+        const isAdmin = currUser.type === 'admin';
+        const userId = currUser.id;
+        const res = await workServices.handleDeleteWorkRegister({ id, isAdmin, userId });
         if (res.errCode === 0) {
             getWorkReq();
             toggleShowModal();

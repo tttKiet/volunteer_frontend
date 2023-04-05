@@ -1,14 +1,51 @@
+import { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
+import MoreWork from '../MoreWork';
 import { Col } from 'react-bootstrap';
 import classNames from 'classnames/bind';
 import styles from './Work.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Work({ startDate, name, workPlace, curStudent, maxStudent, pointPlus, countRequest, note }) {
+function Work({ id, getWorks, startDate, name, workPlace, curStudent, maxStudent, pointPlus, countRequest, note }) {
+    const [isVisible, setIsVisible] = useState(false);
+    const workRef = useRef(null);
+
+    useEffect(() => {
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        if (workRef.current) {
+            observer.observe(workRef.current);
+        }
+
+        return () => {
+            if (workRef.current) {
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+                observer.unobserve(workRef.current);
+            }
+        };
+    }, []);
+
     return (
-        <div className={cx('wrap')}>
-            <div className={cx('wrap-item')}>
+        <div
+            className={cx('wrap', {
+                visible: isVisible,
+            })}
+        >
+            <div className={cx('wrap-item')} ref={workRef}>
                 <div className={cx('item')}>
                     <div className="row">
                         <Col sm={4} className={cx('title')}>
@@ -21,6 +58,7 @@ function Work({ startDate, name, workPlace, curStudent, maxStudent, pointPlus, c
                             Nơi làm việc
                         </Col>
                     </div>
+
                     <div className="row mb-2">
                         <Col sm={4} className={cx('name-main')}>
                             {moment(startDate).format('L')} ({moment(startDate).endOf().fromNow()} )
@@ -85,6 +123,7 @@ function Work({ startDate, name, workPlace, curStudent, maxStudent, pointPlus, c
                         </Col>
                     </div>
                 </div>
+                <MoreWork id={id} getWorks={getWorks} />
             </div>
         </div>
     );

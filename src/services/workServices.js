@@ -104,10 +104,12 @@ const workServices = {
         return res.data;
     },
 
-    async handleDeleteWorkRegister(id) {
+    async handleDeleteWorkRegister({ id, isAdmin, userId }) {
         const res = await axios.delete('/api/v1/listUser/delete', {
             data: {
                 id,
+                isAdmin,
+                userId,
             },
         });
         return res.data;

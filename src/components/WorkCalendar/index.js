@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faBackward } from '@fortawesome/free-solid-svg-icons';
+import ToastMassage from '../ToastMassage';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { userSelector } from '~/redux/selector';
@@ -16,22 +17,52 @@ function WorkCalendar() {
     const [workBrowsed, setWorkBrowsed] = useState([]);
     const [details, setDetails] = useState(false);
 
+    const [toastOb, setToastOb] = useState({
+        show: false,
+        header: '',
+        content: '',
+    });
+
+    const toggleShowToast = ({ header, show, content }) => {
+        setToastOb((toastOb) => {
+            return {
+                header: header ? header : '',
+                content: content ? content : '',
+                show: show ? show : !toastOb.show,
+            };
+        });
+    };
+
     const handleClickDetails = () => {
         setDetails(true);
     };
 
-    useEffect(() => {
-        const getWorks = async () => {
+    const getWorks = useCallback(
+        async ({ header, content }) => {
+            if (header && content) {
+                toggleShowToast({ header: 'Xong', content: 'Hủy tham gia thành công' });
+            }
             const res = await workServices.getNameWorkUser(currUser.id, 1);
             if (res.errCode === 0) {
                 setWorkBrowsed(res.works);
             }
-        };
-        getWorks();
+        },
+        [currUser.id],
+    );
+
+    useEffect(() => {
+        getWorks({});
     }, []);
 
     return (
         <div className={cx('wrap')}>
+            <ToastMassage
+                dur={4000}
+                isShow={toastOb.show}
+                header={toastOb.header}
+                content={toastOb.content}
+                handleClose={() => toggleShowToast({})}
+            />
             <h2
                 className={cx('notications', {
                     details,
@@ -82,7 +113,9 @@ function WorkCalendar() {
                             {workBrowsed.map((work) => {
                                 return (
                                     <Work
+                                        getWorks={getWorks}
                                         key={work.id}
+                                        id={work.id}
                                         startDate={work.work.startDate}
                                         name={work.work.name}
                                         workPlace={work.work.workPlace}

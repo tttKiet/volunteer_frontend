@@ -1,0 +1,56 @@
+.wrap {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s linear;
+    .more-icon {
+        cursor: pointer;
+        padding: 4px;
+        svg {
+            color: #383838;
+            font-weight: 600;
+            transition: all 0.2s linear;
+        }
+
+        &:hover {
+            svg {
+                color: #2f24ff;
+            }
+        }
+    }
+    .more-menu {
+        position: absolute;
+        top: 100%;
+        border-radius: 4px;
+        right: 20px;
+        min-width: 170px;
+        border: 1px solid #ccc;
+        box-shadow: 0px 0px 4px 0px #0000002f;
+
+        .more-item {
+            padding: 6px 16px;
+            font-size: 14px;
+            color: #383838;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s ease-in;
+            background-color: #fff;
+            border-radius: 4px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            &:hover {
+                color: #fff;
+                background-color: #2f24ff;
+            }
+
+            span {
+                margin: 0 4px;
+            }
+        }
+    }
+}

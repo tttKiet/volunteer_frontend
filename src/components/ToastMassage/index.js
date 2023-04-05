@@ -4,12 +4,19 @@ import styles from './ToastMassage.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ToastMassage({ header, content, handleClose, isShow }) {
+function ToastMassage({ header, content, handleClose, isShow, dur = 3200 }) {
     return (
         <div className={cx('wrap')}>
-            <ToastContainer className={cx('')}>
-                <Toast onClose={handleClose} show={isShow} delay={3200} animation={true} autohide>
-                    <Toast.Header>
+            <ToastContainer>
+                <Toast
+                    className={cx('toast')}
+                    onClose={handleClose}
+                    show={isShow}
+                    delay={dur}
+                    animation={true}
+                    autohide
+                >
+                    <Toast.Header className={cx('toast-header')}>
                         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
                         <strong className="me-auto">{header}</strong>
                         <small>Vừa xong</small>

@@ -1,8 +1,25 @@
 .wrap {
     margin-bottom: 40px;
     padding-top: 20px;
+    margin-left: 30px;
+    opacity: 0;
+    transition: all 0.4s linear;
+
+    &.visible {
+        opacity: 1;
+        margin-left: 0px;
+    }
+
+    &:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+    &:nth-child(3) {
+        transition-delay: 0.3s;
+    }
+
     .wrap-item {
         padding: 0 0;
+        position: relative;
 
         .item {
             padding: 10px 20px;
