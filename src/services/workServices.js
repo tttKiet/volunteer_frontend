@@ -123,6 +123,15 @@ const workServices = {
         });
         return res.data;
     },
+
+    async getStatisticalStudenParAndReq({ year }) {
+        const res = await axios.get('api/v1/statistical/student-par-req', {
+            params: {
+                year,
+            },
+        });
+        return res.data;
+    },
 };
 
 export default workServices;

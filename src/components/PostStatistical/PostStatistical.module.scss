@@ -1,0 +1,24 @@
+.wrap {
+    margin-top: 26px;
+    padding-bottom: 20px;
+
+    .select {
+        position: relative;
+        display: inline-block;
+        font-size: 16px;
+        color: #333;
+        margin: 30px 0 10px 0;
+
+        select {
+            padding: 2px 4px;
+            border-radius: 4px;
+            outline: none;
+            margin: 0 12px;
+            border: 1px solid #ccc;
+        }
+    }
+
+    .footer {
+        padding: 20px 0;
+    }
+}

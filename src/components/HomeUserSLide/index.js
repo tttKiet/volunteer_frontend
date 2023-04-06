@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import BtnLgHomePrimary from '../BtnLgHomePrimary/BtnLgHomePrimary';
 
 import styles from './HomeUserSLide.module.scss';
 import gifUser from '../../assets/gif/user-home-2.gif';
@@ -6,7 +7,7 @@ import dog from '../../assets/images/home-user-and-dog.png';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-function HomeUserSLide({ name }) {
+function HomeUserSLide({ name, handleClickPar }) {
     const elementRef = useRef(null);
     const title1 = useRef(null);
     const content = useRef(null);
@@ -73,6 +74,10 @@ function HomeUserSLide({ name }) {
                     cộng đồng và xã hội. Tình nguyện viên không chỉ giúp đỡ người khác mà còn tạo nên những trải nghiệm
                     ý nghĩa và đáng nhớ cho chính bản thân họ.
                 </span>
+
+                <div onClick={handleClickPar}>
+                    <BtnLgHomePrimary />
+                </div>
             </div>
             <div className={cx('header-img')}>
                 <img src={dog} ref={headerImg}></img>

@@ -13,6 +13,7 @@ const cx = classNames.bind(styles);
 const links = [
     { name: 'BÀI ĐĂNG CỦA TÔI', to: '/admin/mypost' },
     { name: 'QUẢN LÝ CÔNG TÁC TÌNH NGUYỆN', to: '/admin/view/list-user-req' },
+    { name: 'THỐNG KÊ', to: '/admin/statistical' },
 ];
 function HomeManager() {
     const [post, setPost] = useState([]);
@@ -35,7 +36,6 @@ function HomeManager() {
         <>
             <div className={cx('wrap')}>
                 <div className={cx('header')}>
-                    
                     <Container>
                         <Header links={links} />
                         <div className={cx('header-main')}>

@@ -17,7 +17,6 @@ import StatedUserSLide from '~/components/StatedUserSLide';
 import ContactUserSLide from '~/components/ContactUserSLide';
 import ListWork from '~/components/ListWork';
 import WorkCalendar from '~/components/WorkCalendar';
-import UserRegister from '~/components/UserRegister';
 
 const cx = classNames.bind(styles);
 
@@ -48,6 +47,11 @@ function LayoutUser() {
                 break;
             }
         }
+    };
+
+    const handleClickPar = () => {
+        setShowContent(true);
+        setCurrComponent('list');
     };
 
     const handleClickLogout = () => {
@@ -159,7 +163,7 @@ function LayoutUser() {
                 </div>
 
                 <div className={cx('slides')}>
-                    <HomeUserSLide name={currUser.name} className={cx('slide')} />
+                    <HomeUserSLide name={currUser.name} handleClickPar={handleClickPar} className={cx('slide')} />
                     <StatedUserSLide className={cx('slide')} />
                     <ContactUserSLide className={cx('slide')} />
                 </div>

@@ -5,6 +5,7 @@ import AdminPostAll from '~/pages/AdminPostAll';
 import AdminWorkManager from '~/pages/AdminWorkManager';
 import AdminWorkCreate from '~/pages/AdminWorkCreate';
 import UserDetailsWork from '~/pages/UserDetailsWork';
+import AdminStatistical from '~/pages/AdminStatistical';
 import UserListWork from '~/components/ListWork';
 import AdminWorkList from '~/pages/AdminWorkList';
 import Invalid_404 from '~/pages/Invalid_404';
@@ -40,6 +41,10 @@ const publicRoutes = [
     {
         path: '/admin/work/create',
         component: AdminWorkCreate,
+    },
+    {
+        path: '/admin/statistical',
+        component: AdminStatistical,
     },
     {
         path: '/user/details-work',

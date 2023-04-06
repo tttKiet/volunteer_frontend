@@ -1,0 +1,70 @@
+.wrap {
+    --ig-separator: 219, 219, 219;
+    --ig-primary-text: 38, 38, 38;
+    --ig-secondary-background: 250, 250, 250;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    padding-left: 432px;
+    padding-right: 92px;
+
+    .map {
+        .menu-control {
+            padding: 48px 20px 30px 0;
+            font-size: 12px;
+            a {
+                padding: 0 4px;
+                cursor: pointer;
+                color: #383838;
+                transition: all 0.2s linear;
+
+                &:hover {
+                    color: rgb(73 94 255 / 77%);
+                }
+            }
+            span {
+                padding: 0 4px;
+            }
+        }
+
+        ul {
+            border-bottom: 1px solid #ca9336bf;
+            li {
+                button {
+                    font-size: 14px;
+                    color: #000;
+                    outline: none !important;
+                    opacity: 0.7;
+                    border-bottom: 1px solid transparent;
+                    transition: all 0.2s linear;
+
+                    &.active {
+                        color: #000 !important;
+                        opacity: 1 !important;
+                        border-left: 1px solid #ca9336bf !important;
+                        border-top: 1px solid #ca9336bf !important;
+                        border-right: 1px solid #ca9336bf !important;
+                        border-bottom: 1px solid #f1f4f6 !important;
+                        background-color: transparent !important;
+
+                        box-shadow: -1px -1px 0px 0px rgba(202, 148, 54, 0.518);
+                    }
+
+                    &:active {
+                        opacity: 1 !important;
+                        color: #000 !important;
+                    }
+
+                    &:not(.active):hover {
+                        opacity: 1 !important;
+                        border-left: 1px solid transparent !important;
+                        border-top: 1px solid transparent !important;
+                        border-right: 1px solid transparent !important;
+                        border-bottom: 1px solid #ca9336bf !important;
+                        background-color: transparent !important;
+                        color: #222222 !important;
+                    }
+                }
+            }
+        }
+    }
+}
