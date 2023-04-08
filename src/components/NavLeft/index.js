@@ -3,13 +3,14 @@ import classNames from 'classnames/bind';
 import ToastMassage from '../ToastMassage';
 import ModalCreateWork from '../ModalCreateWork';
 import styles from './NavLeft.module.scss';
+import ChartGif from '../../assets/gif/line-chart.gif';
 import MenuMoreProfice from '~/components/MenuMoreProfice';
 import { UilEllipsisV } from '@iconscout/react-unicons';
 import { Link } from 'react-router-dom';
 import ModalUpPost from '../ModalUpPost';
 const cx = classNames.bind(styles);
 
-function NavLeft({ menu, handleOkUpPost, post = true }) {
+function NavLeft({ menu, handleOkUpPost, location = 'post' }) {
     const [isShowMenuMore, setIsShowMenuMore] = useState(false);
     const [showCreateWork, setShowCreateWork] = useState(false);
     const [isShowModalUpPost, setIsShowModalUpPost] = useState(false);
@@ -107,12 +108,20 @@ function NavLeft({ menu, handleOkUpPost, post = true }) {
                     );
                 })}
 
+                {location === 'map' && (
+                    <li className={cx('item-link', 'item-link-g')}>
+                        <div className={cx('item-link--gif')}>
+                            <img alt="Chart" src={ChartGif}></img>
+                        </div>
+                    </li>
+                )}
+
                 <li className={cx('item-link', 'more')}>
                     <span>
                         <UilEllipsisV size="30" className={cx('icon')} />
                         <h3 className={cx('title')}>Xem thêm</h3>
                     </span>
-                    <MenuMoreProfice post={post} handleClickMore={handleClickMore} show={isShowMenuMore} />
+                    <MenuMoreProfice location={location} handleClickMore={handleClickMore} show={isShowMenuMore} />
                 </li>
             </ul>
         </div>

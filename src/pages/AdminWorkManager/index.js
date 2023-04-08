@@ -84,7 +84,7 @@ function AdminWorkManager() {
     return (
         <div className={cx('wrap')}>
             {isLoading && <Loader />}
-            <NavLeft menu={menu} />
+            <NavLeft menu={menu} location="work" />
             <Container>
                 <Row>
                     <Col md={3}></Col>

@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
+
 // Chart
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 // services
+import { postServices } from '~/services';
+
+// selection
+import { useSelector } from 'react-redux';
+import { userSelector } from '~/redux/selector';
 
 // scss
 import styles from './PostChart.module.scss';
@@ -12,15 +18,16 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 ChartJS.register(ChartDataLabels, ArcElement, Tooltip, Legend);
-function PostChart({ year = new Date().getFullYear() - 1 }) {
-    const [dataPost, setDataPost] = useState([12, 19]);
+function PostChart() {
+    const currUser = useSelector(userSelector);
+    const [dataPost, setDataPost] = useState([0, 1]);
     const data = {
         labels: ['Đóng góp của bạn', 'Tổng số'],
 
         datasets: [
             {
                 label: 'Số bài viết',
-                data: [12, 19],
+                data: [...dataPost],
                 backgroundColor: ['#864F85', '#b46bb2'],
                 borderColor: ['#fff', '#fff'],
                 borderWidth: 3,
@@ -85,12 +92,23 @@ function PostChart({ year = new Date().getFullYear() - 1 }) {
         aspectRatio: 1.5,
     };
 
+    useEffect(() => {
+        const getStatisticalPost = async () => {
+            const res = await postServices.getStatisticalPost({ userId: currUser.id });
+            if (res.errCode === 0) {
+                setDataPost(res.data);
+            }
+        };
+
+        getStatisticalPost();
+    }, [currUser.id]);
+
     return (
         <div className={cx('wrap')}>
             <div className={cx('map')}>
                 <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />
             </div>
-            <h2 className={cx('title')}>Biểu đồ thống kê sinh viên tham gia / đăng ký tình nguyện ở năm {year}</h2>
+            <h2 className={cx('title')}>Biểu đồ thống kê đóng góp bài viết của bạn</h2>
         </div>
     );
 }

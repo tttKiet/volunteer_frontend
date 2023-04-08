@@ -51,6 +51,16 @@ const postService = {
             console.log('e----------------', e);
         }
     },
+
+    // Statistical
+    async getStatisticalPost({ userId }) {
+        const res = await axios.get('/api/v1/statistical/post', {
+            params: {
+                userId,
+            },
+        });
+        return res.data;
+    },
 };
 
 export default postService;

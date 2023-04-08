@@ -52,7 +52,7 @@ function AdminPostAll() {
 
     return (
         <div className={cx('wrap')}>
-            <NavLeft menu={menu} />
+            <NavLeft menu={menu} location="post" />
             <div className={cx('wrap-post')}>
                 <div className={cx('menu-control')}>
                     <a href="/">Trang chủ</a>/<span> Tất cả bài đăng </span>

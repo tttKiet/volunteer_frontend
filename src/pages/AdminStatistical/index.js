@@ -44,7 +44,7 @@ function AdminStatistical() {
 
     return (
         <div className={cx('wrap')}>
-            <NavLeft menu={menu} />
+            <NavLeft menu={menu} location="map" />
 
             <div className={cx('map')}>
                 <div className={cx('menu-control')}>

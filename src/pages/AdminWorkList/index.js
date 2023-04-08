@@ -79,7 +79,7 @@ function AdminWorkList() {
         <div className={cx('wrap')}>
             <div>
                 {isLoading && <Loader />}
-                <NavLeft menu={menu} />
+                <NavLeft menu={menu} location="work" />
                 <Container>
                     <Row>
                         <Col md={3}></Col>

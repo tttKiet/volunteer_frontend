@@ -62,7 +62,7 @@ function AdminPost() {
 
     return (
         <div className={cx('wrap')}>
-            <NavLeft menu={menu} post={false} handleOkUpPost={getPosts} />
+            <NavLeft menu={menu} location="post" handleOkUpPost={getPosts} />
             <div className={cx('wrap-post')}>
                 <div className={cx('menu-control')}>
                     <a href="/">Trang chủ</a>/<span> Bài đăng </span>
