@@ -6,11 +6,14 @@ import { UilFileUpload } from '@iconscout/react-unicons';
 import { UilEstate } from '@iconscout/react-unicons';
 import Moment from 'react-moment';
 import NavLeft from '~/components/NavLeft';
+
+import Loader from '~/components/Loader';
+import ToastMassage from '~/components/ToastMassage';
 import { postServices } from '~/services';
 import { useSelector } from 'react-redux';
 import { isLoginSelector, userSelector } from '~/redux/selector';
 import Post from '~/components/Post';
-import user from '../../assets/images/home-admin-slide3.jpg';
+import user from '../../assets/images/avatar.png';
 import classNames from 'classnames/bind';
 import styles from './AdminPost.module.scss';
 
@@ -42,6 +45,13 @@ function AdminPost() {
     const curUser = useSelector(userSelector);
     const navigate = useNavigate();
     const [post, setPost] = useState([]);
+    const [showLoading, setShowLoading] = useState(false);
+
+    const [toastOb, setToastOb] = useState({
+        show: false,
+        header: '',
+        content: '',
+    });
 
     const getPosts = useCallback(async () => {
         const res = await postServices.getPosts({ id: curUser.id });
@@ -55,6 +65,28 @@ function AdminPost() {
         }
     }, [isLogined, navigate]);
 
+    const handleDeletePost = async ({ id }) => {
+        setShowLoading(true);
+        const res = await postServices.deletePostByid({ id });
+        if (res.errCode === 0) {
+            toggleShowToast({ header: 'Xong!', content: 'Đã xóa thành công' });
+            getPosts();
+        } else {
+            toggleShowToast({ header: 'Fail!', content: 'Đã có lỗi xảy ra!' });
+        }
+        setShowLoading(false);
+    };
+
+    const toggleShowToast = ({ header, show, content }) => {
+        setToastOb((toastOb) => {
+            return {
+                header: header ? header : '',
+                content: content ? content : '',
+                show: show ? show : !toastOb.show,
+            };
+        });
+    };
+
     useEffect(() => {
         controlPage();
         getPosts();
@@ -62,6 +94,14 @@ function AdminPost() {
 
     return (
         <div className={cx('wrap')}>
+            {showLoading && <Loader />}
+            <ToastMassage
+                dur={4200}
+                isShow={toastOb.show}
+                header={toastOb.header}
+                content={toastOb.content}
+                handleClose={() => toggleShowToast({})}
+            />
             <NavLeft menu={menu} location="post" handleOkUpPost={getPosts} />
             <div className={cx('wrap-post')}>
                 <div className={cx('menu-control')}>
@@ -72,6 +112,7 @@ function AdminPost() {
                         {post.map((post) => {
                             return (
                                 <Post
+                                    handleDeletePost={handleDeletePost}
                                     postId={post.id}
                                     light={true}
                                     image={post.linkImage}
@@ -80,6 +121,7 @@ function AdminPost() {
                                     title={post.title}
                                     content={post.description}
                                     upDate={post.createdAt}
+                                    admin={true}
                                 />
                             );
                         })}
@@ -87,6 +129,7 @@ function AdminPost() {
                     </div>
                 </div>
             </div>
+
             <div className={cx('profice')}>
                 <div className={cx('info')}>
                     <Row>

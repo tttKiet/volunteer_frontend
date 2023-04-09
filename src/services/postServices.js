@@ -61,6 +61,16 @@ const postService = {
         });
         return res.data;
     },
+
+    // Delete post
+    async deletePostByid({ id }) {
+        const res = await axios.delete('/api/v1/post/delete', {
+            params: {
+                id,
+            },
+        });
+        return res.data;
+    },
 };
 
 export default postService;

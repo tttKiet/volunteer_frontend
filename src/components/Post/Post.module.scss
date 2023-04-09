@@ -6,8 +6,6 @@
     --ig-secondary-text2: 168, 168, 168;
     --ig-primary-text: #262626;
     width: 470px;
-    // min-height: 620px;
-    // background-color: #fff;
     color: var(--text-color-post);
     padding-bottom: 20px;
     margin-bottom: 12px;
@@ -30,6 +28,7 @@
         display: flex;
         align-items: center;
         height: 56px;
+        position: relative;
 
         .user {
             width: 28px;

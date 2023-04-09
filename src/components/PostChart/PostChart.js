@@ -22,7 +22,7 @@ function PostChart() {
     const currUser = useSelector(userSelector);
     const [dataPost, setDataPost] = useState([0, 1]);
     const data = {
-        labels: ['Đóng góp của bạn', 'Tổng số'],
+        labels: ['Đóng góp của bạn', 'Người dùng khác'],
 
         datasets: [
             {
@@ -96,7 +96,7 @@ function PostChart() {
         const getStatisticalPost = async () => {
             const res = await postServices.getStatisticalPost({ userId: currUser.id });
             if (res.errCode === 0) {
-                setDataPost(res.data);
+                setDataPost([res.data[0], res.data[1] - res.data[0]]);
             }
         };
 

@@ -102,6 +102,7 @@ function AdminWorkManager() {
                                         return (
                                             <div key={work.id} className={cx('wrap-work')}>
                                                 <Work
+                                                    admin={true}
                                                     key={work.id}
                                                     countRequest={work.workCount}
                                                     startDate={work.work.startDate}

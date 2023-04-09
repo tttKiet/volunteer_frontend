@@ -1,6 +1,3 @@
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-
 import { useState } from 'react';
 import { postServices } from '~/services';
 
@@ -73,7 +70,6 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
     };
 
     const handleChangeFile = (e) => {
-        console.log('upfile');
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
             const url = URL.createObjectURL(file);
@@ -109,6 +105,7 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
             setFile(null);
             setIsShowDecs(false);
             toggleShowToast({ header: 'Xong', content: 'Đã tạo bài đăng' });
+            setImg('img2');
             handleOk();
         }
         setShowLoading(false);
@@ -136,6 +133,7 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
                 show: isShow,
             })}
         >
+            {console.log(decsription)}
             <div className={cx('form')}>
                 <h1 className={cx('header')}>
                     {isShowDecs && (
@@ -206,7 +204,7 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
                                 onChange={(e) => handleClickChangeInput(e, 'decsription')}
                                 placeholder="Nội dung ..."
                                 spellCheck="false"
-                                defaultValue={decsription}
+                                value={decsription}
                             ></textarea>
                         </div>
                         <hr />

@@ -3,6 +3,8 @@ import styles from './Post.module.scss';
 import moment from 'moment';
 
 import { useEffect, useState, useRef } from 'react';
+import MorePost from '../MorePost';
+
 import img1 from '../../assets/images/bg-post-1.jpg';
 import img2 from '../../assets/images/bg-post-2.jpg';
 import img3 from '../../assets/images/bg-post-3.jpg';
@@ -17,7 +19,7 @@ const obImgS = {
 };
 
 const cx = classNames.bind(styles);
-function Post({ author, title, content, upDate, light = true, image }) {
+function Post({ author, title, content, upDate, light = true, image, admin = false, handleDeletePost, postId }) {
     const postRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
     const isDevImg = image?.startsWith('img');
@@ -85,6 +87,7 @@ function Post({ author, title, content, upDate, light = true, image }) {
                 <b>_{author}</b>
                 <span className={cx('dot')}> • </span>
                 <span className={cx('time')}>{moment(upDate).startOf().fromNow()}</span>
+                {admin && <MorePost id={postId} handleDeletePost={handleDeletePost} />}
             </div>
             <div
                 className={cx('main', {
@@ -118,7 +121,6 @@ function Post({ author, title, content, upDate, light = true, image }) {
                     </div>
                 )}
             </div>
-
             {!isDevImg && (
                 <div className={cx('footer', { 'footer-light': light })}>
                     <div>

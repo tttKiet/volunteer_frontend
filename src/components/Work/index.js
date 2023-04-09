@@ -7,7 +7,19 @@ import styles from './Work.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Work({ id, getWorks, startDate, name, workPlace, curStudent, maxStudent, pointPlus, countRequest, note }) {
+function Work({
+    id,
+    getWorks,
+    startDate,
+    name,
+    workPlace,
+    curStudent,
+    maxStudent,
+    pointPlus,
+    countRequest,
+    note,
+    admin = false,
+}) {
     const [isVisible, setIsVisible] = useState(false);
     const workRef = useRef(null);
 
@@ -123,7 +135,7 @@ function Work({ id, getWorks, startDate, name, workPlace, curStudent, maxStudent
                         </Col>
                     </div>
                 </div>
-                <MoreWork id={id} getWorks={getWorks} />
+                {!admin && <MoreWork id={id} getWorks={getWorks} />}
             </div>
         </div>
     );
