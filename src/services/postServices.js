@@ -26,8 +26,6 @@ const postService = {
 
     // Up load post
     async upPost(id, title, description, image) {
-        console.log('file', image);
-
         const formData = new FormData();
         try {
             const data = {
@@ -52,6 +50,32 @@ const postService = {
         }
     },
 
+    // Update  post
+    async updatePost(id, title, description, image, postId) {
+        const formData = new FormData();
+        try {
+            const data = {
+                userId: id,
+                title,
+                description,
+                image,
+            };
+
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
+
+            const res = await axios.patch(`/api/v1/post/${postId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            return res.data;
+        } catch (e) {
+            console.log('e----------------', e);
+        }
+    },
+
     // Statistical
     async getStatisticalPost({ userId }) {
         const res = await axios.get('/api/v1/statistical/post', {
@@ -65,6 +89,16 @@ const postService = {
     // Delete post
     async deletePostByid({ id }) {
         const res = await axios.delete('/api/v1/post/delete', {
+            params: {
+                id,
+            },
+        });
+        return res.data;
+    },
+
+    // get post
+    async getPostByid({ id }) {
+        const res = await axios.get(`api/v1/post/${id}`, {
             params: {
                 id,
             },

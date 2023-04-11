@@ -7,13 +7,11 @@ import ChartGif from '../../assets/gif/line-chart.gif';
 import MenuMoreProfice from '~/components/MenuMoreProfice';
 import { UilEllipsisV } from '@iconscout/react-unicons';
 import { Link } from 'react-router-dom';
-import ModalUpPost from '../ModalUpPost';
 const cx = classNames.bind(styles);
 
-function NavLeft({ menu, handleOkUpPost, location = 'post' }) {
+function NavLeft({ menu, handleUpPost, location = 'post' }) {
     const [isShowMenuMore, setIsShowMenuMore] = useState(false);
     const [showCreateWork, setShowCreateWork] = useState(false);
-    const [isShowModalUpPost, setIsShowModalUpPost] = useState(false);
     const [obToast, setObToast] = useState({
         isShow: false,
         header: '',
@@ -36,15 +34,12 @@ function NavLeft({ menu, handleOkUpPost, location = 'post' }) {
 
     const handleCLickMenu = (e, type) => {
         if (type && type === 'up-post') {
-            setIsShowModalUpPost(true);
+            handleUpPost();
         } else if (type && type === 'create-work') {
             setShowCreateWork(true);
         }
     };
 
-    const handleClickX = () => {
-        setIsShowModalUpPost(false);
-    };
 
     const toggleShowToast = ({ header, content }) => {
         setObToast((toast) => {
@@ -73,12 +68,7 @@ function NavLeft({ menu, handleOkUpPost, location = 'post' }) {
                 isShow={obToast.isShow}
             />
             <ModalCreateWork isShow={showCreateWork} handleClose={toggleShowCreateWorkModal} />
-            <ModalUpPost
-                isShow={isShowModalUpPost}
-                handleOk={handleOkUpPost}
-                toggleShow={handleClickX}
-                toggleShowToast={toggleShowToast}
-            />
+
             <span className={cx('title-main')}>{menu.title}</span>
             <ul className={cx('controler')}>
                 {menu.desc.map((menu, id) => {

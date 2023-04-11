@@ -16,6 +16,7 @@ import Post from '~/components/Post';
 import user from '../../assets/images/avatar.png';
 import classNames from 'classnames/bind';
 import styles from './AdminPost.module.scss';
+import ModalUpPost from '~/components/ModalUpPost';
 
 const cx = classNames.bind(styles);
 
@@ -41,6 +42,8 @@ const menu = {
 };
 
 function AdminPost() {
+    const [isShowModalUpPost, setIsShowModalUpPost] = useState(false);
+    const [idPostEdit, setIdPostEdit] = useState('');
     const isLogined = useSelector(isLoginSelector);
     const curUser = useSelector(userSelector);
     const navigate = useNavigate();
@@ -52,6 +55,10 @@ function AdminPost() {
         header: '',
         content: '',
     });
+
+    const setOffEdit = () => {
+        setIdPostEdit('');
+    };
 
     const getPosts = useCallback(async () => {
         const res = await postServices.getPosts({ id: curUser.id });
@@ -86,6 +93,18 @@ function AdminPost() {
             };
         });
     };
+    const handleEdit = ({ id }) => {
+        setIdPostEdit(id);
+        setIsShowModalUpPost(true);
+    };
+
+    const handleUpPost = () => {
+        setIsShowModalUpPost(true);
+    };
+
+    const handleClickX = () => {
+        setIsShowModalUpPost(false);
+    };
 
     useEffect(() => {
         controlPage();
@@ -102,7 +121,20 @@ function AdminPost() {
                 content={toastOb.content}
                 handleClose={() => toggleShowToast({})}
             />
-            <NavLeft menu={menu} location="post" handleOkUpPost={getPosts} />
+
+            {isShowModalUpPost && (
+                <ModalUpPost
+                    setOffEdit={setOffEdit}
+                    id={idPostEdit}
+                    isShow={isShowModalUpPost}
+                    handleOk={getPosts}
+                    toggleShow={handleClickX}
+                    toggleShowToast={toggleShowToast}
+                />
+            )}
+
+            <NavLeft menu={menu} location="post" handleUpPost={handleUpPost} />
+
             <div className={cx('wrap-post')}>
                 <div className={cx('menu-control')}>
                     <a href="/">Trang chủ</a>/<span> Bài đăng </span>
@@ -110,8 +142,11 @@ function AdminPost() {
                 <div className={cx('posts')}>
                     <div className={cx('post-profice')}>
                         {post.map((post) => {
+                            console.log('Post: ', post);
+
                             return (
                                 <Post
+                                    handleEdit={handleEdit}
                                     handleDeletePost={handleDeletePost}
                                     postId={post.id}
                                     light={true}

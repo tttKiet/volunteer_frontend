@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { postServices } from '~/services';
 
 import Loader from '../Loader';
@@ -53,7 +53,7 @@ const obImgS = {
     img5,
 };
 
-function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
+function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk, id, setOffEdit }) {
     const currUser = useSelector(userSelector);
     const [showLoading, setShowLoading] = useState(false);
     const [title, setTitle] = useState('');
@@ -68,6 +68,14 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
         setName('');
         setFile(null);
     };
+
+    async function getImageFileFromUrl(imageUrl) {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const filename = imageUrl.split('/').pop();
+        const file = new File([blob], filename, { type: blob.type });
+        return file;
+    }
 
     const handleChangeFile = (e) => {
         const file = e.target.files[0];
@@ -85,6 +93,15 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
 
     const handleClickContinue = () => {
         setIsShowDecs(true);
+    };
+
+    const defaultvValue = () => {
+        setTitle('');
+        setDecsription('');
+        setName('');
+        setFile(null);
+        setIsShowDecs(false);
+        setImg('img2');
     };
 
     const handleClickUpPost = async () => {
@@ -127,13 +144,60 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
         }
     };
 
+    const handleClickUpdate = async () => {
+        setShowLoading(true);
+        let userId;
+        let res;
+        userId = currUser.id;
+
+        if (file) {
+            res = await postServices.updatePost(userId, title, decsription, file, id);
+        } else {
+            res = await postServices.updatePost(userId, title, decsription, img, id);
+        }
+        if (res.errCode === 0) {
+            handleOk();
+            toggleShow();
+            setTitle('');
+            setDecsription('');
+            setName('');
+            setFile(null);
+            setIsShowDecs(false);
+            toggleShowToast({ header: 'Xong', content: 'Đã cập nhật bài đăng' });
+            setImg('img2');
+        }
+        setShowLoading(false);
+    };
+
+    useEffect(() => {
+        const getDataEdit = async () => {
+            const res = await postServices.getPostByid({ id });
+            if (res.errCode === 0) {
+                setTitle(res.data.title);
+                setDecsription(res.data.description);
+                setName('myImage');
+                let img = res.data.linkImage;
+                if (obImgS[img]) {
+                    setImg(img);
+                } else {
+                    const imgFile = await getImageFileFromUrl(img);
+                    setFile(imgFile);
+                    setImg(img);
+                }
+            }
+        };
+
+        if (id) {
+            getDataEdit();
+        }
+    }, [id]);
+
     return (
         <div
             className={cx('wrap', {
                 show: isShow,
             })}
         >
-            {console.log(decsription)}
             <div className={cx('form')}>
                 <h1 className={cx('header')}>
                     {isShowDecs && (
@@ -142,7 +206,14 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
                         </div>
                     )}
                     Tạo bài viết mới
-                    <div className={cx('x')} onClick={toggleShow}>
+                    <div
+                        className={cx('x')}
+                        onClick={() => {
+                            toggleShow();
+                            setOffEdit();
+                            defaultvValue();
+                        }}
+                    >
                         <FontAwesomeIcon icon={faXmark} />
                     </div>
                 </h1>
@@ -245,15 +316,29 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk }) {
                                             Đăng
                                         </button>
                                     ) : (
-                                        <button
-                                            type="button"
-                                            className={cx('submit', {
-                                                'btn-load': showLoading,
-                                            })}
-                                            onClick={handleClickUpPost}
-                                        >
-                                            Đăng
-                                        </button>
+                                        <>
+                                            {!id ? (
+                                                <button
+                                                    type="button"
+                                                    className={cx('submit', {
+                                                        'btn-load': showLoading,
+                                                    })}
+                                                    onClick={handleClickUpPost}
+                                                >
+                                                    Đăng
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    type="button"
+                                                    className={cx('submit', {
+                                                        'btn-load': showLoading,
+                                                    })}
+                                                    onClick={handleClickUpdate}
+                                                >
+                                                    Cập nhật
+                                                </button>
+                                            )}
+                                        </>
                                     )}
                                 </>
                             )}

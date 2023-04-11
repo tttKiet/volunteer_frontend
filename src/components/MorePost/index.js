@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { UilEllipsisV, UilCancel } from '@iconscout/react-unicons';
-
-import { workServices } from '~/services';
+import { UilEllipsisV, UilCancel, UilEdit } from '@iconscout/react-unicons';
 import { useSelector } from 'react-redux';
 import { userSelector } from '~/redux/selector';
 import ModalAuth from '../ModalAuth';
@@ -11,7 +9,7 @@ import styles from './MorePost.module.scss';
 
 const cx = classNames.bind(styles);
 
-function MorePost({ id, handleDeletePost }) {
+function MorePost({ id, handleDeletePost, handleEdit }) {
     const currUser = useSelector(userSelector);
     const [isShowModal, setIsShowModal] = useState(false);
 
@@ -33,6 +31,10 @@ function MorePost({ id, handleDeletePost }) {
 
     const handleClickMoreDel = () => {
         toggleShowModal();
+    };
+
+    const handleClickMoreEdit = () => {
+        handleEdit({ id });
     };
 
     useEffect(() => {
@@ -57,9 +59,9 @@ function MorePost({ id, handleDeletePost }) {
 
             {showMenu && (
                 <div ref={menuRef} className={cx('more-menu')}>
-                    <div className={cx('more-item')}>
+                    <div className={cx('more-item')} onClick={handleClickMoreEdit}>
                         <span>
-                            <UilCancel size={18} />
+                            <UilEdit size={18} />
                         </span>
 
                         <span>Sửa bài viết</span>

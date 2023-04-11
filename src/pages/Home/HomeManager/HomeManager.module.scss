@@ -4,9 +4,31 @@
         position: relative;
         height: 100vh;
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('../../../assets/images/home-admin-slide1.jpg') center no-repeat;
+            url('../../../assets/images/bg1.jpg') center no-repeat;
+        animation: change_img 24s linear infinite;
         background-size: cover;
+        will-change: background;
         overflow: hidden;
+
+        @keyframes change_img {
+            0% {
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('../../../assets/images/bg1.jpg') center/cover no-repeat;
+            }
+            25% {
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('../../../assets/images/bg2.jpg') center/cover no-repeat;
+            }
+            50% {
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('../../../assets/images/bg3.jpg') center/cover no-repeat;
+            }
+            75% {
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('../../../assets/images/bg4.jpg') center/cover no-repeat;
+            }
+        }
+
         .header-main {
             color: #fff;
             max-width: 600px;

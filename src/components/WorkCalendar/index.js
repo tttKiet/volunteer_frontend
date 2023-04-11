@@ -57,7 +57,7 @@ function WorkCalendar() {
     return (
         <div className={cx('wrap')}>
             <ToastMassage
-                dur={4000}
+                dur={5000}
                 isShow={toastOb.show}
                 header={toastOb.header}
                 content={toastOb.content}

@@ -19,7 +19,18 @@ const obImgS = {
 };
 
 const cx = classNames.bind(styles);
-function Post({ author, title, content, upDate, light = true, image, admin = false, handleDeletePost, postId }) {
+function Post({
+    author,
+    title,
+    content,
+    upDate,
+    light = true,
+    image,
+    admin = false,
+    handleDeletePost,
+    postId,
+    handleEdit,
+}) {
     const postRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
     const isDevImg = image?.startsWith('img');
@@ -43,6 +54,14 @@ function Post({ author, title, content, upDate, light = true, image, admin = fal
     };
 
     useEffect(() => {
+        setDesc(() => {
+            if (content.length > 100) {
+                setViewMore(true);
+                return content.slice(0, 100);
+            } else {
+                return content;
+            }
+        });
         const options = {
             root: null,
             rootMargin: '0px',
@@ -68,7 +87,7 @@ function Post({ author, title, content, upDate, light = true, image, admin = fal
                 observer.unobserve(postRef.current);
             }
         };
-    });
+    }, [content]);
 
     return (
         <div
@@ -87,7 +106,7 @@ function Post({ author, title, content, upDate, light = true, image, admin = fal
                 <b>_{author}</b>
                 <span className={cx('dot')}> • </span>
                 <span className={cx('time')}>{moment(upDate).startOf().fromNow()}</span>
-                {admin && <MorePost id={postId} handleDeletePost={handleDeletePost} />}
+                {admin && <MorePost id={postId} handleDeletePost={handleDeletePost} handleEdit={handleEdit} />}
             </div>
             <div
                 className={cx('main', {

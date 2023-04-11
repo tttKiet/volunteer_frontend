@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-// import { UilAirplay } from '@iconscout';
 import { UilBorderLeft } from '@iconscout/react-unicons';
-import { Row, Col } from 'react-bootstrap';
+import logo from '../../assets/images/logo2.png';
+import { Row, Col, Image } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { userSelector } from '~/redux/selector';
 import { userSlice } from '~/redux/reducers';
@@ -42,8 +42,7 @@ function Header({ links }) {
                 <Row className="h-100 align-items-center  px-3">
                     <Col md={3}>
                         <Link to="/" className={cx('logo')}>
-                            <UilBorderLeft size="30" className={cx('logo-image')} />
-                            {/* <Image className={cx('logo-image')} rounded roundedCircle thumbnail src={`${logo}`} /> */}
+                            <Image className={cx('logo-image')} src={`${logo}`} />
                         </Link>
                     </Col>
                     <Col md={6}>
