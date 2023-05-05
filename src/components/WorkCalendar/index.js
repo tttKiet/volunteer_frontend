@@ -45,6 +45,9 @@ function WorkCalendar() {
             const res = await workServices.getNameWorkUser(currUser.id, 1);
             if (res.errCode === 0) {
                 setWorkBrowsed(res.works);
+            } else {
+                setWorkBrowsed([]);
+                setDetails(false);
             }
         },
         [currUser.id],
