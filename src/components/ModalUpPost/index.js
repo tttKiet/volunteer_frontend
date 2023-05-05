@@ -155,6 +155,7 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk, id, setOff
         } else {
             res = await postServices.updatePost(userId, title, decsription, img, id);
         }
+
         if (res.errCode === 0) {
             handleOk();
             toggleShow();
@@ -165,6 +166,7 @@ function ModalUpPost({ isShow, toggleShow, toggleShowToast, handleOk, id, setOff
             setIsShowDecs(false);
             toggleShowToast({ header: 'Xong', content: 'Đã cập nhật bài đăng' });
             setImg('img2');
+            setOffEdit();
         }
         setShowLoading(false);
     };

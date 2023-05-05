@@ -81,7 +81,7 @@ function ExportToEx({ data }) {
         );
 
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Danh sách tham gia tình nguyện');
-        XLSX.writeFile(workbook, 'volunter.xlsx');
+        XLSX.writeFile(workbook, `volunter_${new Date().getTime()}.xlsx`);
     };
 
     return (

@@ -10,6 +10,8 @@ import img2 from '../../assets/images/bg-post-2.jpg';
 import img3 from '../../assets/images/bg-post-3.jpg';
 import img4 from '../../assets/images/bg-post-4.jpg';
 import img5 from '../../assets/images/bg-post-5.jpg';
+import avt from '../../assets/images/avt1.png';
+
 const obImgS = {
     img1,
     img2,
@@ -102,7 +104,7 @@ function Post({
                 })}
             >
                 {/* // eslint-disable-next-line jsx-a11y/alt-text */}
-                <img className={cx('user')} src={img4}></img>
+                <img className={cx('user')} src={avt}></img>
                 <b>_{author}</b>
                 <span className={cx('dot')}> • </span>
                 <span className={cx('time')}>{moment(upDate).startOf().fromNow()}</span>

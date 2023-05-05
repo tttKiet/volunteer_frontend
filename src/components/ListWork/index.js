@@ -54,13 +54,24 @@ function ListWork() {
         registerWork(res);
     };
 
+    const arrSort = (arr) => {
+        return arr.sort((a, b) => {
+            if (a.curStudent === a.maxStudent && b.curStudent !== b.maxStudent) {
+                return 1;
+            } else if (a.curStudent !== a.maxStudent && b.curStudent === b.maxStudent) {
+                return -1;
+            }
+            return 0;
+        });
+    };
+
     const renderWork = async () => {
-        console.log('renderWor; currUser.id: ', currUser.id);
         const res = await workServices.getNameWork({ userId: currUser.id });
 
         if (res.errCode === 0) {
-            setWork(res.workNames);
-            console.log('renderWor; currUser.id: ', res);
+            const arr = res.workNames;
+            console.log(arrSort(arr));
+            setWork(arrSort(arr));
         }
     };
 
@@ -70,8 +81,8 @@ function ListWork() {
     };
 
     useEffect(() => {
-        renderWork();
         getWorkUserReg();
+        renderWork();
     }, [currUser.id]);
     return (
         <div className={cx('wrap')}>
